@@ -2,7 +2,12 @@
 
 ## TL;DR
 
-**Chat-first travel agent** that recommends where to travel/relocate by analyzing **14+ factors**: climate, cost, safety, visa rules, events, healthcare, etc. Uses **BrightData MCP** to scrape protected sites (Skyscanner, Airbnb, Numbeo) behind bot-guards and CAPTCHAs. **Real-time WebSocket chat** with LangChain orchestrator progressively filters 20 EU cities → personalized recommendations. Built for **BrightData's hackathon** — showcasing proxy rotation, browser automation, and unlocker tools for travel data that's impossible to scrape otherwise.
+**Chat-first travel agent** that recommends where to travel/relocate by analyzing **14+ factors**: climate, cost, safety, visa rules, events, healthcare, etc. 
+
+Uses **BrightData** to scrape protected sites (Skyscanner, Airbnb, Numbeo) behind bot-guards and CAPTCHAs. **Real-time WebSocket chat** with LangChain orchestrator progressively filters cities → personalized recommendations. 
+
+
+Built for **BrightData's hackathon** — showcasing proxy rotation, browser automation, and unlocker tools for travel data that's impossible to scrape otherwise.
 
 ---
 
@@ -40,23 +45,23 @@ A chat-first agent that decides where you should travel or relocate next by blen
 - **Progressive Filtering**: Intelligent questioning to narrow 20 cities to optimal recommendations
 - **Redis Cache**: TTL-based caching infrastructure ready
 
-## How we use Bright Data MCP in Nomad Booster
+## How we use Bright Data  in Nomad Booster
 
 *This project is built for BrightData's hackathon*
 
 ### Why we need it
 
-Most of our key metrics—cost of living, visa rules, flight prices, Airbnb rates—sit behind JavaScript-heavy pages guarded by rate-limits or CAPTCHAs. Bright Data's Managed Control Plane (MCP) gives us:
+Most of our key metrics—cost of living, visa rules, flight prices, Airbnb rates—sit behind JavaScript-heavy pages guarded by rate-limits or CAPTCHAs. Bright Data gives us:
 
 1. **Residential & ISP proxy rotation** – requests look like real users, so Skyscanner, Airbnb and Numbeo don't block us.
 2. **Web Unlocker + CAPTCHA solver** – auto-bypasses bot checks without extra code.
 3. **Headless Browser API** – remote Chromium session we can drive with browser.open / click / type, ideal for interactive widgets like Timatic visa search.
 4. **One-call "Structured scraper" tools** – site-specific extractors (e.g., Amazon, Zillow, TikTok) if we decide to expand later.
-5. **Single SDK / tool name per call** – our agent just selects a tool; MCP routes the request and returns parsed JSON or rendered HTML.
+5. **Single SDK / tool name per call** – our agent just selects a tool; BrightData routes the request and returns parsed JSON or rendered HTML.
 
-### Concretely, we leverage MCP for:
+### Concretely, we leverage BrightData for:
 
-| Metric we collect | Site | MCP feature we call |
+| Metric we collect | Site | BrightData feature we call |
 |-------------------|------|---------------------|
 | **Flight cost** | Skyscanner "browse-quotes" page | `browser.open` (Unlocker) → scrape cheapest fare |
 | **Accommodation cost** | Airbnb search results | `browser.open` + `browser.scroll` → scrape nightly median |
@@ -64,7 +69,7 @@ Most of our key metrics—cost of living, visa rules, flight prices, Airbnb rate
 | **Visa-free days & appointment backlog** | IATA Timatic widget + embassy booking form | `browser.open` → `browser.type` → `browser.click` → scrape table |
 | *(optional) Event density* | Songkick city-events page | `scrape_as_markdown` (plain fetch wrapped by MCP) |
 
-All other open datasets (Meteostat weather, Eurostat tourism load, EF English proficiency, etc.) are fetched directly via free CSV/JSON APIs—no proxy needed. Using MCP only where it adds real value keeps run-time cost and complexity low while unlocking the hardest-to-scrape but most critical data.
+All other open datasets (Meteostat weather, Eurostat tourism load, EF English proficiency, etc.) are fetched directly via free CSV/JSON APIs—no proxy needed. Using BrightData only where it adds real value keeps run-time cost and complexity low while unlocking the hardest-to-scrape but most critical data.
 
 ## Development Tasks
 
@@ -81,7 +86,7 @@ All other open datasets (Meteostat weather, Eurostat tourism load, EF English pr
 - [x] LangChain ChatOpenAI with tool binding and streaming
 
 ### ✅ Task 3: Comprehensive Data Source Integration Infrastructure (12h)
-- [x] **16 Data Source Integration Scripts** with full documentation
+- [] **16 Data Source Integration Scripts** with full documentation
 - [x] **Three-Tier Architecture**: Static, Time-Dependent, Subjective properties
 - [x] **JSON Schema Documentation** for all data sources
 - [x] **Complete Filter Coverage**: All user preferences covered by data sources
@@ -90,7 +95,7 @@ All other open datasets (Meteostat weather, Eurostat tourism load, EF English pr
 
 ### ⏳ Task 4: Data Fetching Implementation
 - [ ] **Priority 1**: Implement easy wins (11 ✅ Ready sources)
-- [x] **BrightData MCP Integration**: Started for Numbeo (cost/safety), Skyscanner (flights), Airbnb (accommodation)
+- [/] **BrightData  Integration**: Started for Numbeo (cost/safety), Skyscanner (flights), Airbnb (accommodation)
 - [ ] **Priority 2**: Simple calculations (3 ◻️ sources) as time permits
 - [ ] Redis cache decorator setup (30d/1h/real-time TTL)
 - [ ] Data aggregation and processing pipeline
