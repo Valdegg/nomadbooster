@@ -1,0 +1,23 @@
+{
+  "data_source": "Numbeo Crime Index → Safety Score",
+  "url": "https://www.numbeo.com/crime/rankings.jsp",
+  "last_updated": null,
+  "description": "Safety score derived from Numbeo's Crime Index, inverted to create safety rating",
+  "schema": {
+    "city": "string - City name",
+    "country": "string - Country name", 
+    "safety_score": "integer - Safety score (0-100, higher = safer)",
+    "crime_index": "float - Original crime index from Numbeo",
+    "last_updated": "string - ISO date of last update"
+  },
+  "sample_data": [
+    {
+      "city": "Example City",
+      "country": "Example Country",
+      "safety_score": 85,
+      "crime_index": 15.2,
+      "last_updated": "2024-01-01"
+    }
+  ],
+  "cities": []
+} 

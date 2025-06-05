@@ -1,0 +1,63 @@
+{
+  "data_source": "Songkick + Bandsintown Events Score",
+  "urls": [
+    "https://www.songkick.com/developer",
+    "https://www.bandsintown.com/api/overview"
+  ],
+  "last_updated": null,
+  "description": "Cultural scene quality score based on event density, genre diversity, and user preferences",
+  "metrics": {
+    "events_score": "0-100 composite score of cultural scene quality",
+    "cultural_alignment": "List of event types/genres this city excels in"
+  },
+  "scoring_factors": [
+    "Event density (events per capita)",
+    "Genre diversity and cultural breadth",
+    "Venue quality and variety",
+    "Artist quality and international appeal",
+    "Seasonal event consistency" 
+  ],
+  "genre_categories": {
+    "electronic": ["electronic", "techno", "house", "edm", "trance"],
+    "rock": ["rock", "alternative", "indie", "punk", "metal"],
+    "jazz": ["jazz", "blues", "soul", "funk"],
+    "classical": ["classical", "opera", "symphony", "chamber"],
+    "festivals": ["festival", "multi-day", "outdoor"],
+    "nightlife": ["club", "dj", "party", "dance"],
+    "museums": ["exhibition", "gallery", "museum", "art"],
+    "arts": ["theater", "performance", "dance", "contemporary"],
+    "theater": ["theater", "musical", "drama", "comedy"],
+    "sports": ["sports", "football", "basketball", "concert"]
+  },
+  "schema": {
+    "city": "string - City name",
+    "country": "string - Country name",
+    "events_score": "integer - Cultural scene quality score (0-100)",
+    "cultural_alignment": "array - Event types/genres this city excels in",
+    "event_density": "float - Monthly events per 100k population",
+    "genre_breakdown": "object - Event counts by genre category",
+    "top_venues": "array - Major venues contributing to cultural scene",
+    "last_updated": "string - ISO datetime of last event data refresh"
+  },
+  "sample_data": [
+    {
+      "city": "Berlin", 
+      "country": "Germany",
+      "events_score": 92,
+      "cultural_alignment": ["electronic", "nightlife", "arts", "festivals"],
+      "event_density": 8.5,
+      "genre_breakdown": {
+        "electronic": 45,
+        "rock": 22,
+        "jazz": 12,
+        "classical": 8,
+        "festivals": 18,
+        "nightlife": 38,
+        "arts": 15
+      },
+      "top_venues": ["Berghain", "Watergate", "Philharmonie", "Tempodrom"],
+      "last_updated": "2024-01-01T10:00:00Z"
+    }
+  ],
+  "events_data": []
+} 

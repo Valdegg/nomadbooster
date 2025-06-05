@@ -1,0 +1,35 @@
+{
+  "data_source": "IQAir World Air Quality + WHO PM2.5",
+  "urls": [
+    "https://www.iqair.com/world-air-quality-ranking",
+    "https://www.who.int/data/gho/data/themes/air-pollution"
+  ],
+  "last_updated": null,
+  "description": "Air quality pollution index derived from PM2.5 measurements and IQAir rankings",
+  "pollution_scale": {
+    "0-20": "Excellent air quality (PM2.5 <10 µg/m³)",
+    "20-40": "Good air quality (PM2.5 10-15 µg/m³)",
+    "40-60": "Moderate pollution (PM2.5 15-25 µg/m³)",
+    "60-80": "Unhealthy air (PM2.5 25-35 µg/m³)",
+    "80-100": "Very unhealthy air (PM2.5 >35 µg/m³)"
+  },
+  "schema": {
+    "city": "string - City name",
+    "country": "string - Country name", 
+    "pollution_index": "integer - Pollution index (0-100, lower = cleaner)",
+    "pm25_ugm3": "float - PM2.5 concentration in µg/m³",
+    "iqair_rank": "integer - IQAir global ranking (if available)",
+    "last_updated": "string - ISO date of last update"
+  },
+  "sample_data": [
+    {
+      "city": "Example City",
+      "country": "Example Country",
+      "pollution_index": 25,
+      "pm25_ugm3": 12.5,
+      "iqair_rank": 45,
+      "last_updated": "2024-01-01"
+    }
+  ],
+  "cities": []
+} 

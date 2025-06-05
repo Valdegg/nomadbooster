@@ -1,0 +1,334 @@
+{
+  "user_personas": [
+    {
+      "id": "budget_backpacker",
+      "name": "Budget Backpacker",
+      "description": "Young traveler on a tight budget who prioritizes authentic experiences over luxury. Comfortable with basic accommodations and public transport, seeks vibrant nightlife and cultural scenes. Not picky about weather but wants to avoid tourist traps.",
+      "context": {
+        "favourite_place_visited": "Prague",
+        "places_to_avoid": ["Paris", "Zurich"],
+        "group_size": 2
+      },
+      "preferences": {
+        "purpose": "short_stay",
+        "budget_type": "total", 
+        "max_budget": 300,
+        "duration_days": 4,
+        "climate": {
+          "min_temp": null,
+          "max_temp": null,
+          "max_rainfall": null
+        },
+        "min_safety_score": 60,
+        "max_language_barrier": 4,
+        "min_events_score": 80,
+        "event_types": ["nightlife", "festivals", "arts"],
+        "max_tourism_ratio": 3.0,
+        "min_transport_score": 70,
+        "max_pollution_index": 80,
+        "nature_preference": "urban_parks",
+        "preferred_city_size": "medium",
+        "preferred_architecture": "mixed",
+        "min_walkability_score": 80
+      }
+    },
+    {
+      "id": "luxury_weekend_warrior", 
+      "name": "Luxury Weekend Warrior",
+      "description": "Affluent professional seeking premium weekend escapes. Values safety, comfort, and high-quality experiences. Prefers English-speaking destinations with excellent transport and cultural amenities. Weather-sensitive and willing to pay for the best.",
+      "context": {
+        "favourite_place_visited": "Vienna",
+        "places_to_avoid": ["Budapest", "Warsaw"],
+        "group_size": 2
+      },
+      "preferences": {
+        "purpose": "short_stay",
+        "budget_type": "total",
+        "max_budget": 2000,
+        "duration_days": 3,
+        "climate": {
+          "min_temp": 15,
+          "max_temp": 28,
+          "max_rainfall": 60
+        },
+        "min_safety_score": 90,
+        "max_language_barrier": 2,
+        "min_events_score": 85,
+        "event_types": ["museums", "theater", "classical"],
+        "max_tourism_ratio": 5.0,
+        "min_transport_score": 85,
+        "max_pollution_index": 40,
+        "min_healthcare_score": 90,
+        "nature_preference": "urban_parks",
+        "preferred_city_size": "medium",
+        "preferred_architecture": "historic",
+        "min_walkability_score": 85
+      }
+    },
+    {
+      "id": "digital_nomad_adventurer",
+      "name": "Digital Nomad Adventurer", 
+      "description": "Remote worker planning a 3-month stay in an affordable, well-connected city. Prioritizes fast internet, good healthcare, and a vibrant expat community. Comfortable with different languages and cultures, but needs reliable infrastructure.",
+      "context": {
+        "favourite_place_visited": "Berlin",
+        "places_to_avoid": ["Oslo", "Copenhagen"],
+        "group_size": 1
+      },
+      "preferences": {
+        "purpose": "long_stay",
+        "budget_type": "accommodation", 
+        "max_budget": 800,
+        "passport_country": "Germany",
+        "min_visa_free_days": 90,
+        "climate": {
+          "min_temp": 10,
+          "max_temp": 30,
+          "max_rainfall": 100
+        },
+        "min_safety_score": 75,
+        "max_language_barrier": 4,
+        "min_events_score": 70,
+        "event_types": ["nightlife", "arts", "electronic"],
+        "max_tourism_ratio": 3.5,
+        "min_transport_score": 80,
+        "max_pollution_index": 60,
+        "min_healthcare_score": 80,
+        "nature_preference": "nature_access",
+        "preferred_city_size": "medium",
+        "preferred_architecture": "mixed",
+        "min_walkability_score": 85
+      }
+    },
+    {
+      "id": "family_safety_first",
+      "name": "Safety-First Family Traveler",
+      "description": "Parent traveling with children who prioritizes safety and healthcare above all. Needs English communication, clean air, and family-friendly activities. Budget-conscious but won't compromise on safety and health standards.",
+      "context": {
+        "favourite_place_visited": "Copenhagen",
+        "places_to_avoid": ["Athens", "Rome"],
+        "group_size": 4
+      },
+      "preferences": {
+        "purpose": "short_stay", 
+        "budget_type": "total",
+        "max_budget": 1200,
+        "duration_days": 5,
+        "climate": {
+          "min_temp": 12,
+          "max_temp": 25,
+          "max_rainfall": 70
+        },
+        "min_safety_score": 95,
+        "max_language_barrier": 1,
+        "min_events_score": 60,
+        "event_types": ["museums", "sports"],
+        "max_tourism_ratio": 4.0,
+        "min_transport_score": 90,
+        "max_pollution_index": 25,
+        "min_healthcare_score": 95,
+        "nature_preference": "urban_parks",
+        "preferred_city_size": "medium",
+        "preferred_architecture": "historic",
+        "min_walkability_score": 95
+      }
+    },
+    {
+      "id": "culture_vulture", 
+      "name": "Culture Vulture",
+      "description": "Art and history enthusiast who travels primarily for cultural experiences. Prioritizes cities with rich arts scenes, museums, and classical music. Comfortable with some language barriers and willing to navigate complex transport for cultural access.",
+      "context": {
+        "favourite_place_visited": "Vienna",
+        "places_to_avoid": null,
+        "group_size": 1
+      },
+      "preferences": {
+        "purpose": "short_stay",
+        "budget_type": "accommodation",
+        "max_budget": 150, 
+        "duration_days": 4,
+        "climate": {
+          "min_temp": null,
+          "max_temp": null,
+          "max_rainfall": null
+        },
+        "min_safety_score": 70,
+        "max_language_barrier": 4,
+        "min_events_score": 90,
+        "event_types": ["museums", "classical", "theater", "arts"],
+        "max_tourism_ratio": 5.0,
+        "min_transport_score": 60,
+        "max_pollution_index": 70,
+        "min_healthcare_score": 80,
+        "nature_preference": "pure_urban",
+        "preferred_city_size": "metropolis",
+        "preferred_architecture": "historic",
+        "min_walkability_score": 70
+      }
+    },
+    {
+      "id": "weather_chaser",
+      "name": "Weather Chaser", 
+      "description": "Sun-seeking traveler who plans trips entirely around perfect weather. Extremely temperature and rain sensitive, willing to pay premium for guaranteed sunshine and warmth. Prioritizes climate over cultural activities.",
+      "context": {
+        "favourite_place_visited": "Barcelona",
+        "places_to_avoid": ["Oslo", "Helsinki", "Stockholm"],
+        "group_size": 2
+      },
+      "preferences": {
+        "purpose": "short_stay",
+        "budget_type": "transport",
+        "max_budget": 300,
+        "duration_days": 3,
+        "climate": {
+          "min_temp": 22,
+          "max_temp": 30,
+          "max_rainfall": 20
+        },
+        "min_safety_score": 60,
+        "max_language_barrier": 5,
+        "min_events_score": 40,
+        "event_types": ["festivals"],
+        "max_tourism_ratio": 5.0,
+        "min_transport_score": 50,
+        "max_pollution_index": 90,
+        "nature_preference": "nature_access",
+        "preferred_city_size": "medium",
+        "preferred_architecture": "mixed",
+        "min_walkability_score": 40
+      }
+    },
+    {
+      "id": "eco_conscious_nomad",
+      "name": "Eco-Conscious Nomad",
+      "description": "Environmentally aware long-term traveler who prioritizes clean air, sustainable transport, and authentic local experiences. Avoids over-touristed destinations and seeks cities with good environmental standards and public transport.",
+      "context": {
+        "favourite_place_visited": "Stockholm",
+        "places_to_avoid": ["Athens", "Rome"],
+        "group_size": 1
+      },
+      "preferences": {
+        "purpose": "long_stay",
+        "budget_type": "total",
+        "max_budget": 2500,
+        "passport_country": "Netherlands", 
+        "min_visa_free_days": 90,
+        "climate": {
+          "min_temp": 8,
+          "max_temp": 22,
+          "max_rainfall": 120
+        },
+        "min_safety_score": 85,
+        "max_language_barrier": 3,
+        "min_events_score": 75,
+        "event_types": ["arts", "festivals", "museums"],
+        "max_tourism_ratio": 2.5,
+        "min_transport_score": 90,
+        "max_pollution_index": 30,
+        "min_healthcare_score": 85,
+        "nature_preference": "nature_immersed",
+        "preferred_city_size": "medium",
+        "preferred_architecture": "mixed",
+        "min_walkability_score": 90
+      }
+    },
+    {
+      "id": "music_festival_hopper",
+      "name": "Music Festival Hopper",
+      "description": "Electronic music enthusiast who travels to experience the best underground music scenes. Prioritizes cities with vibrant electronic music cultures, nightlife, and festival scenes. Budget-conscious and comfortable with basic accommodations.",
+      "context": {
+        "favourite_place_visited": "Berlin",
+        "places_to_avoid": ["Oslo", "Zurich"],
+        "group_size": 3
+      },
+      "preferences": {
+        "purpose": "short_stay",
+        "budget_type": "accommodation", 
+        "max_budget": 80,
+        "duration_days": 3,
+        "climate": {
+          "min_temp": null,
+          "max_temp": null,
+          "max_rainfall": null
+        },
+        "min_safety_score": 65,
+        "max_language_barrier": 5,
+        "min_events_score": 95,
+        "event_types": ["electronic", "nightlife", "festivals"],
+        "max_tourism_ratio": 4.0,
+        "min_transport_score": 75,
+        "max_pollution_index": 80,
+        "min_healthcare_score": 80,
+        "nature_preference": "nature_access",
+        "preferred_city_size": "medium",
+        "preferred_architecture": "mixed",
+        "min_walkability_score": 85
+      }
+    },
+    {
+      "id": "senior_comfort_traveler",
+      "name": "Senior Comfort Traveler", 
+      "description": "Retired traveler prioritizing comfort, healthcare access, and ease of communication. Prefers temperate climates, excellent public transport, and English-speaking destinations. Values safety and health infrastructure over nightlife.",
+      "context": {
+        "favourite_place_visited": "Vienna",
+        "places_to_avoid": ["Athens", "Budapest"],
+        "group_size": 2
+      },
+      "preferences": {
+        "purpose": "short_stay", 
+        "budget_type": "total",
+        "max_budget": 1500,
+        "duration_days": 6,
+        "climate": {
+          "min_temp": 15,
+          "max_temp": 23,
+          "max_rainfall": 60
+        },
+        "min_safety_score": 90,
+        "max_language_barrier": 1,
+        "min_events_score": 50,
+        "event_types": ["museums", "classical", "theater"],
+        "max_tourism_ratio": 4.0,
+        "min_transport_score": 95,
+        "max_pollution_index": 25,
+        "min_healthcare_score": 95,
+        "nature_preference": "urban_parks",
+        "preferred_city_size": "medium",
+        "preferred_architecture": "historic",
+        "min_walkability_score": 95
+      }
+    },
+    {
+      "id": "spontaneous_explorer", 
+      "name": "Spontaneous Explorer",
+      "description": "Flexible traveler with moderate preferences who's open to new experiences. Not extremely picky about any single factor but wants a balanced mix of culture, safety, and reasonable costs. Represents the 'typical' traveler with no extreme requirements.",
+      "context": {
+        "favourite_place_visited": "Amsterdam",
+        "places_to_avoid": null,
+        "group_size": 2
+      },
+      "preferences": {
+        "purpose": "short_stay",
+        "budget_type": "total",
+        "max_budget": 800,
+        "duration_days": 4,
+        "climate": {
+          "min_temp": 5,
+          "max_temp": 25,
+          "max_rainfall": 100
+        },
+        "min_safety_score": 75,
+        "max_language_barrier": 3,
+        "min_events_score": 70,
+        "event_types": ["nightlife", "museums", "arts"],
+        "max_tourism_ratio": 4.0,
+        "min_transport_score": 75,
+        "max_pollution_index": 60,
+        "min_healthcare_score": 75,
+        "nature_preference": "nature_access",
+        "preferred_city_size": "medium",
+        "preferred_architecture": "mixed",
+        "min_walkability_score": 85
+      }
+    }
+  ]
+} 

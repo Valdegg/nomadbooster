@@ -1,0 +1,51 @@
+{
+  "data_source": "Meteostat Historical + Open-Meteo Forecast Climate Data",
+  "urls": [
+    "https://meteostat.net/en/",
+    "https://open-meteo.com/"
+  ],
+  "last_updated": null,
+  "description": "Combined historical climate normals and real-time forecasts for comprehensive weather data",
+  "data_types": {
+    "historical_normals": "30-year monthly averages (static baseline)",
+    "current_conditions": "Real-time weather data",
+    "short_term_forecast": "7-14 day detailed forecasts",
+    "seasonal_forecast": "Long-range trend predictions"
+  },
+  "schema": {
+    "city": "string - City name",
+    "country": "string - Country name",
+    "lat": "float - Latitude for weather API calls",
+    "lon": "float - Longitude for weather API calls", 
+    "monthly_normals": "object - 30-year monthly averages by month",
+    "current_conditions": "object - Current weather data",
+    "forecast": "object - Short-term forecast data",
+    "last_updated": "string - ISO date of last update"
+  },
+  "sample_data": [
+    {
+      "city": "Example City",
+      "country": "Example Country",
+      "lat": 52.5200,
+      "lon": 13.4050,
+      "monthly_normals": {
+        "1": {"avg_temp_c": 2, "rainfall_mm": 45},
+        "2": {"avg_temp_c": 4, "rainfall_mm": 35},
+        "6": {"avg_temp_c": 22, "rainfall_mm": 65},
+        "12": {"avg_temp_c": 3, "rainfall_mm": 55}
+      },
+      "current_conditions": {
+        "temp_c": 18,
+        "humidity": 65,
+        "precipitation_mm": 0
+      },
+      "forecast": {
+        "7_day": [
+          {"date": "2024-01-01", "temp_high": 20, "temp_low": 12, "precipitation_mm": 2}
+        ]
+      },
+      "last_updated": "2024-01-01T12:00:00Z"
+    }
+  ],
+  "cities": []
+} 

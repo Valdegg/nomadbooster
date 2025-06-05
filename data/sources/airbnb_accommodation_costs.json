@@ -1,0 +1,54 @@
+{
+  "data_source": "Airbnb Accommodation Cost Medians",
+  "url": "https://www.airbnb.com/s/[city]/homes",
+  "last_updated": null,
+  "description": "Daily accommodation cost medians from Airbnb search results for mid-range properties",
+  "search_parameters": {
+    "property_types": ["Entire homes", "Private rooms"],
+    "guest_capacity": "1-2 people",
+    "location": "City center/downtown areas",
+    "quality_filter": "Excludes shared rooms for quality consistency"
+  },
+  "stay_types": {
+    "short_stay": "1-7 nights (weekend/vacation pricing)",
+    "mid_term": "7-30 nights (standard nightly rates)",
+    "long_stay": "30+ nights (monthly discount pricing)"
+  },
+  "pricing_considerations": [
+    "Seasonal demand variations",
+    "Local events and conferences",
+    "Booking advance time",
+    "Property location within city",
+    "Anti-bot measures require careful scraping"
+  ],
+  "schema": {
+    "city": "string - City name",
+    "country": "string - Country name",
+    "accommodation_cost_eur": "integer - Median daily cost in EUR",
+    "stay_type": "string - Type of stay (short_stay/mid_term/long_stay)",
+    "travel_date": "string - Travel date (ISO format)",
+    "property_types": "array - Types of properties included in median",
+    "sample_size": "integer - Number of listings used for median calculation",
+    "price_range": "object - Min/max prices for transparency",
+    "last_updated": "string - ISO datetime of last scrape"
+  },
+  "sample_data": [
+    {
+      "city": "Berlin",
+      "country": "Germany",
+      "accommodation_cost_eur": 75,
+      "stay_type": "short_stay",
+      "travel_date": "2024-06-15",
+      "property_types": ["Entire home/apt", "Private room"],
+      "sample_size": 145,
+      "price_range": {
+        "min_eur": 35,
+        "max_eur": 180,
+        "q25_eur": 55,
+        "q75_eur": 95
+      },
+      "last_updated": "2024-01-01T14:45:00Z"
+    }
+  ],
+  "accommodation_costs": []
+} 

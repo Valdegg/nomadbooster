@@ -1,0 +1,29 @@
+{
+  "data_source": "IATA Timatic Visa Requirements",
+  "url": "https://www.iatatravelcentre.com/international-travel-document-news/1580226297.htm",
+  "last_updated": null,
+  "description": "Visa-free stay durations for different passport-destination country combinations",
+  "passport_countries": [
+    "Germany", "United States", "United Kingdom", "Canada", "Australia",
+    "Netherlands", "Sweden", "Denmark", "France", "Spain", "Italy"
+  ],
+  "schema": {
+    "city": "string - Destination city name",
+    "country": "string - Destination country name", 
+    "passport_country": "string - Passport issuing country",
+    "visa_free_days": "integer - Days allowed visa-free stay (0-365)",
+    "visa_type": "string - Type of visa requirement (visa-free, visa-on-arrival, visa-required)",
+    "last_updated": "string - ISO date of last update"
+  },
+  "sample_data": [
+    {
+      "city": "Example City",
+      "country": "Example Country",
+      "passport_country": "Germany",
+      "visa_free_days": 90,
+      "visa_type": "visa-free",
+      "last_updated": "2024-01-01"
+    }
+  ],
+  "visa_requirements": []
+} 

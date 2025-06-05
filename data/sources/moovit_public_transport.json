@@ -1,0 +1,36 @@
+{
+  "data_source": "Moovit Public Transit Index",
+  "url": "https://moovitapp.com/insights/en/Moovit_Insights_Public_Transit_Index-countries",
+  "last_updated": null,
+  "description": "Public transport quality scores from Moovit's comprehensive transit analysis",
+  "metrics_included": [
+    "Service coverage and network density",
+    "Frequency and reliability of services",
+    "Accessibility features",
+    "User satisfaction and wait times", 
+    "Integration between transport modes"
+  ],
+  "schema": {
+    "city": "string - City name",
+    "country": "string - Country name", 
+    "public_transport_score": "integer - Normalized transport quality score (0-100)",
+    "moovit_index": "float - Original Moovit index value",
+    "coverage_score": "float - Network coverage component",
+    "frequency_score": "float - Service frequency component",
+    "accessibility_score": "float - Accessibility features component",
+    "last_updated": "string - ISO date of last update"
+  },
+  "sample_data": [
+    {
+      "city": "Example City",
+      "country": "Example Country",
+      "public_transport_score": 85,
+      "moovit_index": 7.2,
+      "coverage_score": 8.1,
+      "frequency_score": 7.5,
+      "accessibility_score": 6.8,
+      "last_updated": "2024-01-01"
+    }
+  ],
+  "cities": []
+} 

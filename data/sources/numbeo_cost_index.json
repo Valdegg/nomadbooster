@@ -1,0 +1,21 @@
+{
+  "data_source": "Numbeo Cost-of-Living Index",
+  "url": "https://www.numbeo.com/cost-of-living/rankings.jsp",
+  "last_updated": null,
+  "description": "Cost of living index comparing cities globally, with 100 representing the EU average",
+  "schema": {
+    "city": "string - City name",
+    "country": "string - Country name", 
+    "cost_index": "integer - Cost index (0-200, 100 = EU average)",
+    "last_updated": "string - ISO date of last update"
+  },
+  "sample_data": [
+    {
+      "city": "Example City",
+      "country": "Example Country",
+      "cost_index": 75,
+      "last_updated": "2024-01-01"
+    }
+  ],
+  "cities": []
+} 

@@ -1,0 +1,41 @@
+{
+  "data_source": "UN DESA World Urbanization Prospects - City Population",
+  "url": "https://population.un.org/wup/Download/Files/WUP2018-F12-Cities_Over_300K.xls",
+  "last_updated": null,
+  "description": "City population size classification for urban lifestyle filtering using official UN data",
+  "city_size_classification": {
+    "small": "<500,000 people (intimate, walkable, local feel)",
+    "medium": "500,000 - 1,500,000 (balanced urban amenities + manageability)",
+    "large": "1,500,000 - 5,000,000 (major city amenities, complexity)",
+    "mega": ">5,000,000 people (megacity, maximum urban intensity)"
+  },
+  "population_considerations": [
+    "City proper vs metropolitan area definitions",
+    "Administrative boundaries vs urban agglomeration",
+    "Most recent available estimates (2020-2025)",
+    "Consistency in measurement approach across cities"
+  ],
+  "schema": {
+    "city": "string - City name",
+    "country": "string - Country name", 
+    "city_size": "string - Size classification (small/medium/large/mega)",
+    "population": "integer - City proper population",
+    "population_year": "integer - Year of population data",
+    "metropolitan_area_population": "integer - Metropolitan area population (if available)",
+    "data_source": "string - Specific UN DESA dataset used",
+    "last_updated": "string - ISO date of last data refresh"
+  },
+  "sample_data": [
+    {
+      "city": "Amsterdam",
+      "country": "Netherlands",
+      "city_size": "medium",
+      "population": 872757,
+      "population_year": 2023,
+      "metropolitan_area_population": 2480394,
+      "data_source": "UN DESA World Urbanization Prospects 2024",
+      "last_updated": "2024-01-01"
+    }
+  ],
+  "population_data": []
+} 

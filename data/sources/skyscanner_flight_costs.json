@@ -1,0 +1,39 @@
+{
+  "data_source": "Skyscanner Flight Costs via Browse Quotes",
+  "url": "https://www.skyscanner.net/transport/flights/browse-quotes/",
+  "last_updated": null,
+  "description": "Dynamic flight pricing data for origin-destination pairs with seasonal and booking timing factors",
+  "pricing_factors": {
+    "departure_location": "Prices vary significantly by origin airport",
+    "booking_advance": "Earlier booking typically offers lower prices",
+    "seasonal_demand": "Summer/holiday periods show higher pricing",
+    "currency_conversion": "All prices normalized to EUR"
+  },
+  "supported_origins": [
+    "Frankfurt (FRA)", "Amsterdam (AMS)", "Paris (CDG)", "London (LHR)",
+    "New York (JFK)", "Los Angeles (LAX)", "Toronto (YYZ)", "Berlin (BER)"
+  ],
+  "schema": {
+    "destination_city": "string - Destination city name",
+    "destination_country": "string - Destination country name",
+    "origin_city": "string - Departure city name",
+    "flight_cost_eur": "integer - Flight cost in EUR",
+    "travel_date": "string - Travel date (ISO format)",
+    "booking_advance_days": "integer - Days between booking and travel",
+    "currency": "string - Original currency before EUR conversion",
+    "last_updated": "string - ISO datetime of last price check"
+  },
+  "sample_data": [
+    {
+      "destination_city": "Barcelona",
+      "destination_country": "Spain",
+      "origin_city": "Berlin",
+      "flight_cost_eur": 145,
+      "travel_date": "2024-06-15",
+      "booking_advance_days": 30,
+      "currency": "EUR",
+      "last_updated": "2024-01-01T10:30:00Z"
+    }
+  ],
+  "flight_costs": []
+} 

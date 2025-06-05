@@ -1,0 +1,50 @@
+{
+  "data_source": "OpenStreetMap Nature Access Analysis",
+  "url": "https://overpass-api.de/api/interpreter",
+  "last_updated": null,
+  "description": "Urban nature accessibility based on green space ratio and distribution analysis",
+  "green_space_types": {
+    "parks": ["leisure=park", "leisure=garden", "leisure=recreation_ground", "amenity=park"],
+    "natural": ["landuse=forest", "landuse=meadow", "landuse=grass", "natural=wood", "natural=heath", "natural=scrub"],
+    "water": ["natural=water", "waterway=river", "leisure=swimming_pool"]
+  },
+  "classification_logic": {
+    "high": ">15% green space + good distribution across city",
+    "medium": "5-15% green space with moderate distribution",
+    "low": "<5% green space or poor distribution"
+  },
+  "accessibility_factors": [
+    "Total green space percentage of city area",
+    "Spatial distribution across neighborhoods", 
+    "Proximity to residential areas",
+    "Quality and connectivity of green spaces",
+    "Mix of park types (neighborhood vs major parks)"
+  ],
+  "schema": {
+    "city": "string - City name",
+    "country": "string - Country name",
+    "nature_access": "string - Nature access level (high/medium/low)",
+    "greenspace_ratio": "float - Ratio of green space to total city area (0-1)",
+    "total_greenspace_km2": "float - Total green space area in square kilometers",
+    "city_area_km2": "float - Total city area in square kilometers",
+    "green_space_types": "object - Breakdown of green space by type and area",
+    "last_updated": "string - ISO date of last OpenStreetMap analysis"
+  },
+  "sample_data": [
+    {
+      "city": "Vienna",
+      "country": "Austria",
+      "nature_access": "high",
+      "greenspace_ratio": 0.22,
+      "total_greenspace_km2": 89.5,
+      "city_area_km2": 414.6,
+      "green_space_types": {
+        "parks": 45.2,
+        "natural": 32.8,
+        "water": 11.5
+      },
+      "last_updated": "2024-01-01"
+    }
+  ],
+  "nature_access_data": []
+} 

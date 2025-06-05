@@ -1,0 +1,32 @@
+{
+  "data_source": "EF English Proficiency Index → Language Barrier",
+  "url": "https://www.ef.com/wwen/epi/",
+  "last_updated": null,
+  "description": "Language barrier levels derived from EF English Proficiency Index rankings",
+  "barrier_mapping": {
+    "1": "English native/widely spoken (EPI 600+)",
+    "2": "Minimal barrier (EPI 550-599)",
+    "3": "Moderate barrier (EPI 500-549)", 
+    "4": "Significant barrier (EPI 450-499)",
+    "5": "High barrier (EPI <450)"
+  },
+  "schema": {
+    "city": "string - City name",
+    "country": "string - Country name", 
+    "language_barrier": "integer - Language barrier level (1-5)",
+    "epi_score": "float - EF English Proficiency Index score",
+    "epi_rank": "integer - EF EPI global ranking",
+    "last_updated": "string - ISO date of last update"
+  },
+  "sample_data": [
+    {
+      "city": "Example City",
+      "country": "Example Country",
+      "language_barrier": 2,
+      "epi_score": 575.2,
+      "epi_rank": 12,
+      "last_updated": "2024-01-01"
+    }
+  ],
+  "cities": []
+} 

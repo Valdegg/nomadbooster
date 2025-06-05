@@ -1,0 +1,28 @@
+{
+  "data_source": "WHO UHC + OECD Healthcare Statistics",
+  "urls": [
+    "https://www.who.int/data/gho/data/themes/universal-health-coverage",
+    "https://data.oecd.org/healthres/doctors.htm"
+  ],
+  "last_updated": null,
+  "description": "Composite healthcare score combining WHO Universal Health Coverage and OECD healthcare infrastructure metrics",
+  "schema": {
+    "city": "string - City name",
+    "country": "string - Country name", 
+    "healthcare_score": "integer - Composite healthcare score (0-100, higher = better)",
+    "uhc_coverage": "float - WHO UHC effective coverage index",
+    "doctors_per_1k": "float - OECD doctors per 1000 inhabitants",
+    "last_updated": "string - ISO date of last update"
+  },
+  "sample_data": [
+    {
+      "city": "Example City",
+      "country": "Example Country",
+      "healthcare_score": 92,
+      "uhc_coverage": 87.5,
+      "doctors_per_1k": 4.2,
+      "last_updated": "2024-01-01"
+    }
+  ],
+  "cities": []
+} 

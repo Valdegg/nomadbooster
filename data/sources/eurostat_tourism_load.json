@@ -1,0 +1,33 @@
+{
+  "data_source": "Eurostat Tourist Nights Spent → Tourism Load Ratio",
+  "url": "https://ec.europa.eu/eurostat/databrowser/view/tour_occ_nim/default/table",
+  "last_updated": null,
+  "description": "Tourism load ratio calculated from tourist nights spent divided by local population",
+  "calculation": "tourism_load_ratio = annual_tourist_nights / city_population",
+  "seasonal_info": "Includes monthly multipliers for seasonal variation (summer peaks, winter lows)",
+  "schema": {
+    "city": "string - City name",
+    "country": "string - Country name", 
+    "tourism_load_ratio": "float - Annual tourist-to-resident ratio",
+    "tourist_nights_annual": "integer - Total tourist nights spent annually",
+    "population": "integer - City population for ratio calculation",
+    "seasonal_multipliers": "object - Monthly tourism variation factors (1.0 = average)",
+    "last_updated": "string - ISO date of last update"
+  },
+  "sample_data": [
+    {
+      "city": "Example City",
+      "country": "Example Country",
+      "tourism_load_ratio": 2.5,
+      "tourist_nights_annual": 1250000,
+      "population": 500000,
+      "seasonal_multipliers": {
+        "1": 0.6, "2": 0.7, "3": 0.8, "4": 0.9,
+        "5": 1.1, "6": 1.4, "7": 1.6, "8": 1.5,
+        "9": 1.2, "10": 1.0, "11": 0.8, "12": 0.7
+      },
+      "last_updated": "2024-01-01"
+    }
+  ],
+  "cities": []
+} 

@@ -1,0 +1,56 @@
+{
+  "data_source": "Wikipedia Architectural Style Analysis",
+  "url": "https://en.wikipedia.org/wiki/[City_Name]",
+  "last_updated": null,
+  "description": "Dominant architectural style characterizing the city's built environment via LLM analysis",
+  "analysis_method": "LLM analysis of Wikipedia architecture/history sections",
+  "architectural_categories": {
+    "classical": ["neoclassical", "renaissance", "baroque", "georgian", "palladian"],
+    "medieval": ["gothic", "romanesque", "byzantine", "norman"],
+    "modern": ["modernist", "bauhaus", "international_style", "contemporary", "minimalist"],
+    "eclectic": ["art_nouveau", "art_deco", "victorian", "beaux_arts", "second_empire"],
+    "vernacular": ["traditional", "local_style", "folk_architecture", "regional"],
+    "brutalist": ["brutalist", "concrete", "socialist_realist", "soviet"],
+    "mixed": ["diverse", "eclectic_mix", "varied", "heterogeneous"]
+  },
+  "llm_analysis_factors": [
+    "Frequency of architectural style mentions",
+    "Prominence in city descriptions",
+    "Historical development periods",
+    "Urban renewal vs historic preservation balance",
+    "Notable buildings and landmarks"
+  ],
+  "schema": {
+    "city": "string - City name",
+    "country": "string - Country name",
+    "architectural_style": "string - Dominant architectural style category",
+    "style_confidence": "float - LLM confidence score (0-1)",
+    "secondary_styles": "array - Other significant architectural styles present",
+    "architectural_periods": "object - Historical periods and their architectural characteristics",
+    "notable_buildings": "array - Significant buildings mentioned in analysis",
+    "last_updated": "string - ISO date of last Wikipedia analysis"
+  },
+  "sample_data": [
+    {
+      "city": "Prague",
+      "country": "Czech Republic", 
+      "architectural_style": "medieval",
+      "style_confidence": 0.85,
+      "secondary_styles": ["baroque", "art_nouveau"],
+      "architectural_periods": {
+        "gothic": "14th-16th century - Old Town Square, St. Vitus Cathedral",
+        "baroque": "17th-18th century - Lesser Town palaces", 
+        "art_nouveau": "Early 20th century - Municipal House, hotels"
+      },
+      "notable_buildings": [
+        "Prague Castle",
+        "Charles Bridge", 
+        "St. Vitus Cathedral",
+        "Old Town Square",
+        "Municipal House"
+      ],
+      "last_updated": "2024-01-01"
+    }
+  ],
+  "architectural_data": []
+} 
