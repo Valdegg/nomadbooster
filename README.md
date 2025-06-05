@@ -86,17 +86,17 @@ All other open datasets (Meteostat weather, Eurostat tourism load, EF English pr
 - [x] LangChain ChatOpenAI with tool binding and streaming
 
 ### ✅ Task 3: Comprehensive Data Source Integration Infrastructure (12h)
-- [] **16 Data Source Integration Scripts** with full documentation
+- [x] **16 Data Source Integration Scripts** with full documentation
 - [x] **Three-Tier Architecture**: Static, Time-Dependent, Subjective properties
 - [x] **JSON Schema Documentation** for all data sources
 - [x] **Complete Filter Coverage**: All user preferences covered by data sources
-- [x] **Ready for Implementation**: Structured integration ready for data fetching
-- [x] **BrightData Integration Started**: Numbeo, Skyscanner, Airbnb scripts with MCP implementation
+- [x] **Draft Implementation Structure**: Structured integration scripts ready for testing
+- [x] **BrightData Integration Started**: Numbeo, Skyscanner, Airbnb scripts with BrightData implementation
 
 ### ⏳ Task 4: Data Fetching Implementation
-- [ ] **Priority 1**: Implement easy wins (11 ✅ Ready sources)
-- [/] **BrightData  Integration**: Started for Numbeo (cost/safety), Skyscanner (flights), Airbnb (accommodation)
-- [ ] **Priority 2**: Simple calculations (3 ◻️ sources) as time permits
+- [ ] **Priority 1**: Test and implement 11 📝 Draft sources
+- [x] **BrightData Integration**: Started for Numbeo (cost/safety), Skyscanner (flights), Airbnb (accommodation)
+- [ ] **Priority 2**: Algorithm implementation (3 ⚠️ sources) as time permits
 - [ ] Redis cache decorator setup (30d/1h/real-time TTL)
 - [ ] Data aggregation and processing pipeline
 - [ ] Error handling and fallback mechanisms
@@ -144,35 +144,35 @@ python main.py
 ### 🏛️ Static Properties (Annual Updates)
 **Properties inherent to cities that rarely change**
 
-| Data Source | Metric | Status | Integration |
+| Data Source | Metric | Implementation | Integration |
 |-------------|--------|---------|-------------|
-| **Numbeo Cost Index** | `cost_index` | ✅ Ready | `numbeo_cost_index.py` |
-| **Numbeo Safety Score** | `safety_score` | ✅ Ready | `numbeo_safety_score.py` |
-| **WHO/OECD Healthcare** | `healthcare_score` | ✅ Ready | `who_oecd_healthcare.py` |
-| **EF Language Barrier** | `language_barrier` | ✅ Ready | `ef_language_barrier.py` |
-| **IATA Visa Requirements** | `visa_free_days` | ✅ Ready | `iata_timatic_visa.py` |
-| **IQAir Pollution Index** | `pollution_index` | ✅ Ready | `iqair_pollution_index.py` |
-| **Moovit Transport Score** | `public_transport_score` | ✅ Ready | `moovit_public_transport.py` |
-| **UN DESA Population** | `city_size` | ✅ Ready | `undesa_city_population.py` |
-| **OpenStreetMap Nature** | `nature_access` | ◻️ Compute ratio | `openstreetmap_nature_access.py` |
-| **Wikipedia Architecture** | `architectural_style` | ❌ LLM needed | `wikipedia_architectural_style.py` |
+| **Numbeo Cost Index** | `cost_index` | 📝 Draft | `numbeo_cost_index.py` |
+| **Numbeo Safety Score** | `safety_score` | 📝 Draft | `numbeo_safety_score.py` |
+| **WHO/OECD Healthcare** | `healthcare_score` | 📝 Draft | `who_oecd_healthcare.py` |
+| **EF Language Barrier** | `language_barrier` | 📝 Draft | `ef_language_barrier.py` |
+| **IATA Visa Requirements** | `visa_free_days` | 📝 Draft | `iata_timatic_visa.py` |
+| **IQAir Pollution Index** | `pollution_index` | 📝 Draft | `iqair_pollution_index.py` |
+| **Moovit Transport Score** | `public_transport_score` | 📝 Draft | `moovit_public_transport.py` |
+| **UN DESA Population** | `city_size` | 📝 Draft | `undesa_city_population.py` |
+| **OpenStreetMap Nature** | `nature_access` | ⚠️ Needs algo | `openstreetmap_nature_access.py` |
+| **Wikipedia Architecture** | `architectural_style` | ❌ Complex | `wikipedia_architectural_style.py` |
 
 ### ⏰ Time-Dependent Properties (Real-time/Daily)
 **Properties that vary based on travel dates**
 
-| Data Source | Metric | Status | Integration |
+| Data Source | Metric | Implementation | Integration |
 |-------------|--------|---------|-------------|
-| **Meteostat/Open-Meteo** | `avg_temp_c`, `rainfall_mm` | ✅ Ready | `meteostat_openmeteo_climate.py` |
-| **Skyscanner Flight Costs** | `flight_cost_eur` | ✅ Ready | `skyscanner_flight_costs.py` |
-| **Airbnb Accommodation** | `accommodation_cost_eur` | ✅ Ready | `airbnb_accommodation_costs.py` |
-| **Eurostat Tourism Load** | `tourism_load_ratio` | ◻️ Simple formula | `eurostat_tourism_load.py` |
+| **Meteostat/Open-Meteo** | `avg_temp_c`, `rainfall_mm` | 📝 Draft | `meteostat_openmeteo_climate.py` |
+| **Skyscanner Flight Costs** | `flight_cost_eur` | 📝 Draft + BrightData | `skyscanner_flight_costs.py` |
+| **Airbnb Accommodation** | `accommodation_cost_eur` | 📝 Draft + BrightData | `airbnb_accommodation_costs.py` |
+| **Eurostat Tourism Load** | `tourism_load_ratio` | ⚠️ Needs algo | `eurostat_tourism_load.py` |
 
 ### 🎯 Subjective Properties (User-specific)
 **Properties calculated based on user preferences**
 
-| Data Source | Metric | Status | Integration |
+| Data Source | Metric | Implementation | Integration |
 |-------------|--------|---------|-------------|
-| **Songkick/Bandsintown** | `events_score`, `cultural_alignment` | ◻️ Scoring needed | `songkick_bandsintown_events.py` |
+| **Songkick/Bandsintown** | `events_score`, `cultural_alignment` | ⚠️ Needs scoring | `songkick_bandsintown_events.py` |
 
 ## Comprehensive Filter Tools (14 Total)
 
@@ -201,24 +201,24 @@ The orchestrator now includes **14 filter tools** covering all user preferences:
 
 ## Data Source Integration Status
 
-### ✅ Implementation Ready (11 sources) - **Priority 1**
+### 📝 Draft Implementation (11 sources) - **Priority 1**
 - **Static**: Numbeo (cost, safety), WHO/OECD healthcare, EF language, IATA visa, IQAir pollution, Moovit transport, UN DESA population
 - **Dynamic**: Meteostat/Open-Meteo climate, Skyscanner flights, Airbnb accommodation
-- **Status**: Well-documented APIs, clear integration paths → **Implement first**
-- **Challenge**: Need normalization to 0-100 scales or similar for consistent filtering
+- **Status**: Draft scripts created, need testing and real API integration → **Implement first**
+- **Challenge**: Need to test, debug, and implement normalization to 0-100 scales
 
-### ◻️ Simple Implementation (3 sources) - **Priority 2** 
+### ⚠️ Algorithm Needed (3 sources) - **Priority 2** 
 - **Eurostat tourism load**: Straightforward ratio calculation
 - **OpenStreetMap nature**: Geometric area calculations  
 - **Events scoring**: Algorithm design needed for 0-100 scoring
-- **Status**: Doable with some effort → **Implement if time permits**
+- **Status**: Requires custom algorithms and logic → **Implement if time permits**
 - **Challenge**: Custom algorithms for scoring/classification
 
 ### ❌ Complex Implementation (1 source) - **Future/Optional**
 - **Wikipedia architecture**: Requires LLM analysis for style classification
 - **Status**: Significant complexity → **Skip for MVP, consider later**
 
-### **Realistic Coverage: 11-14 Data Sources** (focus on easy wins + some simple ones)
+### **Realistic Coverage: 11-14 Data Sources** (focus on testing drafts + some algorithms)
 
 ## Data Mapping & Normalization Challenges
 
@@ -272,31 +272,31 @@ Berlin, Amsterdam, Barcelona, Prague, Lisbon, Vienna, Rome, Paris, Copenhagen, S
 
 ## Progressive Filtering Strategy
 
-### **Phase 1 Focus**: Implement Core Filtering with Easy Data Sources
-**Target**: Get 11 ✅ Ready sources working for solid recommendation foundation
+### **Phase 1 Focus**: Implement Core Filtering with Draft Data Sources
+**Target**: Get 11 📝 Draft sources working and tested for solid recommendation foundation
 
 1. **Purpose & Duration** → Budget calculation context
 2. **Budget Anchor** → Highest information gain filter  
-3. **Climate Preference** → Temperature and rainfall comfort (✅ Easy: Open-Meteo)
-4. **Cultural Interests** → Events and cultural scene alignment (◻️ Skip for MVP)
-5. **Administrative** → Visa requirements (✅ Easy: IATA data)
-6. **Quality of Life** → Safety, healthcare, language comfort (✅ Easy: Numbeo, WHO/OECD, EF)
-7. **Environmental** → Pollution (✅ Easy: IQAir) 
-8. **Urban Style** → City size (✅ Easy: UN DESA), architecture (❌ Skip for MVP)
-9. **Infrastructure** → Public transport quality (✅ Easy: Moovit)
-10. **Market Pricing** → Flight/accommodation costs (✅ Easy: APIs available)
+3. **Climate Preference** → Temperature and rainfall comfort (📝 Draft: Open-Meteo)
+4. **Cultural Interests** → Events and cultural scene alignment (⚠️ Skip for MVP)
+5. **Administrative** → Visa requirements (📝 Draft: IATA data)
+6. **Quality of Life** → Safety, healthcare, language comfort (📝 Draft: Numbeo, WHO/OECD, EF)
+7. **Environmental** → Pollution (📝 Draft: IQAir) 
+8. **Urban Style** → City size (📝 Draft: UN DESA), architecture (❌ Skip for MVP)
+9. **Infrastructure** → Public transport quality (📝 Draft: Moovit)
+10. **Market Pricing** → Flight/accommodation costs (📝 Draft + BrightData)
 
-**Goal**: Deliver solid recommendations with 8-10 working filters, add more incrementally.
+**Goal**: Test and implement 8-10 draft sources, add more incrementally.
 
 ## Development Phases
 
 - **✅ Phase 0**: Complete agent infrastructure with comprehensive filtering
-- **⏳ Phase 1**: **Core data sources** - Implement 11 ✅ Ready sources, replace mock data with real data
+- **⏳ Phase 1**: **Test draft sources** - Implement and test 11 📝 Draft sources, replace mock data with real data
 - **⏳ Phase 2**: **Data normalization** + Frontend - Map raw data to standardized metrics + UI development  
 - **⏳ Phase 3**: **Polish & Features** - Add remaining sources, browser automation
 - **🌍 Phase 4+**: **Global expansion** - Scale to 1000+ cities (just run scripts on bigger city lists)
 
-**Current Status: Phase 0 Complete → Ready for Phase 1 implementation**
+**Current Status: Phase 0 Complete → Ready for Phase 1 testing and implementation**
 
 ## API Endpoints
 
@@ -353,6 +353,6 @@ Berlin, Amsterdam, Barcelona, Prague, Lisbon, Vienna, Rome, Paris, Copenhagen, S
 - **AI**: ChatOpenAI with 14 filter tools and streaming responses
 - **Data Processing**: Pydantic schemas + Pandas + comprehensive validation
 - **Data Sources**: 16 integration scripts covering all travel factors
-- **Scraping**: Selenium/Playwright + MCP for dynamic pricing
+- **Scraping**: BrightData for dynamic pricing and protected sites
 - **Frontend**: React with split-pane UI (chat + results visualization) [Coming]
 - **Maps**: Integrated mapping for location visualization [Coming]
