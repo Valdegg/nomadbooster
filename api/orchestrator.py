@@ -10,7 +10,7 @@ from langchain_core.pydantic_v1 import BaseModel as LangChainBaseModel, Field as
 import logging
 import asyncio
 from datetime import datetime
-
+import tiktoken 
 # Import accommodation lookup tool  
 from tools.tool_airbnb_accommodation_lookup import tool_fetch_accommodation_cost
 
@@ -552,20 +552,44 @@ class SearchState:
             "remaining_city_names": self.current_cities['city'].tolist() if len(self.current_cities) <= 15 else self.current_cities['city'].head(15).tolist() + ["...and more"]
         }
     
-    def get_state_summary(self) -> dict:
-        """Get current search state summary with city coordinates for mapping"""
+    def get_state_summary(self, verbose=False) -> dict:
+        """Get current search state summary with city coordinates for mapping
         
-        logger.info(f"🔍 Starting get_state_summary - current_cities count: {len(self.current_cities)}")
+        Args:
+            verbose (bool): If True, return full detailed data for frontend.
+                           If False, return minimal data for LLM to prevent token overflow.
+        """
+        
+        # Log which mode we're in for debugging
+        logger.info(f"📊 get_state_summary called with verbose={verbose}")
+        
+        if not verbose:
+            # Minimal context for LLM (prevent token overflow)
+            minimal_data = {
+                "total_cities": len(self.all_cities),
+                "remaining_cities": len(self.current_cities),
+                "applied_filters": self.applied_filters,
+                "remaining_city_names": self.current_cities['city'].head(10).tolist() if len(self.current_cities) > 10 else self.current_cities['city'].tolist()
+            }
+            
+            # Calculate and log the size of minimal data
+            import json
+            data_size = len(json.dumps(minimal_data))
+            logger.info(f"📊 MINIMAL DATA MODE - Returning {data_size} characters, keys: {list(minimal_data.keys())}")
+            return minimal_data
+        
+        # Full detailed data for frontend (original implementation)
+        #logger.info(f"🔍 Starting get_state_summary - current_cities count: {len(self.current_cities)}")
         
         # Load saved flight data
         flight_data = load_flight_data()
-        logger.info(f"📈 Loaded flight data: {len(flight_data) if flight_data else 0} entries")
+        #logger.info(f"📈 Loaded flight data: {len(flight_data) if flight_data else 0} entries")
         
         # Load weather data
         weather_df = None
         try:
             weather_df = pd.read_csv("../data/cities_weather.csv")
-            logger.info(f"🌤️ Successfully loaded weather data: {len(weather_df)} rows, cities: {weather_df['city'].nunique()}")
+         #   logger.info(f"🌤️ Successfully loaded weather data: {len(weather_df)} rows, cities: {weather_df['city'].nunique()}")
         except Exception as e:
             logger.warning(f"❌ Could not load weather data: {e}")
         
@@ -577,16 +601,15 @@ class SearchState:
         cities_with_coords = []
         cities_complete_data = []
         
-        logger.info(f"🏙️ Processing {len(self.current_cities)} cities...")
+        #logger.info(f"🏙️ Processing {len(self.current_cities)} cities...")
         
         for idx, (_, city_row) in enumerate(self.current_cities.iterrows()):
             city_name = city_row['city']
-            logger.info(f"🔄 Processing city {idx+1}/{len(self.current_cities)}: {city_name}")
+            #logger.info(f"🔄 Processing city {idx+1}/{len(self.current_cities)}: {city_name}")
             
             # Get flight data for this city
             city_flight_data = get_flight_data_for_city(city_name, flight_data)
-            if city_flight_data:
-                logger.info(f"✈️ Found flight data for {city_name}")
+          
             
             # Basic city info with coordinates
             city_info = {
@@ -616,7 +639,7 @@ class SearchState:
             
             # Complete structured data for detailed analysis
             city_data = city_row.to_dict()
-            logger.info(f"📊 City data keys for {city_name}: {list(city_data.keys())}")
+            #logger.info(f"📊 City data keys for {city_name}: {list(city_data.keys())}")
             
             # Define cost-related fields
             cost_fields = [
@@ -643,53 +666,54 @@ class SearchState:
                     else:
                         cost_data[field] = str(value)
             
-            logger.info(f"💰 Cost data for {city_name}: {len(cost_data)} fields - {list(cost_data.keys())}")
+            #logger.info(f"💰 Cost data for {city_name}: {len(cost_data)} fields - {list(cost_data.keys())}")
 
-            from pprint import pprint
-            pprint(cost_data)
+
             
-            # Get weather data for this city (using first month as default or applied filter month)
+            # Get weather data for this city (only if travel month has been specified)
             weather_data = {}
             if weather_df is not None:
-                # Get travel month from applied filters or use a default month
-                travel_month = 6  # Default to June
+                # Only include weather data if travel month has been explicitly specified
                 climate_filter = self.applied_filters.get('climate', {})
+                travel_month = None
+                
                 if climate_filter and climate_filter.get('travel_month') and climate_filter['travel_month'] != -999:
                     travel_month = climate_filter['travel_month']
+                    
+                    logger.info(f"🌤️ Looking for weather data for {city_name} in month {travel_month}")
+                    
+                    # Find weather data for this city and month
+                    city_weather = weather_df[
+                        (weather_df['city'] == city_name) & 
+                        (weather_df['travel_month'] == travel_month)
+                    ]
+                    
+                    #logger.info(f"🌤️ Weather query result for {city_name}: {len(city_weather)} rows")
+                    
+                    if not city_weather.empty:
+                        weather_row = city_weather.iloc[0]
+                        weather_data = {
+                            'travel_month': int(travel_month),
+                            'avg_temp_c': float(weather_row.get('avg_temp_c')) if pd.notna(weather_row.get('avg_temp_c')) else None,
+                            'temp_max_c': float(weather_row.get('temp_max_c')) if pd.notna(weather_row.get('temp_max_c')) else None,
+                            'temp_min_c': float(weather_row.get('temp_min_c')) if pd.notna(weather_row.get('temp_min_c')) else None,
+                            'rainfall_mm': float(weather_row.get('rainfall_mm')) if pd.notna(weather_row.get('rainfall_mm')) else None,
+                            'sunshine_hours': float(weather_row.get('sunshine_hours')) if pd.notna(weather_row.get('sunshine_hours')) else None,
+                            'uv_index_max': float(weather_row.get('uv_index_max')) if pd.notna(weather_row.get('uv_index_max')) else None,
+                            'wind_speed_max_kmh': float(weather_row.get('wind_speed_max_kmh')) if pd.notna(weather_row.get('wind_speed_max_kmh')) else None,
+                            'precipitation_probability_max': float(weather_row.get('precipitation_probability_max')) if pd.notna(weather_row.get('precipitation_probability_max')) else None,
+                            'sunshine_category': str(weather_row.get('sunshine_category')) if pd.notna(weather_row.get('sunshine_category')) else None,
+                            'rain_category': str(weather_row.get('rain_category')) if pd.notna(weather_row.get('rain_category')) else None,
+                            'wind_category': str(weather_row.get('wind_category')) if pd.notna(weather_row.get('wind_category')) else None,
+                            'sunshine_score': float(weather_row.get('sunshine_score')) if pd.notna(weather_row.get('sunshine_score')) else None,
+                            'comfort_score': float(weather_row.get('comfort_score')) if pd.notna(weather_row.get('comfort_score')) else None
+                        }
+                        # Remove None values
+                        weather_data = {k: v for k, v in weather_data.items() if v is not None}
+                    #    logger.info(f"🌤️ Weather data for {city_name}: {len(weather_data)} fields - {list(weather_data.keys())}")
+                    else:
+                        logger.warning(f"⚠️ No weather data found for {city_name} in month {travel_month}")
                 
-                logger.info(f"🌤️ Looking for weather data for {city_name} in month {travel_month}")
-                
-                # Find weather data for this city and month
-                city_weather = weather_df[
-                    (weather_df['city'] == city_name) & 
-                    (weather_df['travel_month'] == travel_month)
-                ]
-                
-                logger.info(f"🌤️ Weather query result for {city_name}: {len(city_weather)} rows")
-                
-                if not city_weather.empty:
-                    weather_row = city_weather.iloc[0]
-                    weather_data = {
-                        'travel_month': int(travel_month),
-                        'avg_temp_c': float(weather_row.get('avg_temp_c')) if pd.notna(weather_row.get('avg_temp_c')) else None,
-                        'temp_max_c': float(weather_row.get('temp_max_c')) if pd.notna(weather_row.get('temp_max_c')) else None,
-                        'temp_min_c': float(weather_row.get('temp_min_c')) if pd.notna(weather_row.get('temp_min_c')) else None,
-                        'rainfall_mm': float(weather_row.get('rainfall_mm')) if pd.notna(weather_row.get('rainfall_mm')) else None,
-                        'sunshine_hours': float(weather_row.get('sunshine_hours')) if pd.notna(weather_row.get('sunshine_hours')) else None,
-                        'uv_index_max': float(weather_row.get('uv_index_max')) if pd.notna(weather_row.get('uv_index_max')) else None,
-                        'wind_speed_max_kmh': float(weather_row.get('wind_speed_max_kmh')) if pd.notna(weather_row.get('wind_speed_max_kmh')) else None,
-                        'precipitation_probability_max': float(weather_row.get('precipitation_probability_max')) if pd.notna(weather_row.get('precipitation_probability_max')) else None,
-                        'sunshine_category': str(weather_row.get('sunshine_category')) if pd.notna(weather_row.get('sunshine_category')) else None,
-                        'rain_category': str(weather_row.get('rain_category')) if pd.notna(weather_row.get('rain_category')) else None,
-                        'wind_category': str(weather_row.get('wind_category')) if pd.notna(weather_row.get('wind_category')) else None,
-                        'sunshine_score': float(weather_row.get('sunshine_score')) if pd.notna(weather_row.get('sunshine_score')) else None,
-                        'comfort_score': float(weather_row.get('comfort_score')) if pd.notna(weather_row.get('comfort_score')) else None
-                    }
-                    # Remove None values
-                    weather_data = {k: v for k, v in weather_data.items() if v is not None}
-                    logger.info(f"🌤️ Weather data for {city_name}: {len(weather_data)} fields - {list(weather_data.keys())}")
-                else:
-                    logger.warning(f"⚠️ No weather data found for {city_name} in month {travel_month}")
             
             # Helper function to convert pandas/numpy types to native Python types
             def safe_convert(value):
@@ -731,19 +755,19 @@ class SearchState:
             if city_flight_data:
                 structured_city_data["flight_data"] = city_flight_data
                 
-            logger.info(f"🏗️ Built structured data for {city_name}: cost={len(cost_data)} fields, weather={len(weather_data)} fields")
+            #logger.info(f"🏗️ Built structured data for {city_name}: cost={len(cost_data)} fields, weather={len(weather_data)} fields")
             cities_complete_data.append(structured_city_data)
         
-        logger.info(f"✅ Final result: cities_complete_data has {len(cities_complete_data)} entries")
-        logger.info(f"📋 Summary: remaining_cities_detailed={len(remaining_cities_detailed)}, cities_with_coords={len(cities_with_coords)}")
+        # logger.info(f"✅ Final result: cities_complete_data has {len(cities_complete_data)} entries")
+        # logger.info(f"📋 Summary: remaining_cities_detailed={len(remaining_cities_detailed)}, cities_with_coords={len(cities_with_coords)}")
         
-        # Log a sample of the actual data being returned
-        if cities_complete_data:
-            sample_city = cities_complete_data[0]
-            logger.info(f"🔍 Sample cities_complete_data entry: {sample_city['city']}")
-            logger.info(f"🔍 Sample structure keys: {list(sample_city.keys())}")
-            logger.info(f"🔍 Sample cost keys: {list(sample_city.get('cost', {}).keys())}")
-            logger.info(f"🔍 Sample weather keys: {list(sample_city.get('weather', {}).keys())}")
+        # # Log a sample of the actual data being returned
+        # if cities_complete_data:
+        #     sample_city = cities_complete_data[0]
+        #     logger.info(f"🔍 Sample cities_complete_data entry: {sample_city['city']}")
+        #     logger.info(f"🔍 Sample structure keys: {list(sample_city.keys())}")
+        #     logger.info(f"🔍 Sample cost keys: {list(sample_city.get('cost', {}).keys())}")
+        #     logger.info(f"🔍 Sample weather keys: {list(sample_city.get('weather', {}).keys())}")
         
         result = {
             "total_cities": len(self.all_cities),
@@ -756,7 +780,10 @@ class SearchState:
             "cities_full_data": cities_complete_data  # Frontend compatibility (same data, different key)
         }
         
-        logger.info(f"🎯 Returning result with keys: {list(result.keys())}")
+        # Calculate and log the size of verbose data
+        import json
+        verbose_data_size = len(json.dumps(result, default=str))
+        logger.info(f"📊 VERBOSE DATA MODE - Returning {verbose_data_size} characters, keys: {list(result.keys())}")
         logger.info(f"🎯 cities_complete_data in result: {len(result['cities_complete_data'])} entries")
         
         return result
@@ -2690,6 +2717,33 @@ class ChatOrchestrator:
         self._cached_tools_description = None
         self._cached_climate_context = None
     
+    def calculate_token_usage(self, messages: list) -> dict:
+        """Calculate token usage for a list of messages using tiktoken"""
+        try:
+            total_tokens = 0
+            
+            for msg in messages:
+                content = ""
+                if hasattr(msg, 'content') and msg.content:
+                    content = str(msg.content)
+                
+                # Calculate tokens for this message
+                if content:
+                    msg_tokens = len(tiktoken.encoding_for_model("gpt-4").encode(content))
+                    total_tokens += msg_tokens
+            
+            return {
+                "total_tokens": total_tokens,
+                "message_count": len(messages)
+            }
+            
+        except Exception as e:
+            logger.error(f"Failed to calculate token usage: {e}")
+            return {
+                "total_tokens": "error",
+                "message_count": len(messages)
+            }
+    
     def generate_tools_description(self) -> str:
         """Generate a formatted list of available tools from their docstrings"""
         tool_descriptions = []
@@ -3050,7 +3104,7 @@ Use these ranges to transform user requirements:
                 for i, msg in enumerate(session["messages"]):
                     msg_type = type(msg).__name__
                     content_preview = getattr(msg, 'content', '')[:100]
-                    logger.info(f"  Message {i}: {msg_type} - {content_preview}")
+                    #logger.info(f"  Message {i}: {msg_type} - {content_preview}")
             
             # Update in-memory session
             self.sessions[client_id] = session
@@ -3060,15 +3114,15 @@ Use these ranges to transform user requirements:
             # Send chat history to frontend if session was loaded
             if session.get("messages"):
                 serialized_messages = self.serialize_messages_for_frontend(session["messages"])
-                logger.info(f"=== SENDING CHAT HISTORY TO FRONTEND ===")
-                logger.info(f"Serialized {len(serialized_messages)} messages for frontend:")
+                # logger.info(f"=== SENDING CHAT HISTORY TO FRONTEND ===")
+                # logger.info(f"Serialized {len(serialized_messages)} messages for frontend:")
                 # for i, msg in enumerate(serialized_messages):
                 #     logger.info(f"  Frontend Message {i}: {msg['type']} - {msg['content'][:100]}")
                 
                 yield {
                     "type": "chat_history",
                     "messages": serialized_messages,
-                    "search_state": search_state.get_state_summary()
+                    "search_state": search_state.get_state_summary(verbose=False)
                 }
             else:
                 logger.info(f"No chat history to send for session {client_id}")
@@ -3107,6 +3161,10 @@ Use these ranges to transform user requirements:
         
         logger.info(f"Processing message from {client_id}: {message.get('content', '')[:50]}")
         
+        # Calculate and log token usage before LLM call
+        token_usage = self.calculate_token_usage(all_content)
+        logger.info(f"🔢 TOKEN USAGE - Input: {token_usage['total_tokens']} tokens ({token_usage['message_count']} messages)")
+        
         try:
             # Stream response from the model
             response_content = ""
@@ -3133,12 +3191,12 @@ Use these ranges to transform user requirements:
                             if call_id not in tool_args_accumulator:
                                 tool_args_accumulator[call_id] = ""
                             tool_args_accumulator[call_id] += chunk_item['args']
-                            logger.info(f"📝 Accumulating args for call_id '{call_id}': {chunk_item['args'][:50]}...")
-                            logger.info(f"🗂️  Current accumulator: {dict((k, v[:50] + '...' if len(v) > 50 else v) for k, v in tool_args_accumulator.items())}")
+                            # logger.info(f"📝 Accumulating args for call_id '{call_id}': {chunk_item['args'][:50]}...")
+                            # logger.info(f"🗂️  Current accumulator: {dict((k, v[:50] + '...' if len(v) > 50 else v) for k, v in tool_args_accumulator.items())}")
                 
                 # Just log tool calls, don't process them yet
                 if hasattr(chunk, 'tool_calls') and chunk.tool_calls:
-                    logger.info(f"🔎 Found tool calls chunk: {[(tc.get('name'), tc.get('id')) for tc in chunk.tool_calls]}")
+                    #logger.info(f"🔎 Found tool calls chunk: {[(tc.get('name'), tc.get('id')) for tc in chunk.tool_calls]}")
                     # Accumulate all tool calls with valid names
                     for tool_call in chunk.tool_calls:
                         if tool_call.get('name'):  # Only keep tool calls with actual names
@@ -3148,12 +3206,12 @@ Use these ranges to transform user requirements:
                                 complete_tool_calls.append(tool_call)
                                 logger.info(f"✅ Added tool call: {tool_call.get('name')} (ID: {tool_call.get('id')})")
                     
-                    logger.info(f"📋 Complete tool calls so far: {[(tc.get('name'), tc.get('id')) for tc in complete_tool_calls]}")
+                    #logger.info(f"📋 Complete tool calls so far: {[(tc.get('name'), tc.get('id')) for tc in complete_tool_calls]}")
             
             # Second pass: process complete tool calls after streaming finishes
             if complete_tool_calls:
                 logger.info(f"🔧 Processing {len(complete_tool_calls)} tool calls")
-                logger.info(f"🗃️  Available accumulated args: {list(tool_args_accumulator.keys())}")
+                #logger.info(f"🗃️  Available accumulated args: {list(tool_args_accumulator.keys())}")
                 
                 # Create a better mapping for multiple tool calls
                 # If we have multiple accumulated args but mismatched IDs, try to match by position
@@ -3164,7 +3222,7 @@ Use these ranges to transform user requirements:
                 all_tool_results = []
             
             for idx, tool_call in enumerate(complete_tool_calls):
-                logger.info(f"🎯 Processing tool call {idx}: {tool_call}")
+                #logger.info(f"🎯 Processing tool call {idx}: {tool_call}")
                 
                 tool_name = tool_call.get('name', '')
                 tool_args = tool_call.get('args', {})
@@ -3178,26 +3236,26 @@ Use these ranges to transform user requirements:
                 # Strategy 1: Direct ID match
                 if tool_id in tool_args_accumulator:
                     args_str = tool_args_accumulator[tool_id]
-                    logger.info(f"✅ Found args by direct ID match: {tool_id}")
+                   # logger.info(f"✅ Found args by direct ID match: {tool_id}")
                 
                 # Strategy 2: Position-based match (for multiple tools)
                 elif idx in tool_args_accumulator:
                     args_str = tool_args_accumulator[idx]
-                    logger.info(f"✅ Found args by position match: index {idx}")
+                    #logger.info(f"✅ Found args by position match: index {idx}")
                 
                 # Strategy 3: Index-based fallback for single tool
                 elif len(complete_tool_calls) == 1 and tool_args_accumulator:
                     # For single tool call, try the first available accumulated args
                     first_key = list(tool_args_accumulator.keys())[0]
                     args_str = tool_args_accumulator[first_key]
-                    logger.info(f"✅ Found args by single-tool fallback: key {first_key}")
+                    #logger.info(f"✅ Found args by single-tool fallback: key {first_key}")
                 
                 if args_str:
-                    logger.info(f"🔄 Using accumulated args: '{args_str[:100]}...'")
+                    #logger.info(f"🔄 Using accumulated args: '{args_str[:100]}...'")
                     try:
                         accumulated_args = json.loads(args_str)
-                        logger.info(f"✅ Successfully parsed accumulated args: {accumulated_args}")
-                        logger.info(f"⚠️  REPLACING original args {tool_args} with accumulated args {accumulated_args}")
+                        #logger.info(f"✅ Successfully parsed accumulated args: {accumulated_args}")
+                        #logger.info(f"⚠️  REPLACING original args {tool_args} with accumulated args {accumulated_args}")
                         tool_args = accumulated_args
                     except json.JSONDecodeError as e:
                         logger.error(f"❌ Failed to parse accumulated args '{args_str}': {e}")
@@ -3271,9 +3329,14 @@ Use these ranges to transform user requirements:
                         "status": "failed"
                     }
             
+            # Log output token usage for the main response
+            if response_content:
+                output_tokens = len(tiktoken.encoding_for_model("gpt-4").encode(response_content))
+                logger.info(f"🔢 TOKEN USAGE - Output: {output_tokens} tokens for main response")
+            
             # Generate one consolidated follow-up response for all tool results
             if complete_tool_calls and all_tool_results:
-                logger.info(f"🔄 Generating consolidated follow-up response for {len(all_tool_results)} tool results")
+                #logger.info(f"🔄 Generating consolidated follow-up response for {len(all_tool_results)} tool results")
                 
                 # Generate consolidated follow-up response
                 followup_context_message = SystemMessage(content=self.build_system_prompt(search_states[client_id].get_llm_context()))
@@ -3292,7 +3355,7 @@ Use these ranges to transform user requirements:
                 followup_response = ""
                 async for followup_chunk in self.runnable_model.astream(followup_content):
                     if hasattr(followup_chunk, 'content') and followup_chunk.content:
-                        logger.info(f"Consolidated follow-up content: {followup_chunk.content}")
+                        #logger.info(f"Consolidated follow-up content: {followup_chunk.content}")
                         followup_response += followup_chunk.content
                         yield {
                             "type": "stream", 
@@ -3301,6 +3364,11 @@ Use these ranges to transform user requirements:
                         }
                 
                 logger.info(f"Consolidated follow-up response complete. Length: {len(followup_response)}")
+                
+                # Log follow-up response tokens
+                if followup_response.strip():
+                    followup_tokens = len(tiktoken.encoding_for_model("gpt-4").encode(followup_response))
+                    logger.info(f"🔢 TOKEN USAGE - Output: {followup_tokens} tokens for follow-up response")
                 
                 # Add the consolidated follow-up response to session
                 if followup_response.strip():
@@ -3336,6 +3404,11 @@ Use these ranges to transform user requirements:
                                 "partial": True
                             }
                     
+                    # Log reminder response tokens
+                    if reminder_response.strip():
+                        reminder_tokens = len(tiktoken.encoding_for_model("gpt-4").encode(reminder_response))
+                        logger.info(f"🔢 TOKEN USAGE - Output: {reminder_tokens} tokens for reminder response")
+                    
                     # Add the reminder response to session
                     if reminder_response.strip():
                         session["messages"].append(AIMessage(content=reminder_response))
@@ -3363,17 +3436,16 @@ Use these ranges to transform user requirements:
                 final_response_content = response_content
             
             # Send final response
-            final_state = search_states[client_id].get_state_summary()
+            final_state = search_states[client_id].get_state_summary(verbose=True)
             logger.info(f"🚀 SENDING FINAL STATE TO FRONTEND")
-            logger.info(f"🚀 Final state keys: {list(final_state.keys())}")
-            logger.info(f"🚀 cities_complete_data length: {len(final_state.get('cities_complete_data', []))}")
-            if final_state.get('cities_complete_data'):
-                sample = final_state['cities_complete_data'][0]
-                logger.info(f"🚀 Sample final city data keys: {list(sample.keys())}")
-                logger.info(f"🚀 Sample final city: {sample.get('city', 'NO_CITY')}")
-            logger.info(f"🚀 About to yield message_complete...")
+            # logger.info(f"🚀 Final state keys: {list(final_state.keys())}")
+            # logger.info(f"🚀 cities_complete_data length: {len(final_state.get('cities_complete_data', []))}")
+            # if final_state.get('cities_complete_data'):
+            #     sample = final_state['cities_complete_data'][0]
+            #     logger.info(f"🚀 Sample final city data keys: {list(sample.keys())}")
+            #     logger.info(f"🚀 Sample final city: {sample.get('city', 'NO_CITY')}")
+            # logger.info(f"🚀 About to yield message_complete...")
             
-            #logger.info(f"Final search state: {final_state}")
             yield {
                 "type": "message_complete",
                 "content": final_response_content,
@@ -3385,8 +3457,7 @@ Use these ranges to transform user requirements:
             yield {
                 "type": "error",
                 "content": f"Error processing message: {str(e)}"
-            }
-    
+            }    
     def serialize_messages_for_frontend(self, messages):
         """Convert LangChain messages to frontend-friendly format"""
         frontend_messages = []

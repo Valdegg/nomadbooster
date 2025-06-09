@@ -81,24 +81,24 @@ class ConnectionManager:
             
             # Log critical data for message_complete events
             if message.get("type") == "message_complete":
-                logger.info(f"📡 SENDING message_complete to {client_id}")
+                #logger.info(f"📡 SENDING message_complete to {client_id}")
                 state = message.get("state", {})
-                logger.info(f"📡 State keys: {list(state.keys())}")
+                #logger.info(f"📡 State keys: {list(state.keys())}")
                 cities_complete = state.get("cities_complete_data", [])
-                logger.info(f"📡 cities_complete_data length before JSON: {len(cities_complete)}")
-                if cities_complete:
-                    logger.info(f"📡 Sample city before JSON: {cities_complete[0].get('city', 'NO_CITY')}")
+                #logger.info(f"📡 cities_complete_data length before JSON: {len(cities_complete)}")
+                #if cities_complete:
+                    #logger.info(f"📡 Sample city before JSON: {cities_complete[0].get('city', 'NO_CITY')}")
                 
                 # Test JSON serialization explicitly
                 try:
                     json_str = json.dumps(message)
-                    logger.info(f"📡 JSON serialization successful, length: {len(json_str)}")
+                #    logger.info(f"📡 JSON serialization successful, length: {len(json_str)}")
                     
                     # Parse it back to verify
                     parsed = json.loads(json_str)
                     parsed_state = parsed.get("state", {})
                     parsed_cities = parsed_state.get("cities_complete_data", [])
-                    logger.info(f"📡 After JSON round-trip, cities_complete_data length: {len(parsed_cities)}")
+                 #   logger.info(f"📡 After JSON round-trip, cities_complete_data length: {len(parsed_cities)}")
                     
                 except Exception as e:
                     logger.error(f"📡 JSON serialization failed: {e}")
@@ -207,7 +207,7 @@ async def resume_session(session_id: str):
         return {
             "session_id": session_id,
             "message_count": len(session.get("messages", [])),
-            "search_state": search_state.get_state_summary(),
+            "search_state": search_state.get_state_summary(verbose=True),
             "last_updated": session.get("updated_at"),
             "status": "loaded"
         }
