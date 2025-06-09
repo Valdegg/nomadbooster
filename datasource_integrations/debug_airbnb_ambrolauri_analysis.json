@@ -1,0 +1,168 @@
+{
+  "elementsWithEuro": [
+    {
+      "tag": "HTML",
+      "className": "",
+      "testId": "",
+      "text": "(function() {\n  // pg_pixel is no-op now.\n})()\"undefined\"!=typeof window&&window.addEventListener(\"e",
+      "innerHTML": "<head><meta charset=\"utf-8\"><meta name=\"locale\" content=\"en\"><meta name=\"google\" content=\"notranslate\"><meta id=\"csrf-param-meta-tag\" name=\"csrf-param"
+    },
+    {
+      "tag": "BODY",
+      "className": "with-new-header",
+      "testId": "",
+      "text": "Skip to content<div class=\"alert alert-with-icon alert-error no-js-alert\" data-nosnippet=\"true\"><i c",
+      "innerHTML": "<div id=\"site-skip-links\"><a class=\"screen-reader-only screen-reader-only-focusable skip-to-content skip-to-content_v2-link\" data-hook=\"skip-to-conten"
+    },
+    {
+      "tag": "DIV",
+      "className": "",
+      "testId": "",
+      "text": "HomesHomesExperiencesExperiences, newServicesServices, newStart your searchLocationAnywhereAnywhereC",
+      "innerHTML": "<div dir=\"ltr\"><div data-theme=\"\" data-color-scheme=\"light\" data-testid=\"linaria-injector\" class=\"t1bgcr6e  cjz5kiq\" style=\"display:contents;--linaria"
+    },
+    {
+      "tag": "DIV",
+      "className": "",
+      "testId": "",
+      "text": "HomesHomesExperiencesExperiences, newServicesServices, newStart your searchLocationAnywhereAnywhereC",
+      "innerHTML": "<div data-theme=\"\" data-color-scheme=\"light\" data-testid=\"linaria-injector\" class=\"t1bgcr6e  cjz5kiq\" style=\"display:contents;--linaria-theme_typograp"
+    },
+    {
+      "tag": "DIV",
+      "className": "t1bgcr6e  cjz5kiq",
+      "testId": "linaria-injector",
+      "text": "HomesHomesExperiencesExperiences, newServicesServices, newStart your searchLocationAnywhereAnywhereC",
+      "innerHTML": "<div><div><div class=\"r9m3m4o atm_eohtre_1wfwpv5 atm_1gwwzir_u29brm atm_eohtre_mm87nz__jx8car atm_1gwwzir_rw9lz9__jx8car dir dir-ltr\"><div data-xray=\""
+    },
+    {
+      "tag": "DIV",
+      "className": "",
+      "testId": "",
+      "text": "HomesHomesExperiencesExperiences, newServicesServices, newStart your searchLocationAnywhereAnywhereC",
+      "innerHTML": "<div><div class=\"r9m3m4o atm_eohtre_1wfwpv5 atm_1gwwzir_u29brm atm_eohtre_mm87nz__jx8car atm_1gwwzir_rw9lz9__jx8car dir dir-ltr\"><div data-xray=\"{&quo"
+    },
+    {
+      "tag": "DIV",
+      "className": "",
+      "testId": "",
+      "text": "HomesHomesExperiencesExperiences, newServicesServices, newStart your searchLocationAnywhereAnywhereC",
+      "innerHTML": "<div class=\"r9m3m4o atm_eohtre_1wfwpv5 atm_1gwwzir_u29brm atm_eohtre_mm87nz__jx8car atm_1gwwzir_rw9lz9__jx8car dir dir-ltr\"><div data-xray=\"{&quot;fed"
+    },
+    {
+      "tag": "DIV",
+      "className": "r9m3m4o atm_eohtre_1wfwpv5 atm_1gwwzir_u29brm atm_",
+      "testId": "",
+      "text": "HomesHomesExperiencesExperiences, newServicesServices, newStart your searchLocationAnywhereAnywhereC",
+      "innerHTML": "<div data-xray=\"{&quot;federatedSearchId&quot;:&quot;SKELETON&quot;,&quot;federatedSearchSessionId&quot;:null,&quot;katana&quot;:&quot;https://search."
+    },
+    {
+      "tag": "DIV",
+      "className": "c13hltkk atm_lcucu6_1ylpe5n atm_1298uvg_idpfg4 atm",
+      "testId": "",
+      "text": "HomesHomesExperiencesExperiences, newServicesServices, newStart your searchLocationAnywhereAnywhereC",
+      "innerHTML": "<header class=\"hdlenu1 atm_mk_1if85x1 atm_tk_idpfg4 atm_vy_1osqo2v atm_wq_zo7u8 dir dir-ltr\"><div data-pageslot=\"true\" class=\"c1yo0219 atm_9s_1txwivl_"
+    },
+    {
+      "tag": "DIV",
+      "className": "c1yo0219 atm_9s_1txwivl_vmtskl atm_92_1yyfdc7_vmts",
+      "testId": "",
+      "text": "Site FooterSupportHelp CenterAirCoverAnti-discriminationDisability supportCancellation optionsReport",
+      "innerHTML": "<div style=\"display:contents\"><div style=\"--search-section-max-width:1600px\"><div class=\"f1enclhd atm_2d_116dmco dir dir-ltr\"><div class=\"_c30a84\"><di"
+    }
+  ],
+  "elementsWithDollar": [],
+  "elementsWithPrice": [],
+  "elementsWithNight": [
+    {
+      "tag": "HTML",
+      "className": "",
+      "testId": "",
+      "text": "(function() {\n  // pg_pixel is no-op now.\n})()\"undefined\"!=typeof window&&window.addEventListener(\"e"
+    },
+    {
+      "tag": "BODY",
+      "className": "with-new-header",
+      "testId": "",
+      "text": "Skip to content<div class=\"alert alert-with-icon alert-error no-js-alert\" data-nosnippet=\"true\"><i c"
+    },
+    {
+      "tag": "SCRIPT",
+      "className": "",
+      "testId": "",
+      "text": "{\"niobeMinimalClientData\":[[\"StaysSearch:{\\\"isLeanTreatment\\\":false,\\\"simplifyContextualPictureEnabl"
+    }
+  ],
+  "dataTestIdElements": [
+    {
+      "testId": "linaria-injector",
+      "tag": "DIV",
+      "text": "HomesHomesExperiencesExperiences, newServicesServices, newStart your searchLocat"
+    },
+    {
+      "testId": "tab-bar-entry-video",
+      "tag": "VIDEO",
+      "text": ""
+    },
+    {
+      "testId": "tab-bar-entry-video",
+      "tag": "VIDEO",
+      "text": ""
+    },
+    {
+      "testId": "tab-bar-entry-video",
+      "tag": "VIDEO",
+      "text": ""
+    },
+    {
+      "testId": "little-search",
+      "tag": "DIV",
+      "text": "Start your searchLocationAnywhereAnywhereCheck in / Check outAnytimeAnytimeGuest"
+    },
+    {
+      "testId": "little-search-location",
+      "tag": "BUTTON",
+      "text": "LocationAnywhereAnywhere"
+    },
+    {
+      "testId": "little-search-date",
+      "tag": "BUTTON",
+      "text": "Check in / Check outAnytimeAnytime"
+    },
+    {
+      "testId": "little-search-guests",
+      "tag": "BUTTON",
+      "text": "GuestsAdd guestsAdd guests"
+    },
+    {
+      "testId": "cypress-headernav-profile",
+      "tag": "A",
+      "text": ""
+    },
+    {
+      "testId": "guest-header-dropdownmenu",
+      "tag": "DIV",
+      "text": "Help CenterBecome a hostIt's easy to start hosting and earn extra income.Refer a"
+    },
+    {
+      "testId": "shimmer-container",
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "testId": "stays-page-heading",
+      "tag": "SPAN",
+      "text": "Over 1,000 stays"
+    },
+    {
+      "testId": "map/GoogleMap",
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "testId": "map/MapBackgroundLoader",
+      "tag": "DIV",
+      "text": ""
+    }
+  ]
+}

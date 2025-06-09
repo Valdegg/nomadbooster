@@ -24,11 +24,32 @@ Schema: {"city": str, "country": str, "safety_score": int, "crime_index": float,
 
 import json
 import re
+import os
+import asyncio
 from typing import List, Dict, Optional
 from datetime import datetime
 import logging
+from playwright.async_api import async_playwright
 
 logger = logging.getLogger(__name__)
+
+# BrightData configuration
+AUTH = os.getenv("BRIGHTDATA_AUTH")  # Format: "brd-customer-123456-zone-my_scraper_zone:password"
+BR_ENDPOINT = os.getenv("BRIGHTDATA_ENDPOINT")
+
+# Try to extract auth from endpoint if not provided directly
+if not AUTH and BR_ENDPOINT and "@brd.superproxy.io" in BR_ENDPOINT:
+    try:
+        auth_part = BR_ENDPOINT.split("@")[0].replace("wss://", "")
+        if auth_part.startswith("brd-customer-"):
+            AUTH = auth_part
+            logger.info(f"Extracted auth from endpoint: {AUTH[:20]}...")
+    except Exception as e:
+        logger.warning(f"Could not extract auth from endpoint: {e}")
+
+# If no endpoint provided, generate from auth
+if not BR_ENDPOINT and AUTH:
+    BR_ENDPOINT = f"wss://{AUTH}@brd.superproxy.io:9222"
 
 # Target cities for our travel recommendation system
 TARGET_CITIES = [
@@ -38,55 +59,285 @@ TARGET_CITIES = [
     "Budapest", "Warsaw", "Athens", "Helsinki", "Oslo"
 ]
 
-def fetch_numbeo_crime_data_with_brightdata() -> str:
+import pandas as pd 
+
+iata_data = pd.read_csv('../data/european_iatas_df.csv')
+TARGET_CITIES = set(iata_data['city'].tolist())
+
+async def fetch_safety_data_for_city(city: str) -> Dict:
     """
-    Fetch Numbeo crime index page using BrightData Browser API
+    Fetch safety/crime data for a specific city using BrightData Browser API
+    
+    Args:
+        city: City name to fetch data for
+        
+    Returns:
+        Dict: City safety data {"city": str, "crime_index": float, "safety_index": float}
+    """
+    if not BR_ENDPOINT:
+        raise ValueError("BrightData configuration missing. Set BRIGHTDATA_AUTH or BRIGHTDATA_ENDPOINT")
+    
+    if "brd.superproxy.io" not in BR_ENDPOINT:
+        raise ValueError("Invalid BrightData endpoint format")
+    
+    target_url = f"https://www.numbeo.com/crime/in/{city}"
+    
+    try:
+        async with async_playwright() as pw:
+            browser = await pw.chromium.connect_over_cdp(BR_ENDPOINT)
+            try:
+                page = await browser.new_page()
+                await page.goto(target_url, timeout=120_000)
+                
+                logger.info(f"Page loaded for {city}, waiting for crime data table...")
+                
+                # Save page screenshot for debugging (optional)
+                if os.getenv("DEBUG_NUMBEO"):
+                    await page.screenshot(path=f"debug_safety_{city.lower()}.png")
+                    logger.info(f"Saved debug screenshot: debug_safety_{city.lower()}.png")
+                
+                # Wait for the crime data table
+                table_found = False
+                selectors_to_try = [
+                    "table.data_wide_table",
+                    "table.tablesorter",
+                    "table:has(td:contains('Crime Index'))",
+                    "table:has(td:contains('Safety Index'))"
+                ]
+                
+                for selector in selectors_to_try:
+                    try:
+                        await page.wait_for_selector(selector, timeout=10_000)
+                        logger.info(f"Found table with selector: {selector}")
+                        table_found = True
+                        break
+                    except Exception:
+                        logger.warning(f"Selector '{selector}' not found, trying next...")
+                        continue
+                
+                if not table_found:
+                    logger.error("Could not find any crime data table on the page")
+                    # Log page content for debugging
+                    content = await page.content()
+                    logger.info(f"Page content preview: {content[:1000]}...")
+                    raise ValueError(f"No crime data table found on Numbeo page for {city}")
+                
+                # Extract crime and safety indices
+                crime_safety_data = await page.evaluate("""
+                    () => {
+                        const tables = document.querySelectorAll('table.data_wide_table, table.tablesorter, table');
+                        let crimeIndex = null;
+                        let safetyIndex = null;
+                        
+                        for (const table of tables) {
+                            const rows = [...table.querySelectorAll('tr')];
+                            
+                            for (const row of rows) {
+                                const cells = [...row.children];
+                                if (cells.length < 2) continue;
+                                
+                                const labelText = cells[0].textContent.trim();
+                                const valueText = cells[1].textContent.trim();
+                                
+                                // Look for Crime Index
+                                if (labelText.includes('Crime Index') && !labelText.includes('in ')) {
+                                    const match = valueText.match(/([0-9.]+)/);
+                                    if (match) {
+                                        crimeIndex = parseFloat(match[1]);
+                                    }
+                                }
+                                
+                                // Look for Safety Index
+                                if (labelText.includes('Safety Index') && !labelText.includes('in ')) {
+                                    const match = valueText.match(/([0-9.]+)/);
+                                    if (match) {
+                                        safetyIndex = parseFloat(match[1]);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        return {
+                            crimeIndex: crimeIndex,
+                            safetyIndex: safetyIndex,
+                            found: crimeIndex !== null || safetyIndex !== null
+                        };
+                    }
+                """)
+                
+                logger.info(f"Crime/Safety extraction result: {crime_safety_data}")
+                
+                if not crime_safety_data or not crime_safety_data.get('found'):
+                    logger.error(f"Could not find crime or safety index for {city}")
+                    raise ValueError(f"Could not find crime/safety data for {city}")
+                
+                crime_index = crime_safety_data.get('crimeIndex')
+                safety_index = crime_safety_data.get('safetyIndex')
+                
+                # If we have crime index but no safety index, calculate it
+                if crime_index is not None and safety_index is None:
+                    safety_index = 100 - crime_index
+                
+                # If we have safety index but no crime index, calculate it
+                if safety_index is not None and crime_index is None:
+                    crime_index = 100 - safety_index
+                
+                logger.info(f"Fetched safety data for {city}: Crime={crime_index}, Safety={safety_index}")
+                
+                return {
+                    "city": city,
+                    "crime_index": crime_index,
+                    "safety_index": safety_index,
+                    "last_updated": datetime.now().isoformat()
+                }
+                
+            finally:
+                await browser.close()
+                
+    except Exception as e:
+        logger.error(f"Error fetching safety data for {city}: {e}")
+        raise
+
+def load_existing_safety_data(output_path: str = "../data/sources/numbeo_safety_score.json") -> Dict:
+    """
+    Load existing safety data file if it exists
     
     Returns:
-        str: Page content as markdown from BrightData
+        Dict: Existing data structure or empty structure
     """
     try:
-        # TODO: Replace with actual BrightData Browser API call
-        # Example BrightData usage:
-        # browser = BrightDataBrowser()
-        # page_content = browser.open("https://www.numbeo.com/crime/rankings.jsp")
-        # markdown_content = browser.scrape_as_markdown()
+        if os.path.exists(output_path):
+            with open(output_path, 'r') as f:
+                return json.load(f)
+    except Exception as e:
+        logger.warning(f"Could not load existing safety data: {e}")
+    
+    # Return empty structure if file doesn't exist or can't be loaded
+    return {
+        "data_source": "Numbeo Crime Index → Safety Score via BrightData",
+        "url": "https://www.numbeo.com/crime/rankings.jsp",
+        "last_updated": datetime.now().isoformat(),
+        "description": "Safety score derived from crime index, 100 = very safe, 0 = dangerous",
+        "calculation": "safety_score = 100 - crime_index (or use Numbeo safety index if available)",
+        "cities": []
+    }
+
+def is_safety_data_recent(city_data: Dict, max_age_hours: int = 24) -> bool:
+    """
+    Check if safety data is recent enough to skip re-fetching
+    
+    Args:
+        city_data: City data dict with 'last_updated' field
+        max_age_hours: Maximum age in hours before data is considered stale
         
-        # For now, placeholder implementation
-        url = "https://www.numbeo.com/crime/rankings.jsp"
-        logger.info(f"Would fetch from BrightData: {url}")
+    Returns:
+        bool: True if data is recent enough
+    """
+    try:
+        last_updated = datetime.fromisoformat(city_data['last_updated'].replace('Z', '+00:00'))
+        age_hours = (datetime.now() - last_updated).total_seconds() / 3600
+        return age_hours < max_age_hours
+    except Exception:
+        return False
+
+def save_single_safety_data(city_data: Dict, output_path: str = "../data/sources/numbeo_safety_score.json"):
+    """
+    Save or update safety data for a single city incrementally
+    
+    Args:
+        city_data: Safety data for single city
+        output_path: Output file path
+    """
+    try:
+        # Load existing data
+        existing_data = load_existing_safety_data(output_path)
         
-        # Placeholder return - replace with actual BrightData call
-        return """
-        # Crime Index Rankings
+        # Find and update/add the city data
+        city_name = city_data['city']
+        city_found = False
         
-        | Rank | City | Country | Crime Index | Safety Index |
-        |------|------|---------|-------------|--------------|
-        | 1    | Barcelona | Spain | 52.73 | 47.27 |
-        | 15   | Athens | Greece | 47.82 | 52.18 |
-        | 23   | Rome | Italy | 43.95 | 56.05 |
-        | 31   | Paris | France | 41.27 | 58.73 |
-        | 42   | Brussels | Belgium | 38.64 | 61.36 |
-        | 58   | Madrid | Spain | 35.91 | 64.09 |
-        | 67   | Berlin | Germany | 33.22 | 66.78 |
-        | 78   | Amsterdam | Netherlands | 30.55 | 69.45 |
-        | 89   | Dublin | Ireland | 28.83 | 71.17 |
-        | 95   | Lisbon | Portugal | 26.14 | 73.86 |
-        | 112  | Stockholm | Sweden | 23.47 | 76.53 |
-        | 125  | Warsaw | Poland | 21.69 | 78.31 |
-        | 134  | Copenhagen | Denmark | 19.82 | 80.18 |
-        | 145  | Helsinki | Finland | 18.04 | 81.96 |
-        | 156  | Budapest | Hungary | 16.33 | 83.67 |
-        | 167  | Oslo | Norway | 14.75 | 85.25 |
-        | 178  | Vienna | Austria | 13.18 | 86.82 |
-        | 189  | Munich | Germany | 11.64 | 88.36 |
-        | 201  | Prague | Czech Republic | 10.27 | 89.73 |
-        | 215  | Zurich | Switzerland | 8.92 | 91.08 |
-        """
+        for i, existing_city in enumerate(existing_data['cities']):
+            if existing_city['city'] == city_name:
+                existing_data['cities'][i] = city_data
+                city_found = True
+                break
+        
+        if not city_found:
+            existing_data['cities'].append(city_data)
+        
+        # Update metadata
+        existing_data['last_updated'] = datetime.now().isoformat()
+        
+        # Ensure directory exists
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        
+        # Save updated data
+        with open(output_path, 'w') as f:
+            json.dump(existing_data, f, indent=2)
+            
+        logger.info(f"Saved/updated safety data for {city_name} (total: {len(existing_data['cities'])} cities)")
         
     except Exception as e:
-        logger.error(f"Error fetching Numbeo crime data via BrightData: {e}")
+        logger.error(f"Error saving safety data for {city_data.get('city', '?')}: {e}")
         raise
+
+async def fetch_all_city_safety_data(force_refresh: bool = False) -> List[Dict]:
+    """
+    Fetch safety data for all target cities with incremental saving
+    
+    Args:
+        force_refresh: If True, ignore existing data age and refresh all cities
+    
+    Returns:
+        List[Dict]: Safety data for all cities (loaded from saved file)
+    """
+    output_path = "../data/sources/numbeo_safety_score.json"
+    
+    # Load existing data to check what we already have
+    existing_data = load_existing_safety_data(output_path)
+    existing_cities = {city['city']: city for city in existing_data['cities']}
+    
+    cities_to_fetch = []
+    cities_skipped = []
+    
+    # Determine which cities need to be fetched
+    for city in TARGET_CITIES:
+        if not force_refresh and city in existing_cities and is_safety_data_recent(existing_cities[city]):
+            cities_skipped.append(city)
+            logger.info(f"Skipping {city} - safety data is recent")
+        else:
+            cities_to_fetch.append(city)
+    
+    if force_refresh and cities_skipped:
+        logger.info("Force refresh mode - will fetch all cities regardless of age")
+        cities_to_fetch = TARGET_CITIES.copy()
+        cities_skipped = []
+    
+    logger.info(f"Will fetch {len(cities_to_fetch)} cities, skipping {len(cities_skipped)} with recent data")
+    
+    # Fetch missing/stale cities one by one with incremental saving
+    for city in cities_to_fetch:
+        try:
+            logger.info(f"Fetching safety data for {city}...")
+            city_data = await fetch_safety_data_for_city(city)
+            
+            # Convert to safety score immediately
+            safety_city = convert_crime_to_safety_score([city_data])[0] if city_data else None
+            
+            if safety_city:
+                # Save immediately
+                save_single_safety_data(safety_city, output_path)
+            
+            # Add small delay to be respectful
+            await asyncio.sleep(2)
+            
+        except Exception as e:
+            logger.error(f"Failed to fetch safety data for {city}: {e}")
+            continue
+    
+    # Return all data (existing + newly fetched)
+    final_data = load_existing_safety_data(output_path)
+    return final_data['cities']
 
 def parse_crime_data_from_markdown(markdown_content: str) -> List[Dict]:
     """
@@ -155,7 +406,7 @@ def convert_crime_to_safety_score(raw_data: List[Dict]) -> List[Dict]:
     Convert crime index to safety score (invert and normalize to 0-100 scale)
     
     Args:
-        raw_data: Raw crime data from Numbeo
+        raw_data: Raw crime/safety data from Numbeo
         
     Returns:
         List[Dict]: Safety score data
@@ -164,15 +415,17 @@ def convert_crime_to_safety_score(raw_data: List[Dict]) -> List[Dict]:
     
     for city_data in raw_data:
         try:
-            crime_index = city_data['crime_index']
+            crime_index = city_data.get('crime_index')
+            safety_index = city_data.get('safety_index')
             
-            # If Numbeo provides safety index, use it; otherwise calculate
-            if city_data.get('safety_index') is not None:
-                safety_score = city_data['safety_index']
-            else:
-                # Calculate safety score: 100 - crime_index
-                # Assumes crime index is on 0-100 scale
+            # Use safety index if available, otherwise calculate from crime index
+            if safety_index is not None:
+                safety_score = safety_index
+            elif crime_index is not None:
                 safety_score = max(0, min(100, 100 - crime_index))
+            else:
+                logger.warning(f"No crime or safety data for {city_data['city']}")
+                continue
             
             # Validate range
             if safety_score < 0 or safety_score > 100:
@@ -181,10 +434,9 @@ def convert_crime_to_safety_score(raw_data: List[Dict]) -> List[Dict]:
             
             safety_data.append({
                 'city': city_data['city'],
-                'country': city_data['country'], 
                 'safety_score': int(round(safety_score)),
                 'crime_index': crime_index,
-                'numbeo_rank': city_data.get('numbeo_rank'),
+                'safety_index': safety_index,
                 'last_updated': city_data['last_updated']
             })
             
@@ -232,29 +484,51 @@ def save_safety_score_data(data: List[Dict], output_path: str = "../data/sources
         logger.error(f"Error saving data to {output_path}: {e}")
         raise
 
+# MCP Tool wrapper for single city fetching
+async def tool_fetch_safety_data(args: dict) -> dict:
+    """
+    MCP tool signature for fetching safety data for a specific city
+    
+    Args:
+        args: {"city": "Lisbon"}
+        
+    Returns:
+        dict: {"city": "Lisbon", "crime_index": 26.14, "safety_index": 73.86}
+    """
+    city = args.get("city")
+    if not city:
+        raise ValueError("City parameter is required")
+    
+    result = await fetch_safety_data_for_city(city)
+    return result
+
 def main():
     """
-    Main execution function for Numbeo safety score data fetching
+    Main execution function for Numbeo safety score data fetching with incremental saving
     """
     try:
+        # Check for force refresh flag
+        import sys
+        force_refresh = "--force" in sys.argv or "--refresh" in sys.argv
+        if force_refresh:
+            logger.info("Force refresh mode enabled - will fetch all cities")
+        
         logger.info("Starting Numbeo safety score data fetch via BrightData...")
         
-        # Fetch data using BrightData Browser API
-        markdown_content = fetch_numbeo_crime_data_with_brightdata()
+        # Fetch data using BrightData Browser API with incremental saving
+        # This function now handles loading existing data, skipping recent cities,
+        # fetching missing/stale cities, converting to safety scores, and saving incrementally
+        all_safety_data = asyncio.run(fetch_all_city_safety_data(force_refresh=force_refresh))
+        logger.info(f"Process completed - total {len(all_safety_data)} cities available")
         
-        # Parse the markdown content
-        raw_data = parse_crime_data_from_markdown(markdown_content)
-        logger.info(f"Parsed {len(raw_data)} cities from Numbeo crime data")
-        
-        # Convert crime indices to safety scores
-        safety_data = convert_crime_to_safety_score(raw_data)
-        logger.info(f"Converted {len(safety_data)} cities to safety scores")
-        
-        # Save to JSON file
-        save_safety_score_data(safety_data)
+        # Load final data from file (already converted and saved incrementally)
+        final_data = load_existing_safety_data("../data/sources/numbeo_safety_score.json")
         
         logger.info("Numbeo safety score data fetch completed successfully")
-        return safety_data
+        logger.info(f"Data saved to: ../data/sources/numbeo_safety_score.json")
+        logger.info(f"Total cities: {len(final_data['cities'])}")
+        
+        return final_data['cities']
         
     except Exception as e:
         logger.error(f"Failed to fetch Numbeo safety score data: {e}")

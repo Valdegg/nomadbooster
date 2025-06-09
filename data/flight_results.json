@@ -1,0 +1,325 @@
+{
+  "BER-BCN": {
+    "destination": "BCN",
+    "cheapest_price_eur": 57,
+    "total_flights": 8,
+    "average_price_eur": 93,
+    "price_range": {
+      "min": 57,
+      "max": 147
+    },
+    "trip_type": "one_way",
+    "dohop_url": "https://dohop.is/flights/BER/BCN/2025-09-15/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "summary": "Found 8 one-way flights from BER to BCN: \u20ac57-147 (avg: \u20ac93). Book at: https://dohop.is/flights/BER/BCN/2025-09-15/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "sample_flights": [
+      {
+        "price_eur": 57,
+        "airline": "Ryanair",
+        "departure_time": "21:50",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "Ryanair Flight 1",
+        "source": "dohop_structured"
+      },
+      {
+        "price_eur": 61,
+        "airline": "FR132",
+        "departure_time": "0:2516 sep",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "FR132 Flight 2",
+        "source": "dohop_structured"
+      }
+    ],
+    "saved_at": "2025-06-09T00:41:40.167727",
+    "route_key": "BER-BCN"
+  },
+  "BER-ATH": {
+    "destination": "ATH",
+    "cheapest_price_eur": 111,
+    "total_flights": 2,
+    "average_price_eur": 167,
+    "price_range": {
+      "min": 111,
+      "max": 223
+    },
+    "trip_type": "one_way",
+    "dohop_url": "https://dohop.is/flights/BER/ATH/2025-09-15/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "summary": "Found 2 one-way flights from BER to ATH: \u20ac111-223 (avg: \u20ac167). Book at: https://dohop.is/flights/BER/ATH/2025-09-15/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "sample_flights": [
+      {
+        "price_eur": 111,
+        "airline": "AEGEAN Airlines",
+        "departure_time": "20:40",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "AEGEAN Airlines Flight 1",
+        "source": "dohop_structured"
+      },
+      {
+        "price_eur": 223,
+        "airline": "A3823",
+        "departure_time": "0:2516 sep",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "A3823 Flight 2",
+        "source": "dohop_structured"
+      }
+    ],
+    "saved_at": "2025-06-09T00:25:08.414786",
+    "route_key": "BER-ATH"
+  },
+  "BER-LIS": {
+    "destination": "LIS",
+    "cheapest_price_eur": 118,
+    "total_flights": 3,
+    "average_price_eur": 159,
+    "price_range": {
+      "min": 118,
+      "max": 218
+    },
+    "trip_type": "one_way",
+    "dohop_url": "https://dohop.is/flights/BER/LIS/2025-09-15/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "summary": "Found 3 one-way flights from BER to LIS: \u20ac118-218 (avg: \u20ac159). Book at: https://dohop.is/flights/BER/LIS/2025-09-15/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "sample_flights": [
+      {
+        "price_eur": 118,
+        "airline": "TAP Air Portugal",
+        "departure_time": "17:20",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "TAP Air Portugal Flight 1",
+        "source": "dohop_structured"
+      },
+      {
+        "price_eur": 141,
+        "airline": "TP533",
+        "departure_time": "20:25",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "TP533 Flight 2",
+        "source": "dohop_structured"
+      }
+    ],
+    "saved_at": "2025-06-09T00:41:40.169045",
+    "route_key": "BER-LIS"
+  },
+  "BER-MAD": {
+    "destination": "MAD",
+    "cheapest_price_eur": 119,
+    "total_flights": 4,
+    "average_price_eur": 177,
+    "price_range": {
+      "min": 119,
+      "max": 225
+    },
+    "trip_type": "one_way",
+    "dohop_url": "https://dohop.is/flights/BER/MAD/2025-09-15/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "summary": "Found 4 one-way flights from BER to MAD: \u20ac119-225 (avg: \u20ac177). Book at: https://dohop.is/flights/BER/MAD/2025-09-15/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "sample_flights": [
+      {
+        "price_eur": 119,
+        "airline": "Ryanair",
+        "departure_time": "21:35",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "Ryanair Flight 1",
+        "source": "dohop_structured"
+      },
+      {
+        "price_eur": 156,
+        "airline": "FR2527",
+        "departure_time": "0:5016 sep",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "FR2527 Flight 2",
+        "source": "dohop_structured"
+      }
+    ],
+    "saved_at": "2025-06-09T00:41:40.169547",
+    "route_key": "BER-MAD"
+  },
+  "BER-ZTH": {
+    "destination": "ZTH",
+    "cheapest_price_eur": 123,
+    "total_flights": 11,
+    "average_price_eur": 223,
+    "price_range": {
+      "min": 123,
+      "max": 322
+    },
+    "trip_type": "one_way",
+    "dohop_url": "https://dohop.is/flights/BER/ZTH/2025-09-01/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "summary": "Found 11 one-way flights from BER to ZTH: \u20ac123-322 (avg: \u20ac223). Book at: https://dohop.is/flights/BER/ZTH/2025-09-01/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "sample_flights": [
+      {
+        "price_eur": 123,
+        "airline": "Ryanair",
+        "departure_time": "7:30",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "Ryanair Flight 1",
+        "source": "dohop_structured"
+      },
+      {
+        "price_eur": 129,
+        "airline": "FR2670",
+        "departure_time": "9:15",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "FR2670 Flight 2",
+        "source": "dohop_structured"
+      }
+    ],
+    "saved_at": "2025-06-09T10:35:32.687572",
+    "route_key": "BER-ZTH"
+  },
+  "BER-PFO": {
+    "destination": "PFO",
+    "cheapest_price_eur": 130,
+    "total_flights": 10,
+    "average_price_eur": 204,
+    "price_range": {
+      "min": 130,
+      "max": 293
+    },
+    "trip_type": "one_way",
+    "dohop_url": "https://dohop.is/flights/BER/PFO/2025-09-01/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "summary": "Found 10 one-way flights from BER to PFO: \u20ac130-293 (avg: \u20ac204). Book at: https://dohop.is/flights/BER/PFO/2025-09-01/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "sample_flights": [
+      {
+        "price_eur": 130,
+        "airline": "Ryanair",
+        "departure_time": "13:05",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "Ryanair Flight 1",
+        "source": "dohop_structured"
+      },
+      {
+        "price_eur": 151,
+        "airline": "FR40",
+        "departure_time": "15:15",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "FR40 Flight 2",
+        "source": "dohop_structured"
+      }
+    ],
+    "saved_at": "2025-06-09T10:35:32.688109",
+    "route_key": "BER-PFO"
+  },
+  "BER-FAO": {
+    "destination": "FAO",
+    "cheapest_price_eur": 315,
+    "total_flights": 1,
+    "average_price_eur": 315,
+    "price_range": {
+      "min": 315,
+      "max": 315
+    },
+    "trip_type": "round_trip",
+    "dohop_url": "https://dohop.is/flights/BER/FAO/2025-09-15/2025-09-22/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "summary": "Found 1 round-trip flights from BER to FAO: \u20ac315-315 (avg: \u20ac315). Book at: https://dohop.is/flights/BER/FAO/2025-09-15/2025-09-22/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "sample_flights": [
+      {
+        "price_eur": 315,
+        "airline": "Ryanair",
+        "departure_time": "13:40",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "Ryanair Flight 1",
+        "source": "dohop_structured"
+      }
+    ],
+    "saved_at": "2025-06-09T12:08:26.718378",
+    "route_key": "BER-FAO"
+  },
+  "BER-GIB": {
+    "destination": "GIB",
+    "cheapest_price_eur": 263,
+    "total_flights": 11,
+    "average_price_eur": 411,
+    "price_range": {
+      "min": 263,
+      "max": 862
+    },
+    "trip_type": "round_trip",
+    "dohop_url": "https://dohop.is/flights/BER/GIB/2025-09-15/2025-09-22/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "summary": "Found 11 round-trip flights from BER to GIB: \u20ac263-862 (avg: \u20ac411). Book at: https://dohop.is/flights/BER/GIB/2025-09-15/2025-09-22/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "sample_flights": [
+      {
+        "price_eur": 263,
+        "airline": "easyJet",
+        "departure_time": "10:40",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "easyJet Flight 1",
+        "source": "dohop_structured"
+      },
+      {
+        "price_eur": 269,
+        "airline": "U28630",
+        "departure_time": "11:40",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "U28630 Flight 2",
+        "source": "dohop_structured"
+      }
+    ],
+    "saved_at": "2025-06-09T12:08:26.720374",
+    "route_key": "BER-GIB"
+  },
+  "BER-FNC": {
+    "destination": "FNC",
+    "cheapest_price_eur": 268,
+    "total_flights": 12,
+    "average_price_eur": 378,
+    "price_range": {
+      "min": 268,
+      "max": 750
+    },
+    "trip_type": "round_trip",
+    "dohop_url": "https://dohop.is/flights/BER/FNC/2025-09-15/2025-09-22/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "summary": "Found 12 round-trip flights from BER to FNC: \u20ac268-750 (avg: \u20ac378). Book at: https://dohop.is/flights/BER/FNC/2025-09-15/2025-09-22/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "sample_flights": [
+      {
+        "price_eur": 268,
+        "airline": "Ryanair",
+        "departure_time": "18:20",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "Ryanair Flight 1",
+        "source": "dohop_structured"
+      },
+      {
+        "price_eur": 270,
+        "airline": "FR177",
+        "departure_time": "19:10",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "FR177 Flight 2",
+        "source": "dohop_structured"
+      }
+    ],
+    "saved_at": "2025-06-09T12:08:26.721099",
+    "route_key": "BER-FNC"
+  }
+}

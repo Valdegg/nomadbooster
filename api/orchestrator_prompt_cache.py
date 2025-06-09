@@ -116,47 +116,6 @@ class SearchState:
         self.current_cities = self.all_cities.copy()
         self.applied_filters = {}
         
-        # Load city coordinates mapping
-        self.city_coordinates = {}
-        try:
-            coordinates_df = pd.read_csv("../data/city_coordinates_mapping.csv")
-            # Create a dictionary mapping city names to coordinates
-            for _, row in coordinates_df.iterrows():
-                city_name = row['city']
-                lat = row['latitude'] 
-                lon = row['longitude']
-                if pd.notna(lat) and pd.notna(lon):
-                    self.city_coordinates[city_name] = {
-                        "lat": float(lat),
-                        "lng": float(lon)
-                    }
-            logger.info(f"✅ Loaded coordinates for {len(self.city_coordinates)} cities")
-        except Exception as e:
-            logger.warning(f"❌ Could not load city coordinates mapping: {e}")
-            # Fallback to hardcoded coordinates for key cities
-            self.city_coordinates = {
-                "Berlin": {"lat": 52.5200, "lng": 13.4050},
-                "Amsterdam": {"lat": 52.3676, "lng": 4.9041},
-                "Barcelona": {"lat": 41.3851, "lng": 2.1734},
-                "Paris": {"lat": 48.8566, "lng": 2.3522},
-                "Rome": {"lat": 41.9028, "lng": 12.4964},
-                "London": {"lat": 51.5074, "lng": -0.1278},
-                "Madrid": {"lat": 40.4168, "lng": -3.7038},
-                "Vienna": {"lat": 48.2082, "lng": 16.3738},
-                "Prague": {"lat": 50.0755, "lng": 14.4378},
-                "Budapest": {"lat": 47.4979, "lng": 19.0402},
-                "Warsaw": {"lat": 52.2297, "lng": 21.0122},
-                "Stockholm": {"lat": 59.3293, "lng": 18.0686},
-                "Oslo": {"lat": 59.9139, "lng": 10.7522},
-                "Copenhagen": {"lat": 55.6761, "lng": 12.5683},
-                "Helsinki": {"lat": 60.1699, "lng": 24.9384},
-                "Reykjavik": {"lat": 64.1466, "lng": -21.9426},
-                "Dublin": {"lat": 53.3498, "lng": -6.2603},
-                "Lisbon": {"lat": 38.7223, "lng": -9.1393},
-                "Athens": {"lat": 37.9838, "lng": 23.7275},
-                "Zurich": {"lat": 47.3769, "lng": 8.5417}
-            }
-    
     def apply_filter(self, filter_name: str, filter_params: dict, filtered_df: pd.DataFrame):
         """Apply a filter and update state"""
         # Check if this is a replacement of the same filter type
@@ -555,211 +514,81 @@ class SearchState:
     def get_state_summary(self) -> dict:
         """Get current search state summary with city coordinates for mapping"""
         
-        logger.info(f"🔍 Starting get_state_summary - current_cities count: {len(self.current_cities)}")
-        
         # Load saved flight data
         flight_data = load_flight_data()
-        logger.info(f"📈 Loaded flight data: {len(flight_data) if flight_data else 0} entries")
         
-        # Load weather data
-        weather_df = None
-        try:
-            weather_df = pd.read_csv("../data/cities_weather.csv")
-            logger.info(f"🌤️ Successfully loaded weather data: {len(weather_df)} rows, cities: {weather_df['city'].nunique()}")
-        except Exception as e:
-            logger.warning(f"❌ Could not load weather data: {e}")
-        
-        # Use the coordinates loaded from CSV in SearchState initialization
-        # This is now loaded from city_coordinates_mapping.csv or uses fallback values
+        # City coordinates for mapping (approximate city centers)
+        city_coordinates = {
+            "Berlin": {"lat": 52.5200, "lng": 13.4050},
+            "Amsterdam": {"lat": 52.3676, "lng": 4.9041},
+            "Barcelona": {"lat": 41.3851, "lng": 2.1734},
+            "Prague": {"lat": 50.0755, "lng": 14.4378},
+            "Lisbon": {"lat": 38.7223, "lng": -9.1393},
+            "Vienna": {"lat": 48.2082, "lng": 16.3738},
+            "Rome": {"lat": 41.9028, "lng": 12.4964},
+            "Paris": {"lat": 48.8566, "lng": 2.3522},
+            "Copenhagen": {"lat": 55.6761, "lng": 12.5683},
+            "Stockholm": {"lat": 59.3293, "lng": 18.0686},
+            "Brussels": {"lat": 50.8503, "lng": 4.3517},
+            "Madrid": {"lat": 40.4168, "lng": -3.7038},
+            "Munich": {"lat": 48.1351, "lng": 11.5820},
+            "Zurich": {"lat": 47.3769, "lng": 8.5417},
+            "Dublin": {"lat": 53.3498, "lng": -6.2603},
+            "Budapest": {"lat": 47.4979, "lng": 19.0402},
+            "Warsaw": {"lat": 52.2297, "lng": 21.0122},
+            "Athens": {"lat": 37.9755, "lng": 23.7348},
+            "Helsinki": {"lat": 60.1699, "lng": 24.9384},
+            "Oslo": {"lat": 59.9139, "lng": 10.7522}
+        }
         
         # Build list of remaining cities with their details
         remaining_cities_detailed = []
         cities_with_coords = []
-        cities_complete_data = []
+        cities_full_data = []
         
-        logger.info(f"🏙️ Processing {len(self.current_cities)} cities...")
-        
-        for idx, (_, city_row) in enumerate(self.current_cities.iterrows()):
+        for _, city_row in self.current_cities.iterrows():
             city_name = city_row['city']
-            logger.info(f"🔄 Processing city {idx+1}/{len(self.current_cities)}: {city_name}")
             
             # Get flight data for this city
             city_flight_data = get_flight_data_for_city(city_name, flight_data)
-            if city_flight_data:
-                logger.info(f"✈️ Found flight data for {city_name}")
             
             # Basic city info with coordinates
             city_info = {
                 "name": city_name,
                 "country": getattr(city_row, 'country', None),
-                "coordinates": self.city_coordinates.get(city_name, {"lat": 0, "lng": 0}),
+                "coordinates": city_coordinates.get(city_name, {"lat": 0, "lng": 0}),
                 "cost_index": getattr(city_row, 'cost_index', None),
                 "safety_score": getattr(city_row, 'safety_score', None)
             }
-            
-            # Clean up NaN values
-            city_info_clean = {}
-            for k, v in city_info.items():
-                if pd.isna(v):
-                    city_info_clean[k] = None
-                else:
-                    city_info_clean[k] = v
-            
-            remaining_cities_detailed.append(city_info_clean)
+            remaining_cities_detailed.append(city_info)
             
             # Coordinates only (for map display)
-            if city_name in self.city_coordinates:
+            if city_name in city_coordinates:
                 cities_with_coords.append({
                     "name": city_name,
-                    "coordinates": self.city_coordinates[city_name]
+                    "coordinates": city_coordinates[city_name]
                 })
             
-            # Complete structured data for detailed analysis
+            # Full CSV data (for detailed analysis)
             city_data = city_row.to_dict()
-            logger.info(f"📊 City data keys for {city_name}: {list(city_data.keys())}")
-            
-            # Define cost-related fields
-            cost_fields = [
-                'cost_index', 'meal_inexpensive', 'meal_mid_range_2p', 'domestic_beer', 
-                'cappuccino', 'transport_ticket', 'transport_monthly', 'taxi_start', 
-                'taxi_1mile', 'gasoline_gallon', 'apartment_1br_center', 'apartment_1br_outside',
-                'apartment_3br_center', 'apartment_3br_outside', 'utilities_basic', 'internet',
-                'fitness_club', 'cinema_ticket', 'milk_gallon', 'bread_1lb', 'eggs_12', 
-                'chicken_1lb', 'accommodation_entire_place_eur', 'accommodation_private_room_eur',
-                'accommodation_avg_eur', 'primary_currency'
-            ]
-            
-            # Extract cost data
-            cost_data = {}
-            for field in cost_fields:
-                if field in city_data and pd.notna(city_data[field]) and city_data[field] != '':
-                    value = city_data[field]
-                    # Convert pandas/numpy types to native Python types
-                    if isinstance(value, (int, float)):
-                        if field == 'primary_currency':
-                            cost_data[field] = str(value)
-                        else:
-                            cost_data[field] = float(value) if '.' in str(value) or isinstance(value, float) else int(value)
-                    else:
-                        cost_data[field] = str(value)
-            
-            logger.info(f"💰 Cost data for {city_name}: {len(cost_data)} fields - {list(cost_data.keys())}")
-
-            from pprint import pprint
-            pprint(cost_data)
-            
-            # Get weather data for this city (using first month as default or applied filter month)
-            weather_data = {}
-            if weather_df is not None:
-                # Get travel month from applied filters or use a default month
-                travel_month = 6  # Default to June
-                climate_filter = self.applied_filters.get('climate', {})
-                if climate_filter and climate_filter.get('travel_month') and climate_filter['travel_month'] != -999:
-                    travel_month = climate_filter['travel_month']
-                
-                logger.info(f"🌤️ Looking for weather data for {city_name} in month {travel_month}")
-                
-                # Find weather data for this city and month
-                city_weather = weather_df[
-                    (weather_df['city'] == city_name) & 
-                    (weather_df['travel_month'] == travel_month)
-                ]
-                
-                logger.info(f"🌤️ Weather query result for {city_name}: {len(city_weather)} rows")
-                
-                if not city_weather.empty:
-                    weather_row = city_weather.iloc[0]
-                    weather_data = {
-                        'travel_month': int(travel_month),
-                        'avg_temp_c': float(weather_row.get('avg_temp_c')) if pd.notna(weather_row.get('avg_temp_c')) else None,
-                        'temp_max_c': float(weather_row.get('temp_max_c')) if pd.notna(weather_row.get('temp_max_c')) else None,
-                        'temp_min_c': float(weather_row.get('temp_min_c')) if pd.notna(weather_row.get('temp_min_c')) else None,
-                        'rainfall_mm': float(weather_row.get('rainfall_mm')) if pd.notna(weather_row.get('rainfall_mm')) else None,
-                        'sunshine_hours': float(weather_row.get('sunshine_hours')) if pd.notna(weather_row.get('sunshine_hours')) else None,
-                        'uv_index_max': float(weather_row.get('uv_index_max')) if pd.notna(weather_row.get('uv_index_max')) else None,
-                        'wind_speed_max_kmh': float(weather_row.get('wind_speed_max_kmh')) if pd.notna(weather_row.get('wind_speed_max_kmh')) else None,
-                        'precipitation_probability_max': float(weather_row.get('precipitation_probability_max')) if pd.notna(weather_row.get('precipitation_probability_max')) else None,
-                        'sunshine_category': str(weather_row.get('sunshine_category')) if pd.notna(weather_row.get('sunshine_category')) else None,
-                        'rain_category': str(weather_row.get('rain_category')) if pd.notna(weather_row.get('rain_category')) else None,
-                        'wind_category': str(weather_row.get('wind_category')) if pd.notna(weather_row.get('wind_category')) else None,
-                        'sunshine_score': float(weather_row.get('sunshine_score')) if pd.notna(weather_row.get('sunshine_score')) else None,
-                        'comfort_score': float(weather_row.get('comfort_score')) if pd.notna(weather_row.get('comfort_score')) else None
-                    }
-                    # Remove None values
-                    weather_data = {k: v for k, v in weather_data.items() if v is not None}
-                    logger.info(f"🌤️ Weather data for {city_name}: {len(weather_data)} fields - {list(weather_data.keys())}")
-                else:
-                    logger.warning(f"⚠️ No weather data found for {city_name} in month {travel_month}")
-            
-            # Helper function to convert pandas/numpy types to native Python types
-            def safe_convert(value):
-                if pd.isna(value):
-                    return None
-                if isinstance(value, (int, float)):
-                    # Convert numpy/pandas numeric types to native Python types
-                    if isinstance(value, float) or '.' in str(value):
-                        return float(value)
-                    else:
-                        return int(value)
-                return str(value)
-            
-            # Build structured city data
-            structured_city_data = {
-                "city": city_name,
-                "country": city_data.get('country'),
-                "coordinates": self.city_coordinates.get(city_name, {"lat": 0, "lng": 0}),
-                "cost": cost_data,
-                "weather": weather_data,
-                # Include other non-cost, non-weather fields at top level with type conversion
-                "safety_score": safe_convert(city_data.get('safety_score')),
-                "crime_index": safe_convert(city_data.get('crime_index')),
-                "safety_index": safe_convert(city_data.get('safety_index')),
-                "healthcare_score": safe_convert(city_data.get('healthcare_score')),
-                "language_barrier": safe_convert(city_data.get('language_barrier')),
-                "visa_free_days": safe_convert(city_data.get('visa_free_days')),
-                "pollution_index": safe_convert(city_data.get('pollution_index')),
-                "tourism_load_ratio": safe_convert(city_data.get('tourism_load_ratio')),
-                "public_transport_score": safe_convert(city_data.get('public_transport_score')),
-                "nature_access": str(city_data.get('nature_access')) if pd.notna(city_data.get('nature_access')) else None,
-                "city_size": str(city_data.get('city_size')) if pd.notna(city_data.get('city_size')) else None,
-                "architectural_style": str(city_data.get('architectural_style')) if pd.notna(city_data.get('architectural_style')) else None,
-                "walkability_score": safe_convert(city_data.get('walkability_score')),
-                "population": safe_convert(city_data.get('population'))
-            }
-            
+            # Clean up NaN values
+            city_data_clean = {k: v for k, v in city_data.items() if pd.notna(v) and v != ''}
+            # Add coordinates
+            city_data_clean["coordinates"] = city_coordinates.get(city_name, {"lat": 0, "lng": 0})
             # Add flight data if available
             if city_flight_data:
-                structured_city_data["flight_data"] = city_flight_data
-                
-            logger.info(f"🏗️ Built structured data for {city_name}: cost={len(cost_data)} fields, weather={len(weather_data)} fields")
-            cities_complete_data.append(structured_city_data)
+                city_data_clean["flight_data"] = city_flight_data
+            cities_full_data.append(city_data_clean)
         
-        logger.info(f"✅ Final result: cities_complete_data has {len(cities_complete_data)} entries")
-        logger.info(f"📋 Summary: remaining_cities_detailed={len(remaining_cities_detailed)}, cities_with_coords={len(cities_with_coords)}")
-        
-        # Log a sample of the actual data being returned
-        if cities_complete_data:
-            sample_city = cities_complete_data[0]
-            logger.info(f"🔍 Sample cities_complete_data entry: {sample_city['city']}")
-            logger.info(f"🔍 Sample structure keys: {list(sample_city.keys())}")
-            logger.info(f"🔍 Sample cost keys: {list(sample_city.get('cost', {}).keys())}")
-            logger.info(f"🔍 Sample weather keys: {list(sample_city.get('weather', {}).keys())}")
-        
-        result = {
+        return {
             "total_cities": len(self.all_cities),
             "remaining_cities": len(self.current_cities),
             "applied_filters": self.applied_filters,
             "remaining_city_names": self.current_cities['city'].tolist() if len(self.current_cities) <= 10 else [],
             "cities": remaining_cities_detailed,  # Basic city info with coordinates
             "cities_with_coordinates": cities_with_coords,  # Just coordinates for maps
-            "cities_complete_data": cities_complete_data,  # Structured data with cost and weather sections
-            "cities_full_data": cities_complete_data  # Frontend compatibility (same data, different key)
+            "cities_full_data": cities_full_data  # Complete CSV data with coordinates and flight data
         }
-        
-        logger.info(f"🎯 Returning result with keys: {list(result.keys())}")
-        logger.info(f"🎯 cities_complete_data in result: {len(result['cities_complete_data'])} entries")
-        
-        return result
 
 # FILTER TOOL SCHEMAS - LangChain compatible with required fields and sentinel values
 
@@ -2043,7 +1872,7 @@ def lookup_flight_prices(
         Origin airport code (3 letters, e.g., 'BER' for Berlin, 'NYC' for New York)
         
     destination : str
-        Destination airport code (3 letters, e.g., 'KEF' for Reykjavik, 'PAR' for Paris, 'BCN' for Barcelona). Must be 3 letters.
+        Destination airport code (3 letters, e.g., 'KEF' for Reykjavik, 'PAR' for Paris)
         
     departure_date : str
         Departure date in YYYY-MM-DD format (e.g., '2025-07-18')
@@ -2646,7 +2475,7 @@ class ChatOrchestrator:
             # filter_by_pollution,
             # filter_by_public_transport,
             # filter_by_urban_nature,
-            #filter_by_city_size,
+            filter_by_city_size,
             # filter_by_walkability,
             get_final_recommendations,
             # filter_by_visa_requirements,
@@ -2686,9 +2515,34 @@ class ChatOrchestrator:
         # In-memory fallback if no Redis
         self.sessions: Dict[str, Dict] = {}
         
-        # Optional caching for static system prompt components
-        self._cached_tools_description = None
-        self._cached_climate_context = None
+        # Cache static system prompt components (loaded once)
+        self._cached_system_prompt = None
+        self._load_system_prompt_cache()
+    
+    def _load_system_prompt_cache(self):
+        """Load and cache the static parts of the system prompt"""
+        try:
+            # Load base system prompt
+            with open("system_prompt.txt", "r") as file:
+                base_prompt = file.read()
+            
+            # Generate static components
+            tools_description = self.generate_tools_description()
+            climate_context = self.analyze_climate_data_ranges()
+            
+            # Replace placeholders
+            self._cached_system_prompt = base_prompt.replace("{AVAILABLE_TOOLS}", tools_description).replace("{CLIMATE_DATA_CONTEXT}", climate_context)
+            
+            logger.info("✅ System prompt cached successfully")
+        except Exception as e:
+            logger.error(f"❌ Failed to cache system prompt: {e}")
+            self._cached_system_prompt = "System prompt cache failed"
+    
+    def get_system_message(self, search_context: dict) -> str:
+        """Get system message with dynamic search context"""
+        return f"""Current search state: {json.dumps(search_context)}
+
+{self._cached_system_prompt}"""
     
     def generate_tools_description(self) -> str:
         """Generate a formatted list of available tools from their docstrings"""
@@ -2855,25 +2709,6 @@ Use these ranges to transform user requirements:
         except Exception as e:
             logger.error(f"Failed to analyze data: {e}")
             return "Data ranges: Unable to analyze (data files not found or invalid)"
-    
-    def build_system_prompt(self, llm_context: dict) -> str:
-        """Build the complete system prompt with placeholders replaced"""
-        # Load system prompt from file
-        with open("system_prompt.txt", "r") as file:
-            system_prompt = file.read()
-        
-        # Replace placeholder with actual available tools
-        tools_description = self.generate_tools_description()
-        system_prompt = system_prompt.replace("{AVAILABLE_TOOLS}", tools_description)
-        
-        # Replace placeholder with climate data context
-        climate_context = self.analyze_climate_data_ranges()
-        system_prompt = system_prompt.replace("{CLIMATE_DATA_CONTEXT}", climate_context)
-        
-        # Add current search state and return
-        return f"""Current search state: {json.dumps(llm_context)}
-
-{system_prompt}"""
     
     async def save_session_to_redis(self, session_id: str, session_data: dict, search_state: SearchState):
         """Save session and search state to Redis"""
@@ -3095,9 +2930,8 @@ Use these ranges to transform user requirements:
         # Add current search state to context (minimal for LLM cost optimization)
         llm_context = search_states[client_id].get_llm_context()
         
-        # System prompt focusing on information gain and progressive filtering
-        system_prompt = self.build_system_prompt(llm_context)
-        context_message = SystemMessage(content=system_prompt)
+        # Use cached system prompt with only dynamic search context
+        context_message = SystemMessage(content=self.get_system_message(llm_context))
         
         # Prepare all content for the model
         all_content = [
@@ -3112,7 +2946,6 @@ Use these ranges to transform user requirements:
             response_content = ""
             complete_tool_calls = []  # Collect tool calls after streaming
             tool_args_accumulator = {}  # Accumulate arguments for valid tool calls
-            followup_response = ""  # Initialize followup response tracking
             
             # First pass: stream content and collect complete tool calls
             async for chunk in self.runnable_model.astream(all_content):
@@ -3276,7 +3109,7 @@ Use these ranges to transform user requirements:
                 logger.info(f"🔄 Generating consolidated follow-up response for {len(all_tool_results)} tool results")
                 
                 # Generate consolidated follow-up response
-                followup_context_message = SystemMessage(content=self.build_system_prompt(search_states[client_id].get_llm_context()))
+                followup_context_message = SystemMessage(content=self.get_system_message(search_states[client_id].get_llm_context()))
                 followup_content = [
                     followup_context_message,
                     *session["messages"]
@@ -3306,77 +3139,32 @@ Use these ranges to transform user requirements:
                 if followup_response.strip():
                     session["messages"].append(AIMessage(content=followup_response))
                 else:
-                    logger.warning("Consolidated follow-up response was empty! Sending reminder prompt to LLM...")
-                    
-                    # Send a system prompt reminder to generate appropriate response
-                    llm_context = search_states[client_id].get_llm_context()
-                    cities_count = llm_context.get('remaining_count', 0)
-                    
-                    if cities_count > 5:
-                        reminder_content = "You applied filters without explaining. If there are more than 5 cities left, offer the user to filter by other properties (budget, climate, city size, etc.). Keep it conversational and engaging."
-                    else:
-                        reminder_content = "You applied filters without explaining. If there are 5 or fewer cities left, ask the user if they want to find which ones they can fly to (and ask for their departure location and budget). Present the shortlisted cities."
-                    
-                    reminder_message = SystemMessage(content=reminder_content)
-                    reminder_content_list = [
-                        SystemMessage(content=self.build_system_prompt(llm_context)),
-                        *session["messages"],
-                        reminder_message
-                    ]
-                    
-                    # Generate response with reminder prompt
-                    reminder_response = ""
-                    async for reminder_chunk in self.runnable_model.astream(reminder_content_list):
-                        if hasattr(reminder_chunk, 'content') and reminder_chunk.content:
-                            logger.info(f"Reminder response content: {reminder_chunk.content}")
-                            reminder_response += reminder_chunk.content
-                            yield {
-                                "type": "stream", 
-                                "content": reminder_chunk.content,
-                                "partial": True
-                            }
-                    
-                    # Add the reminder response to session
-                    if reminder_response.strip():
-                        session["messages"].append(AIMessage(content=reminder_response))
-                        # Update followup_response so the rest of the logic works correctly
-                        followup_response = reminder_response
-                    else:
-                        logger.error("Even the reminder prompt failed to generate a response!")
+                    logger.warning("Consolidated follow-up response was empty!")
+                    # Force a response if none was generated
+                    tool_names = [tr["tool_name"] for tr in all_tool_results]
+                    forced_response = f"I've applied {len(tool_names)} filters: {', '.join(tool_names)}. Let me know if you'd like to add more filters or if you have other preferences!"
+                    session["messages"].append(AIMessage(content=forced_response))
+                    yield {
+                        "type": "stream",
+                        "content": forced_response,
+                        "partial": True
+                    }
             
             logger.info(f"Finished streaming response. Final content length: {len(response_content)}")
             
-            # Add assistant message to session ONLY if there were no tool calls
-            # (if there were tool calls, the consolidated follow-up response was already added)
-            if not complete_tool_calls and response_content.strip():
+            # Add assistant message to session
+            if response_content.strip():
                 session["messages"].append(AIMessage(content=response_content))
             
             # Save session and search state to Redis
             await self.save_session_to_redis(client_id, session, search_states[client_id])
             
-            # Determine the final response content to send to frontend
-            if complete_tool_calls and all_tool_results:
-                # If there were tool calls, the final content is the follow-up response
-                final_response_content = followup_response if followup_response.strip() else response_content
-            else:
-                # If no tool calls, the final content is the initial response
-                final_response_content = response_content
-            
             # Send final response
             final_state = search_states[client_id].get_state_summary()
-            logger.info(f"🚀 SENDING FINAL STATE TO FRONTEND")
-            logger.info(f"🚀 Final state keys: {list(final_state.keys())}")
-            logger.info(f"🚀 cities_complete_data length: {len(final_state.get('cities_complete_data', []))}")
-            if final_state.get('cities_complete_data'):
-                sample = final_state['cities_complete_data'][0]
-                logger.info(f"🚀 Sample final city data keys: {list(sample.keys())}")
-                logger.info(f"🚀 Sample final city: {sample.get('city', 'NO_CITY')}")
-            logger.info(f"🚀 About to yield message_complete...")
-            
             #logger.info(f"Final search state: {final_state}")
             yield {
                 "type": "message_complete",
-                "content": final_response_content,
+                "content": response_content,
                 "state": final_state
             }
             

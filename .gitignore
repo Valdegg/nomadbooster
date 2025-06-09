@@ -57,3 +57,9 @@ logs/
 
 # Cache
 .cache/ 
+
+
+# .png and .html files
+*.png
+*.html
+*.sh

@@ -48,9 +48,38 @@ data/sources/                      # JSON output files
 - Error handling and rate limiting should be implemented for production use
 - Consider implementing incremental updates to avoid re-fetching all data
 
+## BrightData Setup
+
+The Numbeo integrations use BrightData's Browser API to bypass anti-bot protections:
+
+### 1. Get BrightData Credentials
+1. Sign up at [BrightData](https://brightdata.com)
+2. Create a new zone for web scraping
+3. Note your credentials: `customer-zone-username:password`
+
+### 2. Set Environment Variable
+```bash
+export BRIGHTDATA_ENDPOINT="wss://brd-customer-hl_0dc2f720-zone-scraping_browser1:q1psjos7szad@brd.superproxy.io:9222"
+```
+
+### 3. Install Playwright
+```bash
+pip install playwright
+playwright install chromium
+```
+
+### 4. Test the Integration
+```bash
+cd datasource_integrations
+python test_numbeo_fetcher.py
+```
+
 ## Usage
 
 ```bash
+# Test Numbeo BrightData integration
+python datasource_integrations/test_numbeo_fetcher.py
+
 # Run individual data source integration
 python datasource_integrations/numbeo_cost_index.py
 
@@ -64,7 +93,7 @@ Required Python packages:
 - `requests` - HTTP requests
 - `beautifulsoup4` - HTML parsing
 - `pandas` - Data manipulation
-- `playwright` - Browser automation (for Timatic)
+- `playwright` - Browser automation with BrightData
 - `logging` - Logging utilities
 
 ## Next Steps

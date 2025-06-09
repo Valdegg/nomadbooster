@@ -1,11 +1,11 @@
 {
-  "data_source": "Numbeo Crime Index → Safety Score",
+  "data_source": "Numbeo Crime Index \u2192 Safety Score",
   "url": "https://www.numbeo.com/crime/rankings.jsp",
-  "last_updated": null,
+  "last_updated": "2025-06-09T02:38:31.855475",
   "description": "Safety score derived from Numbeo's Crime Index, inverted to create safety rating",
   "schema": {
     "city": "string - City name",
-    "country": "string - Country name", 
+    "country": "string - Country name",
     "safety_score": "integer - Safety score (0-100, higher = safer)",
     "crime_index": "float - Original crime index from Numbeo",
     "last_updated": "string - ISO date of last update"
@@ -19,5 +19,1469 @@
       "last_updated": "2024-01-01"
     }
   ],
-  "cities": []
-} 
+  "cities": [
+    {
+      "city": "Berlin",
+      "safety_score": 55,
+      "crime_index": 44.65,
+      "safety_index": 55.35,
+      "last_updated": "2025-06-09T01:28:44.990200"
+    },
+    {
+      "city": "Amsterdam",
+      "safety_score": 74,
+      "crime_index": 26.36,
+      "safety_index": 73.64,
+      "last_updated": "2025-06-09T02:10:11.826721"
+    },
+    {
+      "city": "Barcelona",
+      "safety_score": 48,
+      "crime_index": 51.72,
+      "safety_index": 48.28,
+      "last_updated": "2025-06-09T01:48:19.005105"
+    },
+    {
+      "city": "Prague",
+      "safety_score": 75,
+      "crime_index": 24.61,
+      "safety_index": 75.39,
+      "last_updated": "2025-06-09T01:32:42.896472"
+    },
+    {
+      "city": "Lisbon",
+      "safety_score": 68,
+      "crime_index": 31.93,
+      "safety_index": 68.07,
+      "last_updated": "2025-06-09T02:16:56.872423"
+    },
+    {
+      "city": "Vienna",
+      "safety_score": 72,
+      "crime_index": 28.04,
+      "safety_index": 71.96,
+      "last_updated": "2025-06-09T01:35:02.321595"
+    },
+    {
+      "city": "Rome",
+      "safety_score": 52,
+      "crime_index": 47.82,
+      "safety_index": 52.18,
+      "last_updated": "2025-06-09T02:12:12.328983"
+    },
+    {
+      "city": "Paris",
+      "safety_score": 42,
+      "crime_index": 58.12,
+      "safety_index": 41.88,
+      "last_updated": "2025-06-09T00:39:23.997306"
+    },
+    {
+      "city": "Copenhagen",
+      "safety_score": 74,
+      "crime_index": 25.74,
+      "safety_index": 74.26,
+      "last_updated": "2025-06-09T02:13:18.338643"
+    },
+    {
+      "city": "Stockholm",
+      "safety_score": 54,
+      "crime_index": 46.49,
+      "safety_index": 53.51,
+      "last_updated": "2025-06-09T01:04:30.756332"
+    },
+    {
+      "city": "Brussels",
+      "safety_score": 45,
+      "crime_index": 54.98,
+      "safety_index": 45.02,
+      "last_updated": "2025-06-09T00:59:24.442683"
+    },
+    {
+      "city": "Madrid",
+      "safety_score": 71,
+      "crime_index": 28.88,
+      "safety_index": 71.12,
+      "last_updated": "2025-06-09T01:13:06.113967"
+    },
+    {
+      "city": "Munich",
+      "safety_score": 79,
+      "crime_index": 21.26,
+      "safety_index": 78.74,
+      "last_updated": "2025-06-09T02:03:35.135733"
+    },
+    {
+      "city": "Zurich",
+      "safety_score": 77,
+      "crime_index": 23.19,
+      "safety_index": 76.81,
+      "last_updated": "2025-06-09T00:49:20.588947"
+    },
+    {
+      "city": "Dublin",
+      "safety_score": 46,
+      "crime_index": 53.98,
+      "safety_index": 46.02,
+      "last_updated": "2025-06-09T01:04:40.209152"
+    },
+    {
+      "city": "Budapest",
+      "safety_score": 66,
+      "crime_index": 33.9,
+      "safety_index": 66.1,
+      "last_updated": "2025-06-09T01:55:12.335217"
+    },
+    {
+      "city": "Warsaw",
+      "safety_score": 75,
+      "crime_index": 25.39,
+      "safety_index": 74.61,
+      "last_updated": "2025-06-09T01:40:35.012146"
+    },
+    {
+      "city": "Athens",
+      "safety_score": 45,
+      "crime_index": 55.29,
+      "safety_index": 44.71,
+      "last_updated": "2025-06-09T00:55:24.232413"
+    },
+    {
+      "city": "Helsinki",
+      "safety_score": 75,
+      "crime_index": 25.41,
+      "safety_index": 74.59,
+      "last_updated": "2025-06-09T02:17:31.004142"
+    },
+    {
+      "city": "Oslo",
+      "safety_score": 66,
+      "crime_index": 34.14,
+      "safety_index": 65.86,
+      "last_updated": "2025-06-09T00:43:32.765623"
+    },
+    {
+      "city": "Bari",
+      "safety_score": 50,
+      "crime_index": 50.02,
+      "safety_index": 49.98,
+      "last_updated": "2025-06-09T00:37:09.523622"
+    },
+    {
+      "city": "Perugia",
+      "safety_score": 66,
+      "crime_index": 33.9,
+      "safety_index": 66.1,
+      "last_updated": "2025-06-09T00:38:32.695915"
+    },
+    {
+      "city": "Santander",
+      "safety_score": 77,
+      "crime_index": 22.91,
+      "safety_index": 77.09,
+      "last_updated": "2025-06-09T00:39:08.433694"
+    },
+    {
+      "city": "Turku",
+      "safety_score": 78,
+      "crime_index": 21.62,
+      "safety_index": 78.38,
+      "last_updated": "2025-06-09T00:39:15.359283"
+    },
+    {
+      "city": "Toulon",
+      "safety_score": 47,
+      "crime_index": 53.06,
+      "safety_index": 46.94,
+      "last_updated": "2025-06-09T00:39:31.991542"
+    },
+    {
+      "city": "Murcia",
+      "safety_score": 51,
+      "crime_index": 48.81,
+      "safety_index": 51.19,
+      "last_updated": "2025-06-09T00:40:31.728723"
+    },
+    {
+      "city": "Venice",
+      "safety_score": 66,
+      "crime_index": 33.85,
+      "safety_index": 66.15,
+      "last_updated": "2025-06-09T00:41:04.360792"
+    },
+    {
+      "city": "Larnaca",
+      "safety_score": 70,
+      "crime_index": 29.52,
+      "safety_index": 70.48,
+      "last_updated": "2025-06-09T00:41:38.327169"
+    },
+    {
+      "city": "Faro",
+      "safety_score": 72,
+      "crime_index": 27.75,
+      "safety_index": 72.25,
+      "last_updated": "2025-06-09T00:42:12.551318"
+    },
+    {
+      "city": "Konya",
+      "safety_score": 60,
+      "crime_index": 40.19,
+      "safety_index": 59.81,
+      "last_updated": "2025-06-09T00:43:17.028485"
+    },
+    {
+      "city": "Volos",
+      "safety_score": 74,
+      "crime_index": 26.03,
+      "safety_index": 73.97,
+      "last_updated": "2025-06-09T00:43:39.491335"
+    },
+    {
+      "city": "Krasnodar",
+      "safety_score": 67,
+      "crime_index": 33.25,
+      "safety_index": 66.75,
+      "last_updated": "2025-06-09T00:43:46.656642"
+    },
+    {
+      "city": "Girona",
+      "safety_score": 63,
+      "crime_index": 36.84,
+      "safety_index": 63.16,
+      "last_updated": "2025-06-09T00:44:23.914939"
+    },
+    {
+      "city": "Baku",
+      "safety_score": 70,
+      "crime_index": 30.28,
+      "safety_index": 69.72,
+      "last_updated": "2025-06-09T00:44:33.415924"
+    },
+    {
+      "city": "Moscow",
+      "safety_score": 65,
+      "crime_index": 35.37,
+      "safety_index": 64.63,
+      "last_updated": "2025-06-09T00:45:07.975970"
+    },
+    {
+      "city": "Palermo",
+      "safety_score": 54,
+      "crime_index": 45.51,
+      "safety_index": 54.49,
+      "last_updated": "2025-06-09T00:46:11.220022"
+    },
+    {
+      "city": "Stuttgart",
+      "safety_score": 65,
+      "crime_index": 34.79,
+      "safety_index": 65.21,
+      "last_updated": "2025-06-09T00:48:01.969512"
+    },
+    {
+      "city": "Kristiansand",
+      "safety_score": 56,
+      "crime_index": 44.42,
+      "safety_index": 55.58,
+      "last_updated": "2025-06-09T00:48:09.378159"
+    },
+    {
+      "city": "Simferopol",
+      "safety_score": 57,
+      "crime_index": 42.94,
+      "safety_index": 57.06,
+      "last_updated": "2025-06-09T00:48:17.403978"
+    },
+    {
+      "city": "Perm",
+      "safety_score": 52,
+      "crime_index": 47.87,
+      "safety_index": 52.13,
+      "last_updated": "2025-06-09T00:49:29.546112"
+    },
+    {
+      "city": "Southampton",
+      "safety_score": 47,
+      "crime_index": 53.29,
+      "safety_index": 46.71,
+      "last_updated": "2025-06-09T00:49:37.465789"
+    },
+    {
+      "city": "Bergen",
+      "safety_score": 76,
+      "crime_index": 24.29,
+      "safety_index": 75.71,
+      "last_updated": "2025-06-09T00:50:37.025305"
+    },
+    {
+      "city": "Rijeka",
+      "safety_score": 76,
+      "crime_index": 24.46,
+      "safety_index": 75.54,
+      "last_updated": "2025-06-09T00:51:24.588547"
+    },
+    {
+      "city": "Haugesund",
+      "safety_score": 63,
+      "crime_index": 37.42,
+      "safety_index": 62.58,
+      "last_updated": "2025-06-09T00:51:58.577210"
+    },
+    {
+      "city": "Turin",
+      "safety_score": 48,
+      "crime_index": 52.05,
+      "safety_index": 47.95,
+      "last_updated": "2025-06-09T00:53:24.444358"
+    },
+    {
+      "city": "Pescara",
+      "safety_score": 49,
+      "crime_index": 50.99,
+      "safety_index": 49.01,
+      "last_updated": "2025-06-09T00:53:32.060738"
+    },
+    {
+      "city": "Corfu",
+      "safety_score": 78,
+      "crime_index": 21.69,
+      "safety_index": 78.31,
+      "last_updated": "2025-06-09T00:54:06.260770"
+    },
+    {
+      "city": "Aalborg",
+      "safety_score": 74,
+      "crime_index": 25.95,
+      "safety_index": 74.05,
+      "last_updated": "2025-06-09T00:54:14.430222"
+    },
+    {
+      "city": "Brindisi",
+      "safety_score": 40,
+      "crime_index": 59.61,
+      "safety_index": 40.39,
+      "last_updated": "2025-06-09T00:54:21.739034"
+    },
+    {
+      "city": "Rimini",
+      "safety_score": 50,
+      "crime_index": 49.85,
+      "safety_index": 50.15,
+      "last_updated": "2025-06-09T00:54:29.022923"
+    },
+    {
+      "city": "Salzburg",
+      "safety_score": 80,
+      "crime_index": 20.47,
+      "safety_index": 79.53,
+      "last_updated": "2025-06-09T00:55:09.312406"
+    },
+    {
+      "city": "Florence",
+      "safety_score": 58,
+      "crime_index": 41.53,
+      "safety_index": 58.47,
+      "last_updated": "2025-06-09T00:55:16.026045"
+    },
+    {
+      "city": "Sarajevo",
+      "safety_score": 55,
+      "crime_index": 44.88,
+      "safety_index": 55.12,
+      "last_updated": "2025-06-09T00:57:18.959441"
+    },
+    {
+      "city": "Pau",
+      "safety_score": 64,
+      "crime_index": 35.7,
+      "safety_index": 64.3,
+      "last_updated": "2025-06-09T00:57:27.436359"
+    },
+    {
+      "city": "Zadar",
+      "safety_score": 49,
+      "crime_index": 50.98,
+      "safety_index": 49.02,
+      "last_updated": "2025-06-09T00:59:59.404642"
+    },
+    {
+      "city": "Milan",
+      "safety_score": 47,
+      "crime_index": 53.18,
+      "safety_index": 46.82,
+      "last_updated": "2025-06-09T01:00:13.000922"
+    },
+    {
+      "city": "Saratov",
+      "safety_score": 54,
+      "crime_index": 45.66,
+      "safety_index": 54.34,
+      "last_updated": "2025-06-09T01:01:16.983562"
+    },
+    {
+      "city": "Trondheim",
+      "safety_score": 79,
+      "crime_index": 20.69,
+      "safety_index": 79.31,
+      "last_updated": "2025-06-09T01:01:24.329869"
+    },
+    {
+      "city": "Samsun",
+      "safety_score": 66,
+      "crime_index": 33.57,
+      "safety_index": 66.43,
+      "last_updated": "2025-06-09T01:02:22.648857"
+    },
+    {
+      "city": "Gomel",
+      "safety_score": 53,
+      "crime_index": 46.9,
+      "safety_index": 53.1,
+      "last_updated": "2025-06-09T01:02:55.370790"
+    },
+    {
+      "city": "Strasbourg",
+      "safety_score": 59,
+      "crime_index": 40.81,
+      "safety_index": 59.19,
+      "last_updated": "2025-06-09T01:03:30.575824"
+    },
+    {
+      "city": "Ankara",
+      "safety_score": 61,
+      "crime_index": 39.28,
+      "safety_index": 60.72,
+      "last_updated": "2025-06-09T01:06:33.832104"
+    },
+    {
+      "city": "Hanover",
+      "safety_score": 54,
+      "crime_index": 45.92,
+      "safety_index": 54.08,
+      "last_updated": "2025-06-09T01:06:44.486095"
+    },
+    {
+      "city": "Zagreb",
+      "safety_score": 79,
+      "crime_index": 21.41,
+      "safety_index": 78.59,
+      "last_updated": "2025-06-09T01:06:54.896621"
+    },
+    {
+      "city": "Bursa",
+      "safety_score": 71,
+      "crime_index": 29.01,
+      "safety_index": 70.99,
+      "last_updated": "2025-06-09T01:07:02.138323"
+    },
+    {
+      "city": "Vaasa",
+      "safety_score": 78,
+      "crime_index": 22.06,
+      "safety_index": 77.94,
+      "last_updated": "2025-06-09T01:07:13.938241"
+    },
+    {
+      "city": "Kharkiv",
+      "safety_score": 53,
+      "crime_index": 47.21,
+      "safety_index": 52.79,
+      "last_updated": "2025-06-09T01:07:21.233354"
+    },
+    {
+      "city": "Samara",
+      "safety_score": 68,
+      "crime_index": 32.07,
+      "safety_index": 67.93,
+      "last_updated": "2025-06-09T01:07:28.067862"
+    },
+    {
+      "city": "Verona",
+      "safety_score": 64,
+      "crime_index": 35.75,
+      "safety_index": 64.25,
+      "last_updated": "2025-06-09T01:07:34.485005"
+    },
+    {
+      "city": "Ibiza",
+      "safety_score": 55,
+      "crime_index": 45.12,
+      "safety_index": 54.88,
+      "last_updated": "2025-06-09T01:07:45.835537"
+    },
+    {
+      "city": "Groningen",
+      "safety_score": 78,
+      "crime_index": 22.05,
+      "safety_index": 77.95,
+      "last_updated": "2025-06-09T01:08:59.411122"
+    },
+    {
+      "city": "Hamburg",
+      "safety_score": 58,
+      "crime_index": 42.06,
+      "safety_index": 57.94,
+      "last_updated": "2025-06-09T01:09:07.685901"
+    },
+    {
+      "city": "Exeter",
+      "safety_score": 66,
+      "crime_index": 33.5,
+      "safety_index": 66.5,
+      "last_updated": "2025-06-09T01:09:14.172912"
+    },
+    {
+      "city": "Tbilisi",
+      "safety_score": 75,
+      "crime_index": 25.49,
+      "safety_index": 74.51,
+      "last_updated": "2025-06-09T01:10:16.615667"
+    },
+    {
+      "city": "Ljubljana",
+      "safety_score": 79,
+      "crime_index": 21.45,
+      "safety_index": 78.55,
+      "last_updated": "2025-06-09T01:10:23.825460"
+    },
+    {
+      "city": "Innsbruck",
+      "safety_score": 75,
+      "crime_index": 24.81,
+      "safety_index": 75.19,
+      "last_updated": "2025-06-09T01:13:14.460256"
+    },
+    {
+      "city": "Sofia",
+      "safety_score": 61,
+      "crime_index": 39.18,
+      "safety_index": 60.82,
+      "last_updated": "2025-06-09T01:13:46.471884"
+    },
+    {
+      "city": "Chania",
+      "safety_score": 83,
+      "crime_index": 17.21,
+      "safety_index": 82.79,
+      "last_updated": "2025-06-09T01:14:43.432337"
+    },
+    {
+      "city": "Voronezh",
+      "safety_score": 62,
+      "crime_index": 38.33,
+      "safety_index": 61.67,
+      "last_updated": "2025-06-09T01:15:15.994307"
+    },
+    {
+      "city": "Ufa",
+      "safety_score": 52,
+      "crime_index": 47.78,
+      "safety_index": 52.22,
+      "last_updated": "2025-06-09T01:15:24.909056"
+    },
+    {
+      "city": "Cork",
+      "safety_score": 63,
+      "crime_index": 36.94,
+      "safety_index": 63.06,
+      "last_updated": "2025-06-09T01:16:32.506550"
+    },
+    {
+      "city": "Minsk",
+      "safety_score": 49,
+      "crime_index": 50.58,
+      "safety_index": 49.42,
+      "last_updated": "2025-06-09T01:17:57.042174"
+    },
+    {
+      "city": "Lublin",
+      "safety_score": 69,
+      "crime_index": 31.07,
+      "safety_index": 68.93,
+      "last_updated": "2025-06-09T01:20:14.167070"
+    },
+    {
+      "city": "Catania",
+      "safety_score": 52,
+      "crime_index": 47.85,
+      "safety_index": 52.15,
+      "last_updated": "2025-06-09T01:20:22.856772"
+    },
+    {
+      "city": "Plovdiv",
+      "safety_score": 74,
+      "crime_index": 26.01,
+      "safety_index": 73.99,
+      "last_updated": "2025-06-09T01:20:32.243251"
+    },
+    {
+      "city": "Lviv",
+      "safety_score": 62,
+      "crime_index": 37.64,
+      "safety_index": 62.36,
+      "last_updated": "2025-06-09T01:21:06.983748"
+    },
+    {
+      "city": "Tomsk",
+      "safety_score": 60,
+      "crime_index": 39.67,
+      "safety_index": 60.33,
+      "last_updated": "2025-06-09T01:21:14.114711"
+    },
+    {
+      "city": "Stavanger",
+      "safety_score": 77,
+      "crime_index": 23.35,
+      "safety_index": 76.65,
+      "last_updated": "2025-06-09T01:21:22.557627"
+    },
+    {
+      "city": "Genoa",
+      "safety_score": 55,
+      "crime_index": 45.31,
+      "safety_index": 54.69,
+      "last_updated": "2025-06-09T01:22:20.789988"
+    },
+    {
+      "city": "Porto",
+      "safety_score": 67,
+      "crime_index": 33.11,
+      "safety_index": 66.89,
+      "last_updated": "2025-06-09T01:22:54.952528"
+    },
+    {
+      "city": "Kiev",
+      "safety_score": 55,
+      "crime_index": 45.32,
+      "safety_index": 54.68,
+      "last_updated": "2025-06-09T01:23:03.613898"
+    },
+    {
+      "city": "Cagliari",
+      "safety_score": 62,
+      "crime_index": 37.82,
+      "safety_index": 62.18,
+      "last_updated": "2025-06-09T01:24:03.813751"
+    },
+    {
+      "city": "Zakynthos",
+      "safety_score": 75,
+      "crime_index": 24.61,
+      "safety_index": 75.39,
+      "last_updated": "2025-06-09T01:24:11.436166"
+    },
+    {
+      "city": "Pardubice",
+      "safety_score": 69,
+      "crime_index": 30.91,
+      "safety_index": 69.09,
+      "last_updated": "2025-06-09T01:25:10.519872"
+    },
+    {
+      "city": "Bremen",
+      "safety_score": 51,
+      "crime_index": 48.98,
+      "safety_index": 51.02,
+      "last_updated": "2025-06-09T01:25:18.208762"
+    },
+    {
+      "city": "Cologne",
+      "safety_score": 55,
+      "crime_index": 44.56,
+      "safety_index": 55.44,
+      "last_updated": "2025-06-09T01:26:17.044492"
+    },
+    {
+      "city": "Debrecen",
+      "safety_score": 76,
+      "crime_index": 23.8,
+      "safety_index": 76.2,
+      "last_updated": "2025-06-09T01:26:50.200043"
+    },
+    {
+      "city": "Krasnoyarsk",
+      "safety_score": 56,
+      "crime_index": 43.84,
+      "safety_index": 56.16,
+      "last_updated": "2025-06-09T01:27:23.188791"
+    },
+    {
+      "city": "Bologna",
+      "safety_score": 52,
+      "crime_index": 48.23,
+      "safety_index": 51.77,
+      "last_updated": "2025-06-09T01:27:54.137117"
+    },
+    {
+      "city": "Varna",
+      "safety_score": 65,
+      "crime_index": 34.56,
+      "safety_index": 65.44,
+      "last_updated": "2025-06-09T01:28:29.819401"
+    },
+    {
+      "city": "Frankfurt",
+      "safety_score": 54,
+      "crime_index": 45.8,
+      "safety_index": 54.2,
+      "last_updated": "2025-06-09T01:31:00.939131"
+    },
+    {
+      "city": "Odessa",
+      "safety_score": 53,
+      "crime_index": 46.53,
+      "safety_index": 53.47,
+      "last_updated": "2025-06-09T01:31:09.979012"
+    },
+    {
+      "city": "Ivano-Frankivsk",
+      "safety_score": 60,
+      "crime_index": 39.84,
+      "safety_index": 60.16,
+      "last_updated": "2025-06-09T01:33:39.681059"
+    },
+    {
+      "city": "Geneva",
+      "safety_score": 70,
+      "crime_index": 30.39,
+      "safety_index": 69.61,
+      "last_updated": "2025-06-09T01:34:12.806272"
+    },
+    {
+      "city": "Tuzla",
+      "safety_score": 57,
+      "crime_index": 42.75,
+      "safety_index": 57.25,
+      "last_updated": "2025-06-09T01:34:45.393282"
+    },
+    {
+      "city": "Valladolid",
+      "safety_score": 78,
+      "crime_index": 22.23,
+      "safety_index": 77.77,
+      "last_updated": "2025-06-09T01:34:55.036697"
+    },
+    {
+      "city": "Eindhoven",
+      "safety_score": 79,
+      "crime_index": 20.93,
+      "safety_index": 79.07,
+      "last_updated": "2025-06-09T01:36:03.185477"
+    },
+    {
+      "city": "Burgas",
+      "safety_score": 62,
+      "crime_index": 38.24,
+      "safety_index": 61.76,
+      "last_updated": "2025-06-09T01:36:10.647856"
+    },
+    {
+      "city": "Yerevan",
+      "safety_score": 77,
+      "crime_index": 22.56,
+      "safety_index": 77.44,
+      "last_updated": "2025-06-09T01:36:19.839585"
+    },
+    {
+      "city": "Belgrade",
+      "safety_score": 62,
+      "crime_index": 37.94,
+      "safety_index": 62.06,
+      "last_updated": "2025-06-09T01:36:27.899122"
+    },
+    {
+      "city": "Rhodes",
+      "safety_score": 71,
+      "crime_index": 28.96,
+      "safety_index": 71.04,
+      "last_updated": "2025-06-09T01:36:35.238073"
+    },
+    {
+      "city": "Brest",
+      "safety_score": 39,
+      "crime_index": 60.68,
+      "safety_index": 39.32,
+      "last_updated": "2025-06-09T01:38:27.235997"
+    },
+    {
+      "city": "Cuneo",
+      "safety_score": 63,
+      "crime_index": 36.67,
+      "safety_index": 63.33,
+      "last_updated": "2025-06-09T01:38:34.536174"
+    },
+    {
+      "city": "Bergamo",
+      "safety_score": 62,
+      "crime_index": 38.12,
+      "safety_index": 61.88,
+      "last_updated": "2025-06-09T01:39:36.522239"
+    },
+    {
+      "city": "Pristina",
+      "safety_score": 68,
+      "crime_index": 31.87,
+      "safety_index": 68.13,
+      "last_updated": "2025-06-09T01:41:33.401630"
+    },
+    {
+      "city": "Grenoble",
+      "safety_score": 39,
+      "crime_index": 61.11,
+      "safety_index": 38.89,
+      "last_updated": "2025-06-09T01:41:45.685541"
+    },
+    {
+      "city": "Lyon",
+      "safety_score": 43,
+      "crime_index": 57.34,
+      "safety_index": 42.66,
+      "last_updated": "2025-06-09T01:43:13.547334"
+    },
+    {
+      "city": "Oradea",
+      "safety_score": 79,
+      "crime_index": 21.01,
+      "safety_index": 78.99,
+      "last_updated": "2025-06-09T01:44:17.776980"
+    },
+    {
+      "city": "Ohrid",
+      "safety_score": 74,
+      "crime_index": 26.29,
+      "safety_index": 73.71,
+      "last_updated": "2025-06-09T01:44:26.269096"
+    },
+    {
+      "city": "Brescia",
+      "safety_score": 51,
+      "crime_index": 48.94,
+      "safety_index": 51.06,
+      "last_updated": "2025-06-09T01:45:00.867604"
+    },
+    {
+      "city": "London",
+      "safety_score": 45,
+      "crime_index": 55.34,
+      "safety_index": 44.66,
+      "last_updated": "2025-06-09T01:46:27.694983"
+    },
+    {
+      "city": "Trieste",
+      "safety_score": 72,
+      "crime_index": 27.62,
+      "safety_index": 72.38,
+      "last_updated": "2025-06-09T01:46:37.171688"
+    },
+    {
+      "city": "Kaliningrad",
+      "safety_score": 70,
+      "crime_index": 29.69,
+      "safety_index": 70.31,
+      "last_updated": "2025-06-09T01:47:12.117238"
+    },
+    {
+      "city": "Bucharest",
+      "safety_score": 71,
+      "crime_index": 28.6,
+      "safety_index": 71.4,
+      "last_updated": "2025-06-09T01:48:09.962343"
+    },
+    {
+      "city": "Gibraltar",
+      "safety_score": 80,
+      "crime_index": 20.23,
+      "safety_index": 79.77,
+      "last_updated": "2025-06-09T01:48:26.663733"
+    },
+    {
+      "city": "Paphos",
+      "safety_score": 68,
+      "crime_index": 31.75,
+      "safety_index": 68.25,
+      "last_updated": "2025-06-09T01:48:59.699646"
+    },
+    {
+      "city": "Alicante",
+      "safety_score": 69,
+      "crime_index": 31.28,
+      "safety_index": 68.72,
+      "last_updated": "2025-06-09T01:49:39.654043"
+    },
+    {
+      "city": "Chelyabinsk",
+      "safety_score": 55,
+      "crime_index": 44.56,
+      "safety_index": 55.44,
+      "last_updated": "2025-06-09T01:50:12.487601"
+    },
+    {
+      "city": "Leipzig",
+      "safety_score": 57,
+      "crime_index": 42.8,
+      "safety_index": 57.2,
+      "last_updated": "2025-06-09T01:51:01.469454"
+    },
+    {
+      "city": "Olbia",
+      "safety_score": 45,
+      "crime_index": 55.48,
+      "safety_index": 44.52,
+      "last_updated": "2025-06-09T01:51:08.858038"
+    },
+    {
+      "city": "Leeds",
+      "safety_score": 55,
+      "crime_index": 45.15,
+      "safety_index": 54.85,
+      "last_updated": "2025-06-09T01:51:16.967035"
+    },
+    {
+      "city": "Split",
+      "safety_score": 69,
+      "crime_index": 30.68,
+      "safety_index": 69.32,
+      "last_updated": "2025-06-09T01:52:16.309024"
+    },
+    {
+      "city": "Adana",
+      "safety_score": 42,
+      "crime_index": 57.79,
+      "safety_index": 42.21,
+      "last_updated": "2025-06-09T01:53:13.581842"
+    },
+    {
+      "city": "Nantes",
+      "safety_score": 41,
+      "crime_index": 58.69,
+      "safety_index": 41.31,
+      "last_updated": "2025-06-09T01:54:10.825241"
+    },
+    {
+      "city": "Oulu",
+      "safety_score": 64,
+      "crime_index": 35.59,
+      "safety_index": 64.41,
+      "last_updated": "2025-06-09T01:56:58.931258"
+    },
+    {
+      "city": "Middlesbrough",
+      "safety_score": 50,
+      "crime_index": 50.22,
+      "safety_index": 49.78,
+      "last_updated": "2025-06-09T01:59:56.552000"
+    },
+    {
+      "city": "Belfast",
+      "safety_score": 52,
+      "crime_index": 47.55,
+      "safety_index": 52.45,
+      "last_updated": "2025-06-09T02:00:06.164584"
+    },
+    {
+      "city": "Tartu",
+      "safety_score": 78,
+      "crime_index": 21.67,
+      "safety_index": 78.33,
+      "last_updated": "2025-06-09T02:00:16.477733"
+    },
+    {
+      "city": "Batumi",
+      "safety_score": 79,
+      "crime_index": 21.29,
+      "safety_index": 78.71,
+      "last_updated": "2025-06-09T02:00:24.741463"
+    },
+    {
+      "city": "Maastricht",
+      "safety_score": 79,
+      "crime_index": 21.4,
+      "safety_index": 78.6,
+      "last_updated": "2025-06-09T02:00:33.290726"
+    },
+    {
+      "city": "Cardiff",
+      "safety_score": 60,
+      "crime_index": 39.73,
+      "safety_index": 60.27,
+      "last_updated": "2025-06-09T02:01:34.564542"
+    },
+    {
+      "city": "Nuremberg",
+      "safety_score": 64,
+      "crime_index": 35.54,
+      "safety_index": 64.46,
+      "last_updated": "2025-06-09T02:02:35.187609"
+    },
+    {
+      "city": "Yekaterinburg",
+      "safety_score": 56,
+      "crime_index": 43.5,
+      "safety_index": 56.5,
+      "last_updated": "2025-06-09T02:03:41.733449"
+    },
+    {
+      "city": "Gothenburg",
+      "safety_score": 54,
+      "crime_index": 45.86,
+      "safety_index": 54.14,
+      "last_updated": "2025-06-09T02:04:45.725962"
+    },
+    {
+      "city": "Nice",
+      "safety_score": 44,
+      "crime_index": 55.81,
+      "safety_index": 44.19,
+      "last_updated": "2025-06-09T02:05:20.770183"
+    },
+    {
+      "city": "Dortmund",
+      "safety_score": 51,
+      "crime_index": 49.37,
+      "safety_index": 50.63,
+      "last_updated": "2025-06-09T02:05:29.559540"
+    },
+    {
+      "city": "Mostar",
+      "safety_score": 61,
+      "crime_index": 39.49,
+      "safety_index": 60.51,
+      "last_updated": "2025-06-09T02:05:39.126758"
+    },
+    {
+      "city": "Bydgoszcz",
+      "safety_score": 70,
+      "crime_index": 29.73,
+      "safety_index": 70.27,
+      "last_updated": "2025-06-09T02:05:51.994919"
+    },
+    {
+      "city": "Sibiu",
+      "safety_score": 72,
+      "crime_index": 27.92,
+      "safety_index": 72.08,
+      "last_updated": "2025-06-09T02:06:02.650111"
+    },
+    {
+      "city": "Rotterdam",
+      "safety_score": 74,
+      "crime_index": 26.35,
+      "safety_index": 73.65,
+      "last_updated": "2025-06-09T02:06:10.566326"
+    },
+    {
+      "city": "Edinburgh",
+      "safety_score": 69,
+      "crime_index": 31.13,
+      "safety_index": 68.87,
+      "last_updated": "2025-06-09T02:06:17.187470"
+    },
+    {
+      "city": "Dubrovnik",
+      "safety_score": 82,
+      "crime_index": 17.77,
+      "safety_index": 82.23,
+      "last_updated": "2025-06-09T02:06:24.561080"
+    },
+    {
+      "city": "Lille",
+      "safety_score": 50,
+      "crime_index": 50.1,
+      "safety_index": 49.9,
+      "last_updated": "2025-06-09T02:07:00.565691"
+    },
+    {
+      "city": "Kavala",
+      "safety_score": 84,
+      "crime_index": 16.32,
+      "safety_index": 83.68,
+      "last_updated": "2025-06-09T02:07:34.256786"
+    },
+    {
+      "city": "Szczecin",
+      "safety_score": 70,
+      "crime_index": 30.11,
+      "safety_index": 69.89,
+      "last_updated": "2025-06-09T02:07:44.900278"
+    },
+    {
+      "city": "Kalamata",
+      "safety_score": 81,
+      "crime_index": 19.08,
+      "safety_index": 80.92,
+      "last_updated": "2025-06-09T02:09:12.801011"
+    },
+    {
+      "city": "Brno",
+      "safety_score": 75,
+      "crime_index": 24.88,
+      "safety_index": 75.12,
+      "last_updated": "2025-06-09T02:09:57.960727"
+    },
+    {
+      "city": "Nottingham",
+      "safety_score": 49,
+      "crime_index": 50.71,
+      "safety_index": 49.29,
+      "last_updated": "2025-06-09T02:10:43.631395"
+    },
+    {
+      "city": "Osijek",
+      "safety_score": 83,
+      "crime_index": 17.08,
+      "safety_index": 82.92,
+      "last_updated": "2025-06-09T02:10:51.853035"
+    },
+    {
+      "city": "Bratislava",
+      "safety_score": 69,
+      "crime_index": 30.54,
+      "safety_index": 69.46,
+      "last_updated": "2025-06-09T02:11:00.049193"
+    },
+    {
+      "city": "Naples",
+      "safety_score": 37,
+      "crime_index": 62.84,
+      "safety_index": 37.16,
+      "last_updated": "2025-06-09T02:11:09.751459"
+    },
+    {
+      "city": "Mulhouse",
+      "safety_score": 42,
+      "crime_index": 57.66,
+      "safety_index": 42.34,
+      "last_updated": "2025-06-09T02:11:56.420699"
+    },
+    {
+      "city": "Antalya",
+      "safety_score": 71,
+      "crime_index": 29.1,
+      "safety_index": 70.9,
+      "last_updated": "2025-06-09T02:12:05.733843"
+    },
+    {
+      "city": "Pisa",
+      "safety_score": 48,
+      "crime_index": 51.72,
+      "safety_index": 48.28,
+      "last_updated": "2025-06-09T02:13:53.042596"
+    },
+    {
+      "city": "Tirana",
+      "safety_score": 59,
+      "crime_index": 40.53,
+      "safety_index": 59.47,
+      "last_updated": "2025-06-09T02:14:01.056971"
+    },
+    {
+      "city": "Ancona",
+      "safety_score": 65,
+      "crime_index": 34.89,
+      "safety_index": 65.11,
+      "last_updated": "2025-06-09T02:16:15.934766"
+    },
+    {
+      "city": "Graz",
+      "safety_score": 72,
+      "crime_index": 27.62,
+      "safety_index": 72.38,
+      "last_updated": "2025-06-09T02:16:24.789098"
+    },
+    {
+      "city": "Norwich",
+      "safety_score": 74,
+      "crime_index": 26.06,
+      "safety_index": 73.94,
+      "last_updated": "2025-06-09T02:18:31.948424"
+    },
+    {
+      "city": "Bristol",
+      "safety_score": 57,
+      "crime_index": 42.62,
+      "safety_index": 57.38,
+      "last_updated": "2025-06-09T02:18:39.062276"
+    },
+    {
+      "city": "Billund",
+      "safety_score": 73,
+      "crime_index": 26.84,
+      "safety_index": 73.16,
+      "last_updated": "2025-06-09T02:19:43.373286"
+    },
+    {
+      "city": "Riga",
+      "safety_score": 62,
+      "crime_index": 37.84,
+      "safety_index": 62.16,
+      "last_updated": "2025-06-09T02:19:55.715037"
+    },
+    {
+      "city": "Aberdeen",
+      "safety_score": 63,
+      "crime_index": 36.8,
+      "safety_index": 63.2,
+      "last_updated": "2025-06-09T02:20:02.821064"
+    },
+    {
+      "city": "Liverpool",
+      "safety_score": 51,
+      "crime_index": 49.14,
+      "safety_index": 50.86,
+      "last_updated": "2025-06-09T02:20:11.030828"
+    },
+    {
+      "city": "Linz",
+      "safety_score": 72,
+      "crime_index": 28.41,
+      "safety_index": 71.59,
+      "last_updated": "2025-06-09T02:20:51.026243"
+    },
+    {
+      "city": "Akureyri",
+      "safety_score": 76,
+      "crime_index": 23.99,
+      "safety_index": 76.01,
+      "last_updated": "2025-06-09T02:21:01.816602"
+    },
+    {
+      "city": "Bern",
+      "safety_score": 78,
+      "crime_index": 22.16,
+      "safety_index": 77.84,
+      "last_updated": "2025-06-09T02:21:41.828089"
+    },
+    {
+      "city": "Gaziantep",
+      "safety_score": 49,
+      "crime_index": 51.19,
+      "safety_index": 48.81,
+      "last_updated": "2025-06-09T02:21:49.521446"
+    },
+    {
+      "city": "Antwerp",
+      "safety_score": 60,
+      "crime_index": 39.83,
+      "safety_index": 60.17,
+      "last_updated": "2025-06-09T02:22:47.755847"
+    },
+    {
+      "city": "Omsk",
+      "safety_score": 63,
+      "crime_index": 37.3,
+      "safety_index": 62.7,
+      "last_updated": "2025-06-09T02:22:57.017788"
+    },
+    {
+      "city": "Granada",
+      "safety_score": 62,
+      "crime_index": 37.69,
+      "safety_index": 62.31,
+      "last_updated": "2025-06-09T02:23:06.012095"
+    },
+    {
+      "city": "Alghero",
+      "safety_score": 72,
+      "crime_index": 28.26,
+      "safety_index": 71.74,
+      "last_updated": "2025-06-09T02:24:14.731803"
+    },
+    {
+      "city": "Ostrava",
+      "safety_score": 69,
+      "crime_index": 30.97,
+      "safety_index": 69.03,
+      "last_updated": "2025-06-09T02:24:21.565129"
+    },
+    {
+      "city": "Inverness",
+      "safety_score": 62,
+      "crime_index": 38.29,
+      "safety_index": 61.71,
+      "last_updated": "2025-06-09T02:25:05.289141"
+    },
+    {
+      "city": "Maribor",
+      "safety_score": 77,
+      "crime_index": 22.75,
+      "safety_index": 77.25,
+      "last_updated": "2025-06-09T02:25:40.985501"
+    },
+    {
+      "city": "Glasgow",
+      "safety_score": 54,
+      "crime_index": 45.6,
+      "safety_index": 54.4,
+      "last_updated": "2025-06-09T02:25:49.261798"
+    },
+    {
+      "city": "Valencia",
+      "safety_score": 64,
+      "crime_index": 35.67,
+      "safety_index": 64.33,
+      "last_updated": "2025-06-09T02:25:55.824292"
+    },
+    {
+      "city": "Tallinn",
+      "safety_score": 78,
+      "crime_index": 21.81,
+      "safety_index": 78.19,
+      "last_updated": "2025-06-09T02:26:27.402243"
+    },
+    {
+      "city": "Vladivostok",
+      "safety_score": 57,
+      "crime_index": 42.69,
+      "safety_index": 57.31,
+      "last_updated": "2025-06-09T02:26:37.937630"
+    },
+    {
+      "city": "Pula",
+      "safety_score": 74,
+      "crime_index": 26.03,
+      "safety_index": 73.97,
+      "last_updated": "2025-06-09T02:26:47.152242"
+    },
+    {
+      "city": "Manchester",
+      "safety_score": 44,
+      "crime_index": 56,
+      "safety_index": 44,
+      "last_updated": "2025-06-09T02:27:19.246952"
+    },
+    {
+      "city": "Heraklion",
+      "safety_score": 74,
+      "crime_index": 26.01,
+      "safety_index": 73.99,
+      "last_updated": "2025-06-09T02:27:26.845305"
+    },
+    {
+      "city": "Marseille",
+      "safety_score": 35,
+      "crime_index": 65.28,
+      "safety_index": 34.72,
+      "last_updated": "2025-06-09T02:28:27.914986"
+    },
+    {
+      "city": "Kaunas",
+      "safety_score": 63,
+      "crime_index": 36.66,
+      "safety_index": 63.34,
+      "last_updated": "2025-06-09T02:28:59.944700"
+    },
+    {
+      "city": "Birmingham",
+      "safety_score": 35,
+      "crime_index": 64.57,
+      "safety_index": 35.43,
+      "last_updated": "2025-06-09T02:29:09.785958"
+    },
+    {
+      "city": "Istanbul",
+      "safety_score": 52,
+      "crime_index": 48,
+      "safety_index": 52,
+      "last_updated": "2025-06-09T02:31:31.292361"
+    },
+    {
+      "city": "Bordeaux",
+      "safety_score": 50,
+      "crime_index": 49.66,
+      "safety_index": 50.34,
+      "last_updated": "2025-06-09T02:31:41.083196"
+    },
+    {
+      "city": "Bournemouth",
+      "safety_score": 55,
+      "crime_index": 45.26,
+      "safety_index": 54.74,
+      "last_updated": "2025-06-09T02:31:50.257794"
+    },
+    {
+      "city": "Thessaloniki",
+      "safety_score": 47,
+      "crime_index": 52.54,
+      "safety_index": 47.46,
+      "last_updated": "2025-06-09T02:32:25.363183"
+    },
+    {
+      "city": "Toulouse",
+      "safety_score": 51,
+      "crime_index": 49.43,
+      "safety_index": 50.57,
+      "last_updated": "2025-06-09T02:33:49.396660"
+    },
+    {
+      "city": "Tampere",
+      "safety_score": 79,
+      "crime_index": 20.54,
+      "safety_index": 79.46,
+      "last_updated": "2025-06-09T02:34:25.091536"
+    },
+    {
+      "city": "Kazan",
+      "safety_score": 70,
+      "crime_index": 30.24,
+      "safety_index": 69.76,
+      "last_updated": "2025-06-09T02:34:34.511084"
+    },
+    {
+      "city": "Katowice",
+      "safety_score": 66,
+      "crime_index": 34.48,
+      "safety_index": 65.52,
+      "last_updated": "2025-06-09T02:35:07.177582"
+    },
+    {
+      "city": "Funchal",
+      "safety_score": 79,
+      "crime_index": 20.55,
+      "safety_index": 79.45,
+      "last_updated": "2025-06-09T02:35:16.707753"
+    },
+    {
+      "city": "Novosibirsk",
+      "safety_score": 54,
+      "crime_index": 46.33,
+      "safety_index": 53.67,
+      "last_updated": "2025-06-09T02:35:24.307437"
+    },
+    {
+      "city": "Reykjavik",
+      "safety_score": 76,
+      "crime_index": 24.36,
+      "safety_index": 75.64,
+      "last_updated": "2025-06-09T02:35:31.611217"
+    },
+    {
+      "city": "Skopje",
+      "safety_score": 54,
+      "crime_index": 46.47,
+      "safety_index": 53.53,
+      "last_updated": "2025-06-09T02:37:06.472300"
+    },
+    {
+      "city": "Vilnius",
+      "safety_score": 71,
+      "crime_index": 28.87,
+      "safety_index": 71.13,
+      "last_updated": "2025-06-09T02:38:12.845384"
+    },
+    {
+      "city": "Almeria",
+      "safety_score": 53,
+      "crime_index": 46.51,
+      "safety_index": 53.49,
+      "last_updated": "2025-06-09T02:38:20.034500"
+    },
+    {
+      "city": "Podgorica",
+      "safety_score": 57,
+      "crime_index": 43.09,
+      "safety_index": 56.91,
+      "last_updated": "2025-06-09T02:38:31.812259"
+    }
+  ]
+}

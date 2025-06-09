@@ -1,0 +1,5 @@
+mcp
+httpx
+anyio
+pydantic
+typing-extensions

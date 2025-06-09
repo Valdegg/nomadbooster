@@ -1,0 +1,21 @@
+city,country,cost_index,safety_score,healthcare_score,language_barrier,visa_free_days,pollution_index,tourism_load_ratio,public_transport_score,nature_access,city_size,architectural_style,walkability_score,population
+Berlin,Germany,65,75,85,1,90,45,2.1,90,urban_parks,metropolis,mixed,85,3700000
+Amsterdam,Netherlands,80,85,90,1,90,35,3.5,85,urban_parks,medium,historic,95,900000
+Barcelona,Spain,60,70,80,3,90,55,4.2,80,nature_access,metropolis,mixed,80,1600000
+Prague,Czech Republic,45,80,75,3,90,40,3.8,85,urban_parks,medium,historic,90,1300000
+Lisbon,Portugal,55,85,85,3,90,30,2.8,75,nature_access,medium,historic,85,500000
+Vienna,Austria,70,90,95,2,90,25,2.3,95,urban_parks,metropolis,historic,90,1900000
+Rome,Italy,65,65,75,3,90,60,4.5,70,urban_parks,metropolis,historic,75,2800000
+Paris,France,85,60,85,2,90,50,5.1,90,urban_parks,metropolis,historic,85,2200000
+Copenhagen,Denmark,95,95,95,1,90,20,3.2,90,nature_access,medium,mixed,95,650000
+Stockholm,Sweden,90,95,90,1,90,15,2.0,95,nature_immersed,medium,mixed,90,970000
+Brussels,Belgium,75,70,85,2,90,40,2.9,80,urban_parks,medium,historic,80,1200000
+Madrid,Spain,60,75,80,3,90,65,3.1,85,urban_parks,metropolis,mixed,80,3200000
+Munich,Germany,80,85,90,2,90,30,2.7,90,nature_access,metropolis,historic,85,1500000
+Zurich,Switzerland,120,95,100,2,90,15,1.8,95,nature_immersed,medium,mixed,90,430000
+Dublin,Ireland,85,85,85,1,90,45,2.5,75,urban_parks,medium,historic,75,550000
+Budapest,Hungary,40,75,70,4,90,35,3.6,80,urban_parks,metropolis,historic,85,1750000
+Warsaw,Poland,50,80,75,4,90,40,2.4,85,urban_parks,metropolis,mixed,80,1790000
+Athens,Greece,55,60,70,3,90,70,4.8,60,nature_access,metropolis,historic,70,3150000
+Helsinki,Finland,85,95,95,2,90,10,1.5,90,nature_immersed,medium,mixed,85,660000
+Oslo,Norway,110,95,100,1,90,12,1.2,85,nature_immersed,medium,modern,80,700000 

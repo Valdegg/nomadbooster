@@ -1,0 +1,1998 @@
+{
+  "data_source": "Airbnb Accommodation Cost Medians",
+  "url": "https://www.airbnb.com/s/[city]/homes",
+  "last_updated": "2025-06-08T13:01:38.805002",
+  "description": "Daily accommodation cost medians from Airbnb search results for mid-range properties",
+  "search_parameters": {
+    "property_types": [
+      "Entire homes",
+      "Private rooms"
+    ],
+    "guest_capacity": "1-2 people",
+    "location": "City center/downtown areas",
+    "quality_filter": "Excludes shared rooms for quality consistency"
+  },
+  "stay_types": {
+    "short_stay": "1-7 nights (weekend/vacation pricing)",
+    "mid_term": "7-30 nights (standard nightly rates)",
+    "long_stay": "30+ nights (monthly discount pricing)"
+  },
+  "pricing_considerations": [
+    "Seasonal demand variations",
+    "Local events and conferences",
+    "Booking advance time",
+    "Property location within city",
+    "Anti-bot measures require careful scraping"
+  ],
+  "schema": {
+    "city": "string - City name",
+    "country": "string - Country name",
+    "accommodation_cost_eur": "integer - Median daily cost in EUR",
+    "stay_type": "string - Type of stay (short_stay/mid_term/long_stay)",
+    "travel_date": "string - Travel date (ISO format)",
+    "property_types": "array - Types of properties included in median",
+    "sample_size": "integer - Number of listings used for median calculation",
+    "price_range": "object - Min/max prices for transparency",
+    "last_updated": "string - ISO datetime of last scrape"
+  },
+  "sample_data": [
+    {
+      "city": "Berlin",
+      "country": "Germany",
+      "accommodation_cost_eur": 75,
+      "stay_type": "short_stay",
+      "travel_date": "2024-06-15",
+      "property_types": [
+        "Entire home/apt",
+        "Private room"
+      ],
+      "sample_size": 145,
+      "price_range": {
+        "min_eur": 35,
+        "max_eur": 180,
+        "q25_eur": 55,
+        "q75_eur": 95
+      },
+      "last_updated": "2024-01-01T14:45:00Z"
+    }
+  ],
+  "accommodation_costs": [
+    {
+      "city": "Berlin",
+      "country": "Germany",
+      "accommodation_cost_eur": 316,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 19,
+      "price_range": {
+        "min": 186,
+        "max": 485,
+        "mean": 325
+      },
+      "statistics": {
+        "median_price_eur": 316,
+        "mean_price_eur": 325,
+        "min_price_eur": 186,
+        "max_price_eur": 485,
+        "sample_size": 19,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          186,
+          188,
+          195,
+          208,
+          266,
+          291,
+          299,
+          301,
+          316,
+          316,
+          328,
+          330,
+          365,
+          378,
+          424,
+          434,
+          435,
+          445,
+          485
+        ]
+      },
+      "last_updated": "2025-06-08T12:06:00.041582",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Berlin",
+      "country": "Germany",
+      "accommodation_cost_eur": 80,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 42,
+        "max": 114,
+        "mean": 77
+      },
+      "statistics": {
+        "median_price_eur": 80,
+        "mean_price_eur": 77,
+        "min_price_eur": 42,
+        "max_price_eur": 114,
+        "sample_size": 20,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          42,
+          55,
+          58,
+          59,
+          65,
+          67,
+          67,
+          68,
+          74,
+          79,
+          82,
+          83,
+          85,
+          85,
+          89,
+          93,
+          95,
+          96,
+          101,
+          114
+        ]
+      },
+      "last_updated": "2025-06-08T12:06:39.754735",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Berlin",
+      "country": "Germany",
+      "accommodation_cost_eur": 111,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 72,
+        "max": 166,
+        "mean": 120
+      },
+      "statistics": {
+        "median_price_eur": 111,
+        "mean_price_eur": 120,
+        "min_price_eur": 72,
+        "max_price_eur": 166,
+        "sample_size": 20,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          72,
+          89,
+          100,
+          100,
+          101,
+          102,
+          102,
+          106,
+          106,
+          110,
+          112,
+          118,
+          122,
+          135,
+          145,
+          145,
+          155,
+          162,
+          162,
+          166
+        ]
+      },
+      "last_updated": "2025-06-08T12:19:11.120898",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Berlin",
+      "country": "Germany",
+      "accommodation_cost_eur": 199,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 108,
+        "max": 401,
+        "mean": 220
+      },
+      "statistics": {
+        "median_price_eur": 199,
+        "mean_price_eur": 220,
+        "min_price_eur": 108,
+        "max_price_eur": 401,
+        "sample_size": 20,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          108,
+          123,
+          143,
+          160,
+          163,
+          175,
+          193,
+          193,
+          199,
+          199,
+          199,
+          200,
+          208,
+          220,
+          268,
+          275,
+          298,
+          340,
+          345,
+          401
+        ]
+      },
+      "last_updated": "2025-06-08T12:20:00.177335",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Amsterdam",
+      "country": "Germany",
+      "accommodation_cost_eur": 147,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 77,
+        "max": 473,
+        "mean": 194
+      },
+      "statistics": {
+        "median_price_eur": 147,
+        "mean_price_eur": 194,
+        "min_price_eur": 77,
+        "max_price_eur": 473,
+        "sample_size": 20,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          77,
+          109,
+          113,
+          119,
+          128,
+          131,
+          132,
+          137,
+          142,
+          144,
+          151,
+          176,
+          194,
+          198,
+          235,
+          238,
+          266,
+          309,
+          408,
+          473
+        ]
+      },
+      "last_updated": "2025-06-08T12:21:12.704552",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Amsterdam",
+      "country": "Germany",
+      "accommodation_cost_eur": 265,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 18,
+      "price_range": {
+        "min": 142,
+        "max": 450,
+        "mean": 273
+      },
+      "statistics": {
+        "median_price_eur": 265,
+        "mean_price_eur": 273,
+        "min_price_eur": 142,
+        "max_price_eur": 450,
+        "sample_size": 18,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          142,
+          154,
+          171,
+          179,
+          181,
+          185,
+          209,
+          245,
+          251,
+          280,
+          281,
+          326,
+          328,
+          354,
+          364,
+          388,
+          439,
+          450
+        ]
+      },
+      "last_updated": "2025-06-08T12:22:08.163487",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Barcelona",
+      "country": "Germany",
+      "accommodation_cost_eur": 183,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 100,
+        "max": 402,
+        "mean": 213
+      },
+      "statistics": {
+        "median_price_eur": 183,
+        "mean_price_eur": 213,
+        "min_price_eur": 100,
+        "max_price_eur": 402,
+        "sample_size": 20,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          100,
+          118,
+          123,
+          127,
+          140,
+          141,
+          176,
+          180,
+          182,
+          182,
+          184,
+          194,
+          201,
+          208,
+          252,
+          253,
+          345,
+          361,
+          399,
+          402
+        ]
+      },
+      "last_updated": "2025-06-08T12:23:56.837493",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Barcelona",
+      "country": "Germany",
+      "accommodation_cost_eur": 72,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 38,
+        "max": 130,
+        "mean": 74
+      },
+      "statistics": {
+        "median_price_eur": 72,
+        "mean_price_eur": 74,
+        "min_price_eur": 38,
+        "max_price_eur": 130,
+        "sample_size": 20,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          38,
+          44,
+          50,
+          52,
+          52,
+          62,
+          63,
+          65,
+          71,
+          72,
+          72,
+          78,
+          78,
+          80,
+          83,
+          91,
+          98,
+          106,
+          113,
+          130
+        ]
+      },
+      "last_updated": "2025-06-08T12:25:29.736068",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Prague",
+      "country": "Germany",
+      "accommodation_cost_eur": 259,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 130,
+        "max": 489,
+        "mean": 258
+      },
+      "statistics": {
+        "median_price_eur": 259,
+        "mean_price_eur": 258,
+        "min_price_eur": 130,
+        "max_price_eur": 489,
+        "sample_size": 20,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          130,
+          135,
+          164,
+          187,
+          201,
+          214,
+          234,
+          240,
+          244,
+          248,
+          271,
+          272,
+          277,
+          278,
+          279,
+          283,
+          316,
+          327,
+          388,
+          489
+        ]
+      },
+      "last_updated": "2025-06-08T12:27:38.050661",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Prague",
+      "country": "Germany",
+      "accommodation_cost_eur": 40,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 30,
+        "max": 67,
+        "mean": 44
+      },
+      "statistics": {
+        "median_price_eur": 40,
+        "mean_price_eur": 44,
+        "min_price_eur": 30,
+        "max_price_eur": 67,
+        "sample_size": 20,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          30,
+          33,
+          36,
+          36,
+          36,
+          36,
+          37,
+          38,
+          38,
+          40,
+          41,
+          41,
+          43,
+          46,
+          47,
+          55,
+          58,
+          60,
+          65,
+          67
+        ]
+      },
+      "last_updated": "2025-06-08T12:28:23.178806",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Lisbon",
+      "country": "Germany",
+      "accommodation_cost_eur": 134,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 18,
+      "price_range": {
+        "min": 79,
+        "max": 205,
+        "mean": 136
+      },
+      "statistics": {
+        "median_price_eur": 134,
+        "mean_price_eur": 136,
+        "min_price_eur": 79,
+        "max_price_eur": 205,
+        "sample_size": 18,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          79,
+          86,
+          103,
+          113,
+          118,
+          120,
+          128,
+          131,
+          132,
+          136,
+          137,
+          145,
+          147,
+          152,
+          168,
+          174,
+          191,
+          205
+        ]
+      },
+      "last_updated": "2025-06-08T12:29:40.836777",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Lisbon",
+      "country": "Germany",
+      "accommodation_cost_eur": 155,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 73,
+        "max": 286,
+        "mean": 158
+      },
+      "statistics": {
+        "median_price_eur": 155,
+        "mean_price_eur": 158,
+        "min_price_eur": 73,
+        "max_price_eur": 286,
+        "sample_size": 20,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          73,
+          89,
+          103,
+          111,
+          113,
+          128,
+          131,
+          134,
+          148,
+          151,
+          160,
+          169,
+          171,
+          173,
+          183,
+          183,
+          199,
+          223,
+          244,
+          286
+        ]
+      },
+      "last_updated": "2025-06-08T12:30:33.574913",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Vienna",
+      "country": "Germany",
+      "accommodation_cost_eur": 268,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 104,
+        "max": 485,
+        "mean": 266
+      },
+      "statistics": {
+        "median_price_eur": 268,
+        "mean_price_eur": 266,
+        "min_price_eur": 104,
+        "max_price_eur": 485,
+        "sample_size": 20,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          104,
+          104,
+          139,
+          139,
+          201,
+          225,
+          249,
+          251,
+          256,
+          266,
+          270,
+          293,
+          297,
+          310,
+          311,
+          316,
+          327,
+          370,
+          424,
+          485
+        ]
+      },
+      "last_updated": "2025-06-08T12:31:54.719905",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Vienna",
+      "country": "Germany",
+      "accommodation_cost_eur": 177,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 81,
+        "max": 400,
+        "mean": 199
+      },
+      "statistics": {
+        "median_price_eur": 177,
+        "mean_price_eur": 199,
+        "min_price_eur": 81,
+        "max_price_eur": 400,
+        "sample_size": 20,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          81,
+          99,
+          103,
+          111,
+          119,
+          119,
+          120,
+          129,
+          168,
+          171,
+          183,
+          183,
+          205,
+          264,
+          278,
+          303,
+          314,
+          315,
+          329,
+          400
+        ]
+      },
+      "last_updated": "2025-06-08T12:32:44.817687",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Rome",
+      "country": "Germany",
+      "accommodation_cost_eur": 134,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 66,
+        "max": 204,
+        "mean": 133
+      },
+      "statistics": {
+        "median_price_eur": 134,
+        "mean_price_eur": 133,
+        "min_price_eur": 66,
+        "max_price_eur": 204,
+        "sample_size": 20,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          66,
+          86,
+          96,
+          97,
+          110,
+          115,
+          120,
+          128,
+          129,
+          131,
+          137,
+          138,
+          138,
+          139,
+          144,
+          160,
+          169,
+          169,
+          186,
+          204
+        ]
+      },
+      "last_updated": "2025-06-08T12:34:53.358500",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Rome",
+      "country": "Germany",
+      "accommodation_cost_eur": 217,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 19,
+      "price_range": {
+        "min": 58,
+        "max": 459,
+        "mean": 254
+      },
+      "statistics": {
+        "median_price_eur": 217,
+        "mean_price_eur": 254,
+        "min_price_eur": 58,
+        "max_price_eur": 459,
+        "sample_size": 19,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          58,
+          84,
+          145,
+          177,
+          191,
+          206,
+          214,
+          215,
+          215,
+          217,
+          253,
+          289,
+          299,
+          315,
+          339,
+          361,
+          394,
+          399,
+          459
+        ]
+      },
+      "last_updated": "2025-06-08T12:35:44.766961",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Paris",
+      "country": "Germany",
+      "accommodation_cost_eur": 348,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 15,
+      "price_range": {
+        "min": 139,
+        "max": 493,
+        "mean": 335
+      },
+      "statistics": {
+        "median_price_eur": 348,
+        "mean_price_eur": 335,
+        "min_price_eur": 139,
+        "max_price_eur": 493,
+        "sample_size": 15,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          139,
+          183,
+          185,
+          236,
+          256,
+          268,
+          331,
+          348,
+          377,
+          385,
+          411,
+          445,
+          485,
+          493,
+          493
+        ]
+      },
+      "last_updated": "2025-06-08T12:37:05.127587",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Paris",
+      "country": "Germany",
+      "accommodation_cost_eur": 74,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 36,
+        "max": 250,
+        "mean": 84
+      },
+      "statistics": {
+        "median_price_eur": 74,
+        "mean_price_eur": 84,
+        "min_price_eur": 36,
+        "max_price_eur": 250,
+        "sample_size": 20,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          36,
+          42,
+          45,
+          48,
+          48,
+          50,
+          51,
+          53,
+          68,
+          69,
+          79,
+          79,
+          80,
+          87,
+          87,
+          109,
+          126,
+          133,
+          142,
+          250
+        ]
+      },
+      "last_updated": "2025-06-08T12:38:04.942513",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Copenhagen",
+      "country": "Germany",
+      "accommodation_cost_eur": 385,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 10,
+      "price_range": {
+        "min": 239,
+        "max": 493,
+        "mean": 366
+      },
+      "statistics": {
+        "median_price_eur": 385,
+        "mean_price_eur": 366,
+        "min_price_eur": 239,
+        "max_price_eur": 493,
+        "sample_size": 10,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          239,
+          249,
+          263,
+          278,
+          353,
+          417,
+          433,
+          471,
+          473,
+          493
+        ]
+      },
+      "last_updated": "2025-06-08T12:39:19.411090",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Copenhagen",
+      "country": "Germany",
+      "accommodation_cost_eur": 239,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 17,
+      "price_range": {
+        "min": 139,
+        "max": 391,
+        "mean": 260
+      },
+      "statistics": {
+        "median_price_eur": 239,
+        "mean_price_eur": 260,
+        "min_price_eur": 139,
+        "max_price_eur": 391,
+        "sample_size": 17,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          139,
+          149,
+          189,
+          190,
+          206,
+          209,
+          218,
+          228,
+          239,
+          252,
+          281,
+          300,
+          345,
+          353,
+          361,
+          371,
+          391
+        ]
+      },
+      "last_updated": "2025-06-08T12:40:09.783128",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Stockholm",
+      "country": "Germany",
+      "accommodation_cost_eur": 130,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 55,
+        "max": 296,
+        "mean": 131
+      },
+      "statistics": {
+        "median_price_eur": 130,
+        "mean_price_eur": 131,
+        "min_price_eur": 55,
+        "max_price_eur": 296,
+        "sample_size": 20,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          55,
+          74,
+          79,
+          84,
+          84,
+          100,
+          101,
+          107,
+          122,
+          129,
+          132,
+          132,
+          141,
+          143,
+          145,
+          147,
+          175,
+          184,
+          207,
+          296
+        ]
+      },
+      "last_updated": "2025-06-08T12:41:36.239948",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Stockholm",
+      "country": "Germany",
+      "accommodation_cost_eur": 194,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 46,
+        "max": 409,
+        "mean": 214
+      },
+      "statistics": {
+        "median_price_eur": 194,
+        "mean_price_eur": 214,
+        "min_price_eur": 46,
+        "max_price_eur": 409,
+        "sample_size": 20,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          46,
+          91,
+          101,
+          120,
+          133,
+          136,
+          142,
+          157,
+          189,
+          189,
+          199,
+          222,
+          251,
+          283,
+          285,
+          287,
+          311,
+          346,
+          398,
+          409
+        ]
+      },
+      "last_updated": "2025-06-08T12:42:45.640512",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Brussels",
+      "country": "Germany",
+      "accommodation_cost_eur": 252,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 17,
+      "price_range": {
+        "min": 202,
+        "max": 432,
+        "mean": 278
+      },
+      "statistics": {
+        "median_price_eur": 252,
+        "mean_price_eur": 278,
+        "min_price_eur": 202,
+        "max_price_eur": 432,
+        "sample_size": 17,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          202,
+          205,
+          207,
+          234,
+          240,
+          244,
+          245,
+          246,
+          252,
+          268,
+          305,
+          316,
+          329,
+          333,
+          341,
+          342,
+          432
+        ]
+      },
+      "last_updated": "2025-06-08T12:44:03.635022",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Brussels",
+      "country": "Germany",
+      "accommodation_cost_eur": 183,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 114,
+        "max": 323,
+        "mean": 202
+      },
+      "statistics": {
+        "median_price_eur": 183,
+        "mean_price_eur": 202,
+        "min_price_eur": 114,
+        "max_price_eur": 323,
+        "sample_size": 20,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          114,
+          115,
+          124,
+          133,
+          157,
+          162,
+          164,
+          166,
+          172,
+          177,
+          189,
+          195,
+          207,
+          231,
+          234,
+          276,
+          293,
+          296,
+          318,
+          323
+        ]
+      },
+      "last_updated": "2025-06-08T12:45:14.292472",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Madrid",
+      "country": "Germany",
+      "accommodation_cost_eur": 110,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 18,
+      "price_range": {
+        "min": 54,
+        "max": 152,
+        "mean": 102
+      },
+      "statistics": {
+        "median_price_eur": 110,
+        "mean_price_eur": 102,
+        "min_price_eur": 54,
+        "max_price_eur": 152,
+        "sample_size": 18,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          54,
+          70,
+          83,
+          84,
+          87,
+          88,
+          98,
+          103,
+          110,
+          110,
+          111,
+          111,
+          112,
+          113,
+          115,
+          115,
+          124,
+          152
+        ]
+      },
+      "last_updated": "2025-06-08T12:46:30.131953",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Madrid",
+      "country": "Germany",
+      "accommodation_cost_eur": 150,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 55,
+        "max": 481,
+        "mean": 190
+      },
+      "statistics": {
+        "median_price_eur": 150,
+        "mean_price_eur": 190,
+        "min_price_eur": 55,
+        "max_price_eur": 481,
+        "sample_size": 20,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          55,
+          92,
+          94,
+          96,
+          98,
+          124,
+          136,
+          137,
+          143,
+          144,
+          156,
+          171,
+          193,
+          235,
+          257,
+          270,
+          301,
+          309,
+          318,
+          481
+        ]
+      },
+      "last_updated": "2025-06-08T12:47:22.887819",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Munich",
+      "country": "Germany",
+      "accommodation_cost_eur": 92,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 18,
+      "price_range": {
+        "min": 54,
+        "max": 249,
+        "mean": 111
+      },
+      "statistics": {
+        "median_price_eur": 92,
+        "mean_price_eur": 111,
+        "min_price_eur": 54,
+        "max_price_eur": 249,
+        "sample_size": 18,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          54,
+          60,
+          68,
+          71,
+          75,
+          77,
+          83,
+          87,
+          92,
+          92,
+          106,
+          107,
+          116,
+          131,
+          133,
+          172,
+          227,
+          249
+        ]
+      },
+      "last_updated": "2025-06-08T12:48:41.187148",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Munich",
+      "country": "Germany",
+      "accommodation_cost_eur": 172,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 119,
+        "max": 317,
+        "mean": 181
+      },
+      "statistics": {
+        "median_price_eur": 172,
+        "mean_price_eur": 181,
+        "min_price_eur": 119,
+        "max_price_eur": 317,
+        "sample_size": 20,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          119,
+          120,
+          123,
+          127,
+          129,
+          137,
+          147,
+          148,
+          163,
+          171,
+          173,
+          178,
+          193,
+          193,
+          213,
+          216,
+          223,
+          240,
+          291,
+          317
+        ]
+      },
+      "last_updated": "2025-06-08T12:49:46.270294",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Zurich",
+      "country": "Germany",
+      "accommodation_cost_eur": 163,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 18,
+      "price_range": {
+        "min": 94,
+        "max": 292,
+        "mean": 165
+      },
+      "statistics": {
+        "median_price_eur": 163,
+        "mean_price_eur": 165,
+        "min_price_eur": 94,
+        "max_price_eur": 292,
+        "sample_size": 18,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          94,
+          97,
+          105,
+          108,
+          113,
+          126,
+          126,
+          156,
+          162,
+          165,
+          169,
+          184,
+          186,
+          197,
+          206,
+          246,
+          251,
+          292
+        ]
+      },
+      "last_updated": "2025-06-08T12:51:38.644998",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Zurich",
+      "country": "Germany",
+      "accommodation_cost_eur": 90,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 64,
+        "max": 119,
+        "mean": 93
+      },
+      "statistics": {
+        "median_price_eur": 90,
+        "mean_price_eur": 93,
+        "min_price_eur": 64,
+        "max_price_eur": 119,
+        "sample_size": 20,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          64,
+          68,
+          72,
+          76,
+          78,
+          84,
+          86,
+          86,
+          87,
+          88,
+          93,
+          99,
+          101,
+          105,
+          105,
+          112,
+          112,
+          113,
+          116,
+          119
+        ]
+      },
+      "last_updated": "2025-06-08T12:52:27.548497",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Dublin",
+      "country": "Germany",
+      "accommodation_cost_eur": 170,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 18,
+      "price_range": {
+        "min": 96,
+        "max": 387,
+        "mean": 186
+      },
+      "statistics": {
+        "median_price_eur": 170,
+        "mean_price_eur": 186,
+        "min_price_eur": 96,
+        "max_price_eur": 387,
+        "sample_size": 18,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          96,
+          96,
+          102,
+          111,
+          118,
+          140,
+          140,
+          141,
+          165,
+          176,
+          195,
+          196,
+          200,
+          247,
+          281,
+          282,
+          288,
+          387
+        ]
+      },
+      "last_updated": "2025-06-08T12:54:01.381072",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Dublin",
+      "country": "Germany",
+      "accommodation_cost_eur": 286,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 17,
+      "price_range": {
+        "min": 148,
+        "max": 349,
+        "mean": 262
+      },
+      "statistics": {
+        "median_price_eur": 286,
+        "mean_price_eur": 262,
+        "min_price_eur": 148,
+        "max_price_eur": 349,
+        "sample_size": 17,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          148,
+          151,
+          164,
+          171,
+          203,
+          210,
+          246,
+          251,
+          286,
+          304,
+          318,
+          318,
+          319,
+          334,
+          340,
+          346,
+          349
+        ]
+      },
+      "last_updated": "2025-06-08T12:54:51.928487",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Budapest",
+      "country": "Germany",
+      "accommodation_cost_eur": 165,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 92,
+        "max": 455,
+        "mean": 194
+      },
+      "statistics": {
+        "median_price_eur": 165,
+        "mean_price_eur": 194,
+        "min_price_eur": 92,
+        "max_price_eur": 455,
+        "sample_size": 20,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          92,
+          130,
+          137,
+          138,
+          141,
+          145,
+          152,
+          153,
+          160,
+          163,
+          168,
+          183,
+          185,
+          188,
+          190,
+          214,
+          232,
+          280,
+          381,
+          455
+        ]
+      },
+      "last_updated": "2025-06-08T12:56:26.239781",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Budapest",
+      "country": "Germany",
+      "accommodation_cost_eur": 37,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 30,
+        "max": 69,
+        "mean": 39
+      },
+      "statistics": {
+        "median_price_eur": 37,
+        "mean_price_eur": 39,
+        "min_price_eur": 30,
+        "max_price_eur": 69,
+        "sample_size": 20,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          30,
+          30,
+          33,
+          33,
+          34,
+          34,
+          34,
+          35,
+          35,
+          37,
+          38,
+          39,
+          39,
+          42,
+          44,
+          46,
+          47,
+          47,
+          52,
+          69
+        ]
+      },
+      "last_updated": "2025-06-08T12:57:09.189269",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Warsaw",
+      "country": "Germany",
+      "accommodation_cost_eur": 202,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 95,
+        "max": 433,
+        "mean": 209
+      },
+      "statistics": {
+        "median_price_eur": 202,
+        "mean_price_eur": 209,
+        "min_price_eur": 95,
+        "max_price_eur": 433,
+        "sample_size": 20,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          95,
+          104,
+          119,
+          120,
+          131,
+          148,
+          165,
+          176,
+          180,
+          199,
+          205,
+          227,
+          238,
+          240,
+          247,
+          269,
+          289,
+          291,
+          306,
+          433
+        ]
+      },
+      "last_updated": "2025-06-08T12:58:25.038673",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Warsaw",
+      "country": "Germany",
+      "accommodation_cost_eur": 109,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 51,
+        "max": 255,
+        "mean": 125
+      },
+      "statistics": {
+        "median_price_eur": 109,
+        "mean_price_eur": 125,
+        "min_price_eur": 51,
+        "max_price_eur": 255,
+        "sample_size": 20,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          51,
+          63,
+          80,
+          81,
+          99,
+          100,
+          100,
+          104,
+          105,
+          106,
+          112,
+          117,
+          119,
+          130,
+          135,
+          135,
+          172,
+          203,
+          237,
+          255
+        ]
+      },
+      "last_updated": "2025-06-08T12:59:22.659160",
+      "property_type_filter": "private_room"
+    },
+    {
+      "city": "Athens",
+      "country": "Germany",
+      "accommodation_cost_eur": 83,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Entire place"
+      ],
+      "sample_size": 18,
+      "price_range": {
+        "min": 56,
+        "max": 115,
+        "mean": 84
+      },
+      "statistics": {
+        "median_price_eur": 83,
+        "mean_price_eur": 84,
+        "min_price_eur": 56,
+        "max_price_eur": 115,
+        "sample_size": 18,
+        "property_types": [
+          "Entire place"
+        ],
+        "prices": [
+          56,
+          64,
+          65,
+          66,
+          72,
+          76,
+          77,
+          81,
+          83,
+          84,
+          88,
+          88,
+          92,
+          93,
+          103,
+          104,
+          110,
+          115
+        ]
+      },
+      "last_updated": "2025-06-08T13:00:42.688692",
+      "property_type_filter": "entire_place"
+    },
+    {
+      "city": "Athens",
+      "country": "Germany",
+      "accommodation_cost_eur": 123,
+      "stay_type": "short",
+      "stay_duration_days": 3,
+      "travel_date": "2025-06-15",
+      "guests": 1,
+      "property_types": [
+        "Private room"
+      ],
+      "sample_size": 20,
+      "price_range": {
+        "min": 62,
+        "max": 294,
+        "mean": 136
+      },
+      "statistics": {
+        "median_price_eur": 123,
+        "mean_price_eur": 136,
+        "min_price_eur": 62,
+        "max_price_eur": 294,
+        "sample_size": 20,
+        "property_types": [
+          "Private room"
+        ],
+        "prices": [
+          62,
+          74,
+          78,
+          79,
+          89,
+          103,
+          107,
+          108,
+          120,
+          120,
+          126,
+          137,
+          139,
+          145,
+          146,
+          194,
+          194,
+          196,
+          228,
+          294
+        ]
+      },
+      "last_updated": "2025-06-08T13:01:38.774633",
+      "property_type_filter": "private_room"
+    }
+  ],
+  "total_searches": 38
+}
