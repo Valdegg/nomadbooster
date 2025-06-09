@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 
 def get_city_coordinates(city_name: str) -> Optional[tuple]:
     """
-    Use Open-Meteo geocoding API to get precise coordinates for a city
+    Use Open-Meteo geocoding API to get precise coordinates for a European city
     
     Args:
         city_name: Name of the city
@@ -47,7 +47,7 @@ def get_city_coordinates(city_name: str) -> Optional[tuple]:
         url = "https://geocoding-api.open-meteo.com/v1/search"
         params = {
             "name": city_name,
-            "count": 1,  # Only need the top result
+            "count": 10,  # Get multiple results to filter for Europe
             "language": "en",
             "format": "json"
         }
@@ -57,11 +57,33 @@ def get_city_coordinates(city_name: str) -> Optional[tuple]:
         data = response.json()
         
         if "results" in data and len(data["results"]) > 0:
-            result = data["results"][0]
-            lat = result["latitude"]
-            lon = result["longitude"]
-            logger.info(f"✅ Found coordinates for {city_name}: {lat}, {lon}")
-            return (lat, lon)
+            # Filter for European and adjacent regions (lat: 30-75, lon: -25-90)
+            european_results = []
+            for result in data["results"]:
+                lat = result["latitude"]
+                lon = result["longitude"]
+                # European and adjacent regions bounds (including Iceland, Russia, Georgia, etc.)
+                if 30 <= lat <= 75 and -25 <= lon <= 90:
+                    # Add country info if available for logging
+                    country = result.get("country", "Unknown")
+                    admin1 = result.get("admin1", "")
+                    european_results.append((lat, lon, country, admin1))
+            
+            if european_results:
+                # Take the first European result
+                lat, lon, country, admin1 = european_results[0]
+                location_info = f"{country}" + (f", {admin1}" if admin1 else "")
+                logger.info(f"✅ Found coordinates for {city_name}: {lat}, {lon} ({location_info})")
+                return (lat, lon)
+            else:
+                # If no European results, log all results for debugging
+                logger.warning(f"❌ No European/adjacent region coordinates found for {city_name}")
+                for result in data["results"][:3]:  # Show first 3 results
+                    lat = result["latitude"]
+                    lon = result["longitude"]
+                    country = result.get("country", "Unknown")
+                    logger.warning(f"   Alternative: {lat}, {lon} ({country})")
+                return None
         else:
             logger.warning(f"❌ No coordinates found for {city_name}")
             return None
@@ -94,7 +116,8 @@ def get_climate_normals_for_month(lat: float, lon: float, month: int) -> Dict:
             "temperature_2m_max", 
             "temperature_2m_min",
             "precipitation_sum",
-            "wind_speed_10m_max"
+            "wind_speed_10m_max",
+            "shortwave_radiation_sum"  # Add solar radiation to estimate sunshine
         ]),
         "temperature_unit": "celsius"
     }
@@ -117,6 +140,7 @@ def get_climate_normals_for_month(lat: float, lon: float, month: int) -> Dict:
         temp_mins = daily_data["temperature_2m_min"] 
         precipitations = daily_data["precipitation_sum"]
         wind_speeds = daily_data["wind_speed_10m_max"]
+        solar_radiation = daily_data["shortwave_radiation_sum"]  # MJ/m² per day
         
         # Filter data for the specific month across all years
         month_indices = []
@@ -135,10 +159,27 @@ def get_climate_normals_for_month(lat: float, lon: float, month: int) -> Dict:
         monthly_temp_min = sum(temp_mins[i] for i in month_indices) / len(month_indices)
         monthly_rainfall = sum(precipitations[i] for i in month_indices) / len(month_indices)
         monthly_wind = sum(wind_speeds[i] for i in month_indices) / len(month_indices)
+        monthly_solar = sum(solar_radiation[i] for i in month_indices) / len(month_indices)
         
         # For weekly estimates (7 days), scale daily values appropriately
         weekly_rainfall = monthly_rainfall * 7  # 7 days worth
-        weekly_sunshine = 35.0  # Placeholder - will estimate from other factors
+        
+        # Convert solar radiation to sunshine hours with latitude and seasonal adjustments
+        # Base conversion: ~0.3-0.5 hours per MJ/m², adjusted for location and season
+        base_sunshine_per_mj = 0.4
+        
+        # Adjust for latitude (higher latitudes have longer summer days, shorter winter days)
+        latitude_factor = 1.0 + (abs(lat) - 45) * 0.01  # Slight adjustment based on latitude
+        
+        # Apply seasonal adjustment using existing function
+        seasonal_factor = get_seasonal_sunshine_adjustment(month)
+        
+        # Calculate weekly sunshine hours with adjustments
+        daily_sunshine = monthly_solar * base_sunshine_per_mj * latitude_factor * seasonal_factor
+        weekly_sunshine = daily_sunshine * 7
+        
+        # Ensure realistic bounds (0-84 hours max for 7 days)
+        weekly_sunshine = max(0, min(84, weekly_sunshine))
         
         return {
             "avg_temp_c": round(monthly_temp),

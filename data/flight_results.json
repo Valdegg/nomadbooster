@@ -321,5 +321,199 @@
     ],
     "saved_at": "2025-06-09T12:08:26.721099",
     "route_key": "BER-FNC"
+  },
+  "BER-ABZ": {
+    "route": "BER \u2192 ABZ",
+    "origin": "BER",
+    "destination": "ABZ",
+    "departure_date": "2025-07-10",
+    "return_date": null,
+    "passengers": 1,
+    "trip_type": "one_way",
+    "stay_duration_days": null,
+    "flight_statistics": {
+      "total_flights": 9,
+      "cheapest_flight_eur": 94,
+      "average_price_eur": 153,
+      "price_range": {
+        "min": 94,
+        "max": 273
+      }
+    },
+    "sample_flights": [
+      {
+        "price_eur": 94,
+        "airline": "KLM",
+        "departure_time": "6:00",
+        "flight_number": "KLM Flight 1"
+      },
+      {
+        "price_eur": 104,
+        "airline": "KL1770",
+        "departure_time": "7:25",
+        "flight_number": "KL1770 Flight 2"
+      },
+      {
+        "price_eur": 114,
+        "airline": "KLM",
+        "departure_time": "8:20",
+        "flight_number": "KLM Flight 3"
+      }
+    ],
+    "search_time_seconds": 28.752708673477173,
+    "summary": "Found 9 one-way flights from BER to ABZ: \u20ac94-273 (avg: \u20ac153). View and book at: https://dohop.is/flights/BER/ABZ/2025-07-10/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "data_source": "Live flight data via Dohop & BrightData",
+    "last_updated": "2025-06-09T15:05:40.031295",
+    "dohop_url": "https://dohop.is/flights/BER/ABZ/2025-07-10/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "saved_at": "2025-06-09T15:05:40.068471",
+    "route_key": "BER-ABZ"
+  },
+  "BER-LCA": {
+    "destination": "LCA",
+    "cheapest_price_eur": 245,
+    "total_flights": 12,
+    "average_price_eur": 368,
+    "price_range": {
+      "min": 245,
+      "max": 457
+    },
+    "trip_type": "round_trip",
+    "dohop_url": "https://dohop.is/flights/BER/LCA/2025-08-20/2025-08-27/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "summary": "Found 12 round-trip flights from BER to LCA: \u20ac245-457 (avg: \u20ac368). Book at: https://dohop.is/flights/BER/LCA/2025-08-20/2025-08-27/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "sample_flights": [
+      {
+        "price_eur": 245,
+        "airline": "Air Serbia",
+        "departure_time": "20:15",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "Air Serbia Flight 1",
+        "source": "dohop_structured"
+      },
+      {
+        "price_eur": 294,
+        "airline": "JU357",
+        "departure_time": "22:00",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "JU357 Flight 2",
+        "source": "dohop_structured"
+      }
+    ],
+    "saved_at": "2025-06-09T20:02:32.349440",
+    "route_key": "BER-LCA"
+  },
+  "BER-RHO": {
+    "destination": "RHO",
+    "cheapest_price_eur": 189,
+    "total_flights": 4,
+    "average_price_eur": 387,
+    "price_range": {
+      "min": 189,
+      "max": 562
+    },
+    "trip_type": "round_trip",
+    "dohop_url": "https://dohop.is/flights/BER/RHO/2025-08-20/2025-08-27/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "summary": "Found 4 round-trip flights from BER to RHO: \u20ac189-562 (avg: \u20ac387). Book at: https://dohop.is/flights/BER/RHO/2025-08-20/2025-08-27/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "sample_flights": [
+      {
+        "price_eur": 189,
+        "airline": "Ryanair",
+        "departure_time": "15:05",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "Ryanair Flight 1",
+        "source": "dohop_structured"
+      },
+      {
+        "price_eur": 370,
+        "airline": "FR4396",
+        "departure_time": "19:20",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "FR4396 Flight 2",
+        "source": "dohop_structured"
+      }
+    ],
+    "saved_at": "2025-06-09T20:02:32.348156",
+    "route_key": "BER-RHO"
+  },
+  "BER-KEF": {
+    "destination": "KEF",
+    "cheapest_price_eur": 310,
+    "total_flights": 4,
+    "average_price_eur": 373,
+    "price_range": {
+      "min": 310,
+      "max": 446
+    },
+    "trip_type": "round_trip",
+    "dohop_url": "https://dohop.is/flights/BER/KEF/2025-08-20/2025-08-27/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "summary": "Found 4 round-trip flights from BER to KEF: \u20ac310-446 (avg: \u20ac373). Book at: https://dohop.is/flights/BER/KEF/2025-08-20/2025-08-27/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "sample_flights": [
+      {
+        "price_eur": 310,
+        "airline": "PLAY",
+        "departure_time": "12:20",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "PLAY Flight 1",
+        "source": "dohop_structured"
+      },
+      {
+        "price_eur": 365,
+        "airline": "PLAY",
+        "departure_time": "14:00",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "PLAY Flight 2",
+        "source": "dohop_structured"
+      }
+    ],
+    "saved_at": "2025-06-09T20:29:41.462183",
+    "route_key": "BER-KEF"
+  },
+  "BER-CDG": {
+    "destination": "CDG",
+    "cheapest_price_eur": 94,
+    "total_flights": 8,
+    "average_price_eur": 142,
+    "price_range": {
+      "min": 94,
+      "max": 165
+    },
+    "trip_type": "round_trip",
+    "dohop_url": "https://dohop.is/flights/BER/CDG/2025-08-20/2025-08-27/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "summary": "Found 8 round-trip flights from BER to CDG: \u20ac94-165 (avg: \u20ac142). Book at: https://dohop.is/flights/BER/CDG/2025-08-20/2025-08-27/adults-1?stops=0&currency=EUR&lang=en&locale=en-US",
+    "sample_flights": [
+      {
+        "price_eur": 94,
+        "airline": "easyJet",
+        "departure_time": "20:40",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "easyJet Flight 1",
+        "source": "dohop_structured"
+      },
+      {
+        "price_eur": 138,
+        "airline": "U24634",
+        "departure_time": "22:30",
+        "arrival_time": "Unknown",
+        "duration": "Unknown",
+        "stops": 0,
+        "flight_number": "U24634 Flight 2",
+        "source": "dohop_structured"
+      }
+    ],
+    "saved_at": "2025-06-09T20:29:41.463555",
+    "route_key": "BER-CDG"
   }
 }

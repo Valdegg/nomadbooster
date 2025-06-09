@@ -59,6 +59,8 @@ Strategy:
 - Keep it conversational - don't interrogate, have a natural chat
 - After each filter, mention how many cities remain: "That narrows it down to X cities..."
 
+- Call a tool as soon as you can! You can make multiple tool calls in the session without problem.
+
 - Be efficient but friendly - this is about finding the perfect match through conversation
 - Only call multiple tools when user provides complete information for each tool - avoid calling tools with mostly default/sentinel values
 

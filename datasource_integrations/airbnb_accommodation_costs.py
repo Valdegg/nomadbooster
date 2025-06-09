@@ -159,7 +159,7 @@ def build_airbnb_search_url(city: str, checkin_date: datetime, checkout_date: da
         logger.error(f"Error building Airbnb search URL: {e}")
         raise
 
-async def fetch_airbnb_data_for_city(city: str, checkin_date: datetime, checkout_date: datetime, guests: int = 2, max_retries: int = 3, property_type: str = None) -> Dict:
+async def fetch_airbnb_data_for_city(city: str, checkin_date: datetime, checkout_date: datetime, guests: int = 2, max_retries: int = 1, property_type: str = None) -> Dict:
     """
     Fetch Airbnb accommodation data for a specific city using BrightData Browser API
     
@@ -699,6 +699,38 @@ def load_existing_data(output_path: str = "../data/sources/airbnb_accommodation_
         "accommodation_costs": []
     }
 
+def get_existing_combinations(existing_data: Dict) -> set:
+    """
+    Get set of existing (city, property_type_filter) combinations
+    
+    Args:
+        existing_data: Loaded existing data structure
+        
+    Returns:
+        set: Set of (city, property_type_filter) tuples that already exist
+    """
+    combinations = set()
+    for entry in existing_data.get('accommodation_costs', []):
+        city = entry.get('city')
+        property_type_filter = entry.get('property_type_filter')
+        if city and property_type_filter:
+            combinations.add((city, property_type_filter))
+    return combinations
+
+def should_fetch_combination(city: str, property_type: str, existing_combinations: set) -> bool:
+    """
+    Check if we should fetch data for this (city, property_type) combination
+    
+    Args:
+        city: City name
+        property_type: Property type filter ('entire_place' or 'private_room')
+        existing_combinations: Set of existing (city, property_type) combinations
+        
+    Returns:
+        bool: True if we should fetch, False if combination already exists
+    """
+    return (city, property_type) not in existing_combinations
+
 def save_single_search_data(search_data: Dict, output_path: str = "../data/sources/airbnb_accommodation_costs.json"):
     """
     Save or update data for a single search incrementally
@@ -781,6 +813,7 @@ async def fetch_accommodation_costs_for_cities(cities: List[str], travel_dates: 
 async def fetch_both_property_types():
     """
     Fetch data for both entire places and private rooms for all target cities
+    Only fetches combinations that don't already exist in the data file
     """
     logger.info("Starting Airbnb accommodation costs fetch via BrightData...")
     
@@ -802,62 +835,90 @@ async def fetch_both_property_types():
     property_types = ['entire_place', 'private_room']
     
     output_path = "../data/sources/airbnb_accommodation_costs.json"
-    results = []
     
-    total_searches = len(target_cities) * len(property_types)
+    # Load existing data to check what combinations we already have
+    existing_data = load_existing_data(output_path)
+    existing_combinations = get_existing_combinations(existing_data)
+    
+    logger.info(f"Found {len(existing_combinations)} existing (city, property_type) combinations")
+    if existing_combinations:
+        logger.info("Sample existing combinations:")
+        for combo in list(existing_combinations)[:5]:  # Show first 5
+            logger.info(f"  - {combo[0]}, {combo[1]}")
+    
+    # Build list of combinations we need to fetch
+    combinations_to_fetch = []
+    for city in target_cities:
+        for property_type in property_types:
+            if should_fetch_combination(city, property_type, existing_combinations):
+                combinations_to_fetch.append((city, property_type))
+            else:
+                type_name = "Entire places" if property_type == 'entire_place' else "Private rooms"
+                logger.info(f"⏭️  Skipping {type_name} in {city} (already exists)")
+    
+    if not combinations_to_fetch:
+        logger.info("🎉 All combinations already exist! No fetching needed.")
+        return existing_data['accommodation_costs']
+    
+    logger.info(f"📋 Will fetch {len(combinations_to_fetch)} missing combinations out of {len(target_cities) * len(property_types)} total")
+    
+    results = []
     search_count = 0
     
-    for city in target_cities:
-        logger.info(f"\n=== Processing city: {city} ===")
+    for city, property_type in combinations_to_fetch:
+        search_count += 1
+        type_name = "Entire places" if property_type == 'entire_place' else "Private rooms"
+        logger.info(f"\n=== Search {search_count}/{len(combinations_to_fetch)}: {type_name} in {city} ===")
+        logger.info(f"Dates: {checkin_date.date()} to {checkout_date.date()}, {guests} guest")
         
-        for property_type in property_types:
-            search_count += 1
-            type_name = "Entire places" if property_type == 'entire_place' else "Private rooms"
-            logger.info(f"Search {search_count}/{total_searches}: {type_name} in {city} ({checkin_date.date()} to {checkout_date.date()}, {guests} guest)")
+        try:
+            # Fetch accommodation costs for this city and property type
+            search_data = await fetch_airbnb_data_for_city(city, checkin_date, checkout_date, guests, property_type=property_type)
             
-            try:
-                # Fetch accommodation costs for this city and property type
-                search_data = await fetch_airbnb_data_for_city(city, checkin_date, checkout_date, guests, property_type=property_type)
-                
-                # Add property type info to result
-                search_data['property_type_filter'] = property_type
-                
-                # Save the result immediately
-                save_single_search_data(search_data, output_path)
-                results.append(search_data)
-                
-                logger.info(f"✅ Completed {type_name} in {city} - median cost: €{search_data['accommodation_cost_eur']} ({search_data['sample_size']} listings)")
-                
-                # Wait between searches to avoid rate limiting
-                await asyncio.sleep(15)  # Longer delay for multiple cities
-                
-            except Exception as e:
-                logger.error(f"❌ Failed to fetch {type_name} for {city}: {e}")
-                # Continue with next search instead of stopping
-                continue
+            # Add property type info to result
+            search_data['property_type_filter'] = property_type
+            
+            # Save the result immediately
+            save_single_search_data(search_data, output_path)
+            results.append(search_data)
+            
+            logger.info(f"✅ Completed {type_name} in {city} - median cost: €{search_data['accommodation_cost_eur']} ({search_data['sample_size']} listings)")
+            
+            # Wait between searches to avoid rate limiting
+            await asyncio.sleep(15)  # Longer delay for multiple cities
+            
+        except Exception as e:
+            logger.error(f"❌ Failed to fetch {type_name} for {city}: {e}")
+            # Continue with next search instead of stopping
+            continue
         
-        # Extra delay between cities
-        if city != target_cities[-1]:  # Don't wait after last city
-            logger.info(f"Completed {city}, waiting before next city...")
-            await asyncio.sleep(30)
+        # Extra delay every 10 searches
+        if search_count % 10 == 0 and search_count < len(combinations_to_fetch):
+            logger.info(f"Completed {search_count}/{len(combinations_to_fetch)} searches, taking a longer break...")
+            await asyncio.sleep(60)
     
-    # Summary by city
+    # Summary of what was fetched in this run
     if results:
-        logger.info("\n=== FINAL SUMMARY ===")
+        logger.info("\n=== FETCHING SUMMARY ===")
+        logger.info(f"✅ Successfully fetched {len(results)} new combinations:")
         cities_processed = set(result['city'] for result in results)
         for city in cities_processed:
             city_results = [r for r in results if r['city'] == city]
-            if len(city_results) == 2:  # Both property types
-                entire = next((r for r in city_results if r.get('property_type_filter') == 'entire_place'), None)
-                private = next((r for r in city_results if r.get('property_type_filter') == 'private_room'), None)
-                if entire and private:
-                    logger.info(f"{city}: Entire places €{entire['accommodation_cost_eur']}, Private rooms €{private['accommodation_cost_eur']}")
-            else:
-                logger.warning(f"{city}: Only {len(city_results)} property type(s) completed")
+            for result in city_results:
+                property_type = result.get('property_type_filter')
+                type_name = "Entire places" if property_type == 'entire_place' else "Private rooms"
+                logger.info(f"  - {city}: {type_name} €{result['accommodation_cost_eur']}")
+    else:
+        logger.info("\n=== FETCHING SUMMARY ===")
+        logger.info("No new data was fetched (all combinations already existed)")
     
-    logger.info(f"\nCompleted {len(results)} successful searches out of {total_searches} total")
+    # Load final data to return all results
+    final_data = load_existing_data(output_path)
+    total_combinations = len(final_data.get('accommodation_costs', []))
+    logger.info(f"\n🎯 Total combinations in database: {total_combinations}")
     logger.info("Airbnb accommodation costs fetch completed successfully")
-    return results
+    
+    return final_data.get('accommodation_costs', [])
 
 def main():
     """
